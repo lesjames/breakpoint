@@ -11,14 +11,14 @@ html { font-size: 100%; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 10
 html, button, input, select, textarea { font-family: sans-serif; color: #222; }
 body { margin: 0; font-size: 1em; line-height: 1.4; }
 
-::-moz-selection { background: #fe57a1; color: #fff; text-shadow: none; }
-::selection { background: #fe57a1; color: #fff; text-shadow: none; }
+::-moz-selection { background: $link-color; color: #fff; text-shadow: none; }
+::selection { background: $link-color; color: #fff; text-shadow: none; }
 
 // Links
 
-a { color: #00e; }
-a:visited { color: #551a8b; }
-a:hover { color: #06e; }
+a { color: $link-color; }
+a:visited { color: $link-color-visited; }
+a:hover { color: darken($link-color, 10%); }
 a:focus { outline: thin dotted; }
 a:hover, a:active { outline: 0; }
 
@@ -45,7 +45,6 @@ sub { bottom: -0.25em; }
 ul, ol { margin: 1em 0; padding: 0 0 0 40px; }
 dd { margin: 0 0 0 40px; }
 nav ul, nav ol { list-style: none; list-style-image: none; margin: 0; padding: 0; }
-
 
 // Embedded content
 

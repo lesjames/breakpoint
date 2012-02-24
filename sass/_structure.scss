@@ -1,0 +1,5 @@
+// centering div
+.wrap { width: em(960px); margin: 0 auto; @extend .clearfix; }
+
+// responsive
+@media only screen and (min-width: 35em) {  }
