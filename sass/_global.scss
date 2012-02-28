@@ -14,3 +14,4 @@ $link-color-visited: purple;
 // graceful degredation
 @mixin no-rgba { .no-rgba & { @content } }
 @mixin no-cssgradients { .no-cssgradients & { @content } }
+@mixin no-svg { .no-svg & { @content } }
