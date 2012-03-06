@@ -18,7 +18,7 @@ body { margin: 0; font-size: 1em; line-height: 1.4; }
 
 a { color: $link-color; }
 a:visited { color: $link-color-visited; }
-a:hover { color: darken($link-color, 10%); }
+a:hover { color: darken($link-color, 15%); }
 a:focus { outline: thin dotted; }
 a:hover, a:active { outline: 0; }
 

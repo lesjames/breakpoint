@@ -1,6 +1,6 @@
 // variables
-$link-color: blue;
-$link-color-visited: purple;
+$link-color: #08c;
+$link-color-visited: darken($link-color, 15%);
 
 // function for converting px to em
 @function em($px, $base: 16px) { @return ($px / $base) * 1em; }
