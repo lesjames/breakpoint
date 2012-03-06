@@ -1,5 +1,11 @@
-// centering div
-.wrap { width: em(960px); margin: 0 auto; @extend .clearfix; position: relative; }
+// centering container
+.container { width: $gridRowWidth; margin-left: auto; margin-right: auto; @extend .clearfix; position: relative; }
+
+// Fixed Grid (940px)
+@include gridSystem-generate($gridColumns, $gridColumnWidth, $gridGutterWidth);
+
+// Fluid Grid (940px)
+@include fluidGridSystem-generate($gridColumns, $fluidGridColumnWidth, $fluidGridGutterWidth);
 
 // responsive
 @media only screen and (min-width: 35em) {  }
