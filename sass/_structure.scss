@@ -1,11 +1,41 @@
 // centering container
 .container { width: $gridRowWidth; margin-left: auto; margin-right: auto; @extend .clearfix; position: relative; }
+.container-fluid { padding-left: $gridGutterWidth; padding-right: $gridGutterWidth; @extend .clearfix; }
 
-// Fixed Grid (940px)
+// Fixed Grid
 @include gridSystem-generate($gridColumns, $gridColumnWidth, $gridGutterWidth);
 
-// Fluid Grid (940px)
-@include fluidGridSystem-generate($gridColumns, $fluidGridColumnWidth, $fluidGridGutterWidth);
+// Fluid Grid
+@if ($fluidGrid) { @include fluidGridSystem-generate($gridColumns, $fluidGridColumnWidth, $fluidGridGutterWidth); }
 
-// responsive
-@media only screen and (min-width: 35em) {  }
+// LANDSCAPE PHONE TO SMALL DESKTOP & PORTRAIT TABLET
+@media (max-width: 767px) {
+    // Remove width from containers
+    .container { width: auto; padding: 0 em(20px); }
+    // Fluid rows
+    @if ($fluidGrid) { .row-fluid { width: 100%; } }
+    // Undo negative margin on rows
+    .row { margin-left: 0; }
+    // Make all columns even
+    @if ($fluidGrid) {
+        .row > [class*="span"], .row-fluid > [class*="span"] { float: none; display: block; width: auto; margin: 0; }
+    } @else {
+        .row > [class*="span"] { float: none; display: block; width: auto; margin: 0; }
+    }
+}
+
+// PORTRAIT TABLET TO DEFAULT DESKTOP
+@media (min-width: 768px) and (max-width: 979px) {
+    // Fixed grid
+    @include gridSystem-generate(12, 42px, 20px);
+    // Fluid grid
+    @if ($fluidGrid) { @include fluidGridSystem-generate(12, 5.801104972%, 2.762430939%); }
+}
+
+// LARGE DESKTOP & UP
+@media (min-width: 1200px) {
+    // Fixed grid
+    @include gridSystem-generate(12, 70px, 30px);
+    // Fluid grid
+    @if ($fluidGrid) { @include fluidGridSystem-generate(12, 5.982905983%, 2.564102564%); }
+}
