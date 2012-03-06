@@ -1,3 +1,6 @@
+// change box model
+* { @include box-sizing(border-box); @include ie7 { behavior: url(../js/boxsizing.htc); } }
+
 // centering container
 .container { width: $gridRowWidth; margin-left: auto; margin-right: auto; @extend .clearfix; position: relative; }
 .container-fluid { padding-left: $gridGutterWidth; padding-right: $gridGutterWidth; @extend .clearfix; }

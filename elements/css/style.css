@@ -42,31 +42,31 @@ body {
 
 /* line 14, ../../sass/_normalize.scss */
 ::-moz-selection {
-  background: blue;
+  background: #0088cc;
   color: #fff;
   text-shadow: none;
 }
 
 /* line 15, ../../sass/_normalize.scss */
 ::selection {
-  background: blue;
+  background: #0088cc;
   color: #fff;
   text-shadow: none;
 }
 
 /* line 19, ../../sass/_normalize.scss */
 a {
-  color: blue;
+  color: #0088cc;
 }
 
 /* line 20, ../../sass/_normalize.scss */
 a:visited {
-  color: purple;
+  color: #005580;
 }
 
 /* line 21, ../../sass/_normalize.scss */
 a:hover {
-  color: #0000cc;
+  color: #005580;
 }
 
 /* line 22, ../../sass/_normalize.scss */
@@ -309,6 +309,18 @@ td {
 }
 
 /* line 2, ../../sass/_structure.scss */
+* {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  box-sizing: border-box;
+}
+/* line 11, ../../sass/_global.scss */
+.lt-ie8 * {
+  behavior: url(../js/boxsizing.htc);
+}
+
+/* line 5, ../../sass/_structure.scss */
 .container {
   width: 58.75em;
   margin-left: auto;
@@ -316,7 +328,7 @@ td {
   position: relative;
 }
 
-/* line 3, ../../sass/_structure.scss */
+/* line 6, ../../sass/_structure.scss */
 .container-fluid {
   padding-left: 1.25em;
   padding-right: 1.25em;
@@ -512,23 +524,23 @@ td {
 }
 
 @media (max-width: 767px) {
-  /* line 14, ../../sass/_structure.scss */
+  /* line 17, ../../sass/_structure.scss */
   .container {
     width: auto;
     padding: 0 1.25em;
   }
 
-  /* line 16, ../../sass/_structure.scss */
+  /* line 19, ../../sass/_structure.scss */
   .row-fluid {
     width: 100%;
   }
 
-  /* line 18, ../../sass/_structure.scss */
+  /* line 21, ../../sass/_structure.scss */
   .row {
     margin-left: 0;
   }
 
-  /* line 21, ../../sass/_structure.scss */
+  /* line 24, ../../sass/_structure.scss */
   .row > [class*="span"], .row-fluid > [class*="span"] {
     float: none;
     display: block;
