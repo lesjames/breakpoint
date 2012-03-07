@@ -1,0 +1,11 @@
+// Fixed grid (940px)
+@include gridSystem-generate($gridColumns, $gridColumnWidth, $gridGutterWidth);
+
+// Fluid grid (940px)
+@include fluidGridSystem-generate($gridColumns, $fluidGridColumnWidth, $fluidGridGutterWidth);
+
+// Container (centered, fixed-width layouts)
+.container { @include container-fixed(); }
+
+// Fluid layouts (left aligned, with sidebar, min- & max-width content)
+.container-fluid { padding-left: $gridGutterWidth; padding-right: $gridGutterWidth; @include clearfix(); }

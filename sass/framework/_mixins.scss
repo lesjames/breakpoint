@@ -1,0 +1,186 @@
+// change box model
+@mixin border-box() { @include box-sizing(border-box); @include ie7 { behavior: url(../js/mylibs/boxsizing.htc); } }
+
+// function for converting px to em
+@function em($px, $base: 16px) { @return ($px / $base) * 1em; }
+
+// cross browser mixins
+@mixin ff { body:not(:-moz-handler-blocked) & { @content } }
+@mixin ie6 { .lt-ie7 & { @content } }
+@mixin ie7 { .lt-ie8 & { @content } }
+@mixin ie8 { .lt-ie9 & { @content } }
+
+// graceful degredation
+@mixin no-rgba { .no-rgba & { @content } }
+@mixin no-cssgradients { .no-cssgradients & { @content } }
+@mixin no-svg { .no-svg & { @content } }
+
+// responsive mixins
+@mixin respond($device) {
+    @if ($device == 'phone') { @media (max-width: 767px) { @content } }
+    @if ($device == 'tablet') { @media (min-width: 768px) and (max-width: 979px) { @content } }
+    @if ($device == 'desktop') { @media (min-width: 1200px) { @content } }
+}
+
+// Clearfix
+@mixin clearfix() { *zoom: 1; &:before, &:after { display: table; content: ""; } &:after { clear: both; } }
+
+// Webkit-style focus
+@mixin tab-focus() {
+  // Default
+  outline: thin dotted #333;
+  // Webkit
+  outline: 5px auto -webkit-focus-ring-color;
+  outline-offset: -2px;
+}
+
+// Center-align a block level element
+@mixin center-block() { display: block; margin-left: auto; margin-right: auto; }
+
+// IE7 inline-block
+@mixin ie7-inline-block() { *display: inline; /* IE7 inline-block hack */ *zoom: 1; }
+
+// IE7 likes to collapse whitespace on either side of the inline-block elements.
+@mixin ie7-restore-left-whitespace() { *margin-left: .3em; &:first-child { *margin-left: 0; } }
+@mixin ie7-restore-right-whitespace() { *margin-right: .3em; &:last-child { *margin-left: 0; } }
+
+// Sizing shortcuts
+@mixin size($height: 5px, $width: 5px) { width: $width; height: $height; }
+@mixin square($size: 5px) { @include size($size, $size); }
+
+// Placeholder text
+@mixin placeholder($color: $placeholderText) { :-moz-placeholder { color: $color; } ::-webkit-input-placeholder { color: $color; } }
+
+// Text overflow
+// Requires inline-block or block for proper styling
+@mixin text-overflow() { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+// Font Stacks
+@mixin font-family-serif { font-family: Georgia, "Times New Roman", Times, serif; }
+@mixin font-family-sans-serif { font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; }
+@mixin font-family-monospace { font-family: Menlo, Monaco, "Courier New", monospace; }
+@mixin font-shorthand($size: $baseFontSize, $weight: normal, $lineHeight: $baseLineHeight) {
+    font-size: $size; font-weight: $weight; line-height: $lineHeight;
+}
+@mixin font-serif($size: $baseFontSize, $weight: normal, $lineHeight: $baseLineHeight) {
+    @include font-family-serif; @include font-shorthand($size, $weight, $lineHeight);
+}
+@mixin font-sans-serif($size: $baseFontSize, $weight: normal, $lineHeight: $baseLineHeight) {
+    @include font-family-sans-serif; @include font-shorthand($size, $weight, $lineHeight);
+}
+@mixin font-monospace($size: $baseFontSize, $weight: normal, $lineHeight: $baseLineHeight) {
+    @include font-family-monospace; @include font-shorthand($size, $weight, $lineHeight);
+}
+
+// GRID SYSTEM
+
+// Site container
+@mixin container-fixed() { width: $gridRowWidth; margin-left: auto; margin-right: auto; @include clearfix(); }
+
+// Le grid system
+@mixin gridSystem-columns ($gridGutterWidth, $gridColumnWidth, $gridRowWidth, $columns) {
+    width: ($gridColumnWidth * $columns) + ($gridGutterWidth * ($columns - 1));
+} 
+@mixin gridSystem-offset($gridColumnWidth, $gridGutterWidth, $columns) {
+    margin-left: ($gridColumnWidth * $columns) + ($gridGutterWidth * ($columns - 1)) + ($gridGutterWidth * 2);
+}
+@mixin gridSystem-gridColumn($gridGutterWidth) {
+    float: left; margin-left: $gridGutterWidth;
+}
+
+// Take these values and mixins, and make 'em do their thang
+@mixin gridSystem-generate($gridColumns, $gridColumnWidth, $gridGutterWidth) {
+    // Row surrounds the columns
+    .row { margin-left: $gridGutterWidth * -1; @include clearfix(); }
+    // Find all .span# classes within .row and give them the necessary properties for grid columns (supported by all browsers back to IE7, thanks $dhg)
+    [class*="span"] { @include gridSystem-gridColumn($gridGutterWidth); }
+    // Default columns
+    @for $i from 1 through $gridColumns { .span#{$i} { @include gridSystem-columns($gridGutterWidth, $gridColumnWidth, $gridRowWidth, $i); } }
+    .container { @include gridSystem-columns($gridGutterWidth, $gridColumnWidth, $gridRowWidth, $gridColumns); }
+    // Offset column options
+    @for $i from 1 through ($gridColumns - 1) { .offset#{$i} { @include gridSystem-offset($gridColumnWidth, $gridGutterWidth, $i); } }
+}
+
+// Fluid grid system
+@mixin fluidGridSystem-columns($fluidGridGutterWidth, $fluidGridColumnWidth, $columns) {
+  width: ($fluidGridColumnWidth * $columns) + ($fluidGridGutterWidth * ($columns - 1));
+}
+@mixin fluidGridSystem-gridColumn($fluidGridGutterWidth) { float: left; margin-left: $fluidGridGutterWidth; }
+
+// Take these values and mixins, and make 'em do their thang
+@mixin fluidGridSystem-generate($gridColumns, $fluidGridColumnWidth, $fluidGridGutterWidth) {      
+    // Row surrounds the columns
+    .row-fluid {
+        width: 100%; @include clearfix();
+        // Find all .span# classes within .row and give them the necessary properties for grid columns (supported by all browsers back to IE7, thanks $dhg)
+        > [class*="span"] { @include fluidGridSystem-gridColumn($fluidGridGutterWidth); }
+        > [class*="span"]:first-child { margin-left: 0; }
+        // Default columns
+        @for $i from 1 through $gridColumns { > .span#{$i} { @include fluidGridSystem-columns($fluidGridGutterWidth, $fluidGridColumnWidth, $i); } }
+    }
+}
+
+// Input grid system
+@mixin inputGridSystem-inputColumns($gridGutterWidth, $gridColumnWidth, $gridRowWidth, $columns) {
+  width: (($gridColumnWidth) * $columns) + ($gridGutterWidth * ($columns - 1)) - 10;
+}
+@mixin inputGridSystem-generate($gridColumns, $gridColumnWidth, $gridGutterWidth) {
+    input,textarea,.uneditable-input {
+        @for $i from 1 through $gridColumns { &.span#{$i} { @include inputGridSystem-inputColumns($gridGutterWidth, $gridColumnWidth, $gridRowWidth, $i); } }
+    }
+}
+
+// Use .makeRow and .makeColumn to assign semantic layouts grid system behavior
+@mixin makeRow() { margin-left: $gridGutterWidth * -1; @include clearfix(); }
+@mixin makeColumn($columns: 1) { float: left; margin-left: $gridGutterWidth; width: ($gridColumnWidth * $columns) + ($gridGutterWidth * ($columns - 1)); }
+
+// Mixin for form field states
+@mixin formFieldState($textColor: #555, $borderColor: #ccc, $backgroundColor: #f5f5f5) {
+    // Set the text color
+    > label,.help-block,.help-inline { color: $textColor; }
+    // Style inputs accordingly
+    input,select,textarea {
+        color: $textColor; border-color: $borderColor;
+        &:focus { border-color: darken($borderColor, 10%); @include box-shadow(0 0 6px lighten($borderColor, 20%)); }
+    }
+    // Give a small background color for input-prepend/-append
+    .input-prepend .add-on,.input-append .add-on {
+        color: $textColor; background-color: $backgroundColor; border-color: $textColor;
+    }
+}
+
+// Gradient for buttons
+    @mixin gradient-vertical($startColor: #555, $endColor: #333) {
+    background-color: mix($startColor, $endColor, 60%);
+    background-image: -moz-linear-gradient(top, $startColor, $endColor); // FF 3.6+
+    background-image: -ms-linear-gradient(top, $startColor, $endColor); // IE10
+    background-image: -webkit-gradient(linear, 0 0, 0 100%, from($startColor), to($endColor)); // Safari 4+, Chrome 2+
+    background-image: -webkit-linear-gradient(top, $startColor, $endColor); // Safari 5.1+, Chrome 10+
+    background-image: -o-linear-gradient(top, $startColor, $endColor); // Opera 11.10
+    background-image: linear-gradient(top, $startColor, $endColor); // The standard
+    background-repeat: repeat-x;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#{$startColor}', endColorstr='#{$endColor}', GradientType=0),$startColor,$endColor; // IE9 and down
+}
+
+// Gradient Bar Colors for buttons and alerts
+@mixin gradientBar($primaryColor, $secondaryColor) {
+    @include gradient-vertical($primaryColor, $secondaryColor);
+    border-color: $secondaryColor $secondaryColor darken($secondaryColor, 15%);
+    border-color: rgba(0,0,0,.1) rgba(0,0,0,.1) fade-in(rgba(0,0,0,.1), 0.15);
+}
+
+// Reset filters for IE
+@mixin reset-filter() {
+  filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);
+}
+
+// Mixin for generating button backgrounds
+@mixin buttonBackground($startColor, $endColor) {
+    // gradientBar will set the background to a pleasing blend of these, to support IE<=9
+    @include gradientBar($startColor, $endColor);
+    @include reset-filter();
+    // in these cases the gradient won't cover the background, so we override
+    &:hover, &:active, &.active, &.disabled, &[disabled] { background-color: $endColor; }
+    // IE 7 + 8 can't handle box-shadow to show active, so we darken a bit ourselves
+    &:active,&.active { background-color: darken($endColor, 10%) #{"\9"}; }
+}

@@ -1,11 +1,5 @@
-@import 'compass/css3';
-@import 'global';
-@import 'normalize';
+@import 'framework/framework';
 
 @import 'base';
-@import 'grid';
 @import 'structure';
 @import 'components';
-
-@import 'helpers';
-@import 'print';
