@@ -1,5 +1,7 @@
-@import 'framework/framework';
+@import 'config'; // project specific framework config
+@import 'framework/framework'; // load framework
 
+// project specific style
 @import 'base';
 @import 'structure';
 @import 'components';

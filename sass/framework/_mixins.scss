@@ -16,10 +16,25 @@
 @mixin no-svg { .no-svg & { @content } }
 
 // responsive mixins
-@mixin respond($device) {
-    @if ($device == 'phone') { @media (max-width: 767px) { @content } }
-    @if ($device == 'tablet') { @media (min-width: 768px) and (max-width: 979px) { @content } }
-    @if ($device == 'desktop') { @media (min-width: 1200px) { @content } }
+@mixin respond-to($device) {
+    
+    // UP TO LANDSCAPE PHONE
+    @if ($device == 'portPhone') { @media (max-width: 480px) { @content } }
+    
+    // LANDSCAPE PHONE TO SMALL DESKTOP & PORTRAIT TABLET
+    @if ($device == 'landPhone') { @media (max-width: 767px) { @content } }
+    
+    // PORTRAIT TABLET TO DEFAULT DESKTOP    
+    @if ($device == 'portTablet') { @media (min-width: 768px) and (max-width: 979px) { @content } }
+    
+    // TABLETS AND BELOW
+    @if ($device == 'landTablet') { @media (max-width: 979px) { @content } }
+    
+    // DEFAULT DESKTOP
+    @if ($device == 'smallDesktop') { @media (min-width: 980px) { @content } }
+    
+    // LARGE DESKTOP & UP
+    @if ($device == 'largeDesktop') { @media (min-width: 1200px) { @content } }
 }
 
 // Clearfix
@@ -150,7 +165,7 @@
 }
 
 // Gradient for buttons
-    @mixin gradient-vertical($startColor: #555, $endColor: #333) {
+@mixin gradient-vertical($startColor: #555, $endColor: #333) {
     background-color: mix($startColor, $endColor, 60%);
     background-image: -moz-linear-gradient(top, $startColor, $endColor); // FF 3.6+
     background-image: -ms-linear-gradient(top, $startColor, $endColor); // IE10

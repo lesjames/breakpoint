@@ -3,7 +3,7 @@
 @import 'mixins';
 @import 'normalize';
 @import 'grid';
-@import 'forms'; // needs cleanup
+@import 'forms';
 @import 'buttons';
 @import 'helpers';
 @import 'print';
@@ -11,5 +11,6 @@
 
 /* To do...
 
+    create resond-to mixin for mqs
 
 */
