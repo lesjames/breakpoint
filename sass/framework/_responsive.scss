@@ -18,7 +18,7 @@
             // Make span* classes full width
             input[class*="span"],select[class*="span"],textarea[class*="span"],.uneditable-input {
                 display: block; width: 100%;
-                min-height: 28px; /* Make inputs at least the height of their button counterpart */
+                min-height: 34px; /* Make inputs at least the height of their button counterpart */
                 @include border-box;
             }
             // But don't let it screw up prepend/append inputs
@@ -40,7 +40,7 @@
     
     @include respond-to('landPhone') {
         // Remove width from containers
-        .container { width: auto; padding: 0 20px; }
+        .container { width: auto; padding-left: 20px; padding-right: 20px; }
         // Fluid rows
         .row-fluid { width: 100%; }
         // Undo negative margin on rows
@@ -67,5 +67,7 @@
         @if ($frameworkFluidGrid) { @include fluidGridSystem-generate(12, 5.982905983%, 2.564102564%); }
         // Input grid
         @if ($frameworkForms) { @include inputGridSystem-generate(12, 70px, 30px); }
+        // Thumbnails
+        @if ($frameworkThumbnails) { .thumbnails { margin-left: -30px; } .thumbnails > li { margin-left: 30px; } }
     }
 }

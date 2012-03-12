@@ -3,14 +3,12 @@
 @import 'mixins';
 @import 'normalize';
 @import 'grid';
+@import 'typography';
+@import 'tables';
+@import 'code';
 @import 'forms';
 @import 'buttons';
+@import 'thumbnails';
 @import 'helpers';
 @import 'print';
 @import 'responsive';
-
-/* To do...
-
-    create resond-to mixin for mqs
-
-*/

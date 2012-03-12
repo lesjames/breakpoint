@@ -31,6 +31,7 @@ $textColor:             $grayDark !default;
 $primaryButtonBackground:    $linkColor !default;
 
 // Sprite icons path
+$spriteOffset:            0px !default; // needed if you change the default font size
 $iconSpritePath:          "../img/glyphicons-halflings.png";
 $iconWhiteSpritePath:     "../img/glyphicons-halflings-white.png";
 

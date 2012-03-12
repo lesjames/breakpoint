@@ -1,6 +1,6 @@
 @if ($frameworkForms) {
 
-    form { margin: 0 0 $baseLineHeight; }
+    form { margin: 0; }
     fieldset { padding: 0; margin: 0; border: 0; }
     
     // Groups of fields with labels on top (legends)
