@@ -1,28 +1,4 @@
-// Framework configuration
-// grid
-$frameworkGrid: false;
-$frameworkFluidGrid: false;
-
-// typography
-$frameworkTypography: ture;
-
-// tables
-$frameworkTables: false;
-
-// code
-$frameworkCode: false;
-
-// forms
-$frameworkForms: false;
-
-// button styles
-$frameworkButtons: false;
-
-// thumbnails
-$frameworkThumbnails: false;
-
-// icon sprites for buttons
-$frameworkIcons: ture;
-
-// responsive grid
-$frameworkResponsive: false;
+// framework components
+$framework-tables: true;
+$framework-code: true;
+$framework-forms: true;

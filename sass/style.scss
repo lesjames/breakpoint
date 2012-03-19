@@ -3,7 +3,5 @@
 
 @import 'framework/framework'; // load framework
 
-// project specific style
-@import 'custom/base';
-@import 'custom/structure';
-@import 'custom/components';
+@import 'custom/structure'; // project specific structure
+@import 'custom/components'; // project specific components

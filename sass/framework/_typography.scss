@@ -1,115 +1,50 @@
-@if ($frameworkTypography) {
+$font-size: 16px !default; 		// Your base font-size in pixels
+$line-height: 1.5em !default;   // 24px line height
+$em: $font-size / 1em !default;	// Shorthand for outputting ems
+$text-color: #333 !default;
 
-    // BODY TEXT
-    p {
-      margin: 0 0 $baseLineHeight / 2; font-family: $baseFontFamily; font-size: $baseFontSize; line-height: $baseLineHeight;
-      small { font-size: $baseFontSize - 2; color: $grayLight; }
-    }
-    .lead { margin-bottom: $baseLineHeight; font-size: 20px; font-weight: 200; line-height: $baseLineHeight * 1.5; }
+body { color: $text-color; @extend .sans-serif; }
+p { margin: 0 0 $line-height / 2; line-height: $line-height; }
     
-    // HEADINGS
-    h1, h2, h3, h4, h5, h6 {
-      margin: 0; font-weight: bold; color: $grayDark; text-rendering: optimizelegibility;
-      small { font-weight: normal; color: $grayLight; }
-    }
-    h1 { font-size: 30px; line-height: $baseLineHeight * 2; small { font-size: 18px; } }
-    h2 { font-size: 24px; line-height: $baseLineHeight * 2; small { font-size: 18px; } }
-    h3 { line-height: $baseLineHeight * 1.5; font-size: 18px; small { font-size: 14px; } }
-    h4, h5, h6 { line-height: $baseLineHeight; }
-    h4 { font-size: 14px; small { font-size: 12px; } }
-    h5 { font-size: 12px; }
-    h6 { font-size: 11px; color: $grayLight; text-transform: uppercase; }
+// headings
+h1, h2, h3, h4, h5, h6 { margin: 0; font-weight: bold; text-rendering: optimizelegibility; line-height: $line-height; }
+h1 { font-size: 1.875em; }
+h2 { font-size: 1.5em; }
+h3 { font-size: 1.125em; }
+h4, h5, h6 { font-size: 1em; }
     
-    // Page header
-    .page-header { padding-bottom: $baseLineHeight - 1; margin-top: $baseLineHeight; margin-bottom: $baseLineHeight; border-bottom: 1px solid $grayLighter; }
-    .page-header h1 { line-height: 1; }
-    
-    // LISTS
-    ul, ol { padding: 0; margin: 0 0 $baseLineHeight / 2 25px; }
-    ul ul,ul ol,ol ol,ol ul { margin-bottom: 0; }
-    ul { list-style: disc; }
-    ol { list-style: decimal; }
-    li { line-height: $baseLineHeight; }
-    ul.unstyled,ol.unstyled { margin-left: 0; list-style: none; }
-    
-    // Description Lists
-    dl { margin-bottom: $baseLineHeight; }
-    dt,dd { line-height: $baseLineHeight; }
-    dt { font-weight: bold; }
-    dd { margin-left: $baseLineHeight / 2; }
-    
-    // MISC
-    // Horizontal rules
-    hr { margin: $baseLineHeight 0; border: 0; border-top: 1px solid $hrBorder; border-bottom: 1px solid $white; }
-    
-    // Emphasis
-    strong { font-weight: bold; }
-    em { font-style: italic; }
-    .muted { color: $grayLight; }
-    
-    // Abbreviations and acronyms
-    abbr { font-size: 90%; text-transform: uppercase; border-bottom: 1px dotted #ddd; cursor: help; }
-    
-    // Blockquotes
-    blockquote {
-      padding: 0 0 0 15px; margin: 0 0 $baseLineHeight; border-left: 5px solid $grayLighter;
-      p { margin-bottom: 0; @include font-shorthand(16px,300,$baseLineHeight * 1.25); }
-      small {
-        display: block; line-height: $baseLineHeight; color: $grayLight;
-        &:before { content: '\2014 \00A0'; }
-      }
-    
-      // Float right with text-align: right
-      &.pull-right {
-        float: right; padding-left: 0; padding-right: 15px; border-left: 0; border-right: 5px solid $grayLighter;
-        p,small { text-align: right; }
-      }
-    }
-    
-    // Quotes
-    q:before,q:after,blockquote:before,blockquote:after { content: ""; }
-    
-    // Addresses
-    address { display: block; margin-bottom: $baseLineHeight; line-height: $baseLineHeight; font-style: normal; }
-    
-    // Misc
-    small { font-size: $baseFontSize * 0.8; }
-    cite { font-style: normal; }
-    
-    // LABELS
-    .label {
-      padding: 2px 4px 3px;
-      font-size: $baseFontSize * .85;
-      font-weight: bold;
-      color: $white;
-      text-shadow: 0 -1px 0 rgba(0,0,0,.25);
-      background-color: $grayLight;
-      @include border-radius(3px);
-    }
-    
-    // Hover state
-    .label:hover { color: $white; text-decoration: none; }
-    
-    // Colors
-    .label-important        { background-color: $errorText; }
-    .label-important:hover  { background-color: darken($errorText, 10%); }
-    
-    .label-warning          { background-color: $orange; }
-    .label-warning:hover    { background-color: darken($orange, 10%); }
-    
-    .label-success          { background-color: $successText; }
-    .label-success:hover    { background-color: darken($successText, 10%); }
-    
-    .label-info             { background-color: $infoText; }
-    .label-info:hover       { background-color: darken($infoText, 10%); }
-    
-    // wells
-    .well {
-        min-height: 20px; padding: 19px; margin-bottom: 20px;
-        background-color: #f5f5f5; border: 1px solid #eee; border: 1px solid rgba(0,0,0,.05);
-        @include border-radius(4px); @include box-shadow(inset 0 1px 1px rgba(0,0,0,.05));
-        blockquote { border-color: #ddd; border-color: rgba(0,0,0,.15); }
-    }
-    .well-small { min-height: 18px; padding: 13px 15px 15px; }
+// lists
+ul, ol { padding: 0; margin: 0 0 ($line-height / 2) 1.5em; }
+ul ul,ul ol,ol ol,ol ul { margin-bottom: 0; }
+ul { list-style: disc; }
+ol { list-style: decimal; }
+li { line-height: $line-height; }
+ul.unstyled,ol.unstyled { margin-left: 0; list-style: none; }
 
+// description Lists
+dl { margin-bottom: $line-height; }
+dt,dd { line-height: $line-height; }
+dt { font-weight: bold; }
+dd { margin-left: $line-height / 2; }
+
+// horizontal rules
+hr { margin: $line-height 0; border: 0; border-top: 1px solid $text-color; border-bottom: 1px solid white; }
+
+// emphasis
+strong { font-weight: bold; }
+em { font-style: italic; }
+
+// bbbreviations and acronyms
+abbr { font-size: 90%; text-transform: uppercase; border-bottom: 1px dotted #ddd; cursor: help; }
+
+// blockquotes
+blockquote {
+  padding: 0 0 0 1em; margin: 0 0 $line-height; border-left: em(5px) solid lighten($text-color, 50%);
+  p { margin-bottom: 0; }
 }
+
+// quotes
+q:before,q:after,blockquote:before,blockquote:after { content: ""; }
+
+// addresses
+address { display: block; margin-bottom: $line-height; line-height: $line-height; font-style: normal; }

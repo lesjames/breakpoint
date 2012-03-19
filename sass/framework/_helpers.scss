@@ -16,3 +16,6 @@
 
 // generate clearfix class
 .clearfix { @include clearfix(); }
+
+// unstyle lists
+ul.unstyled, ol.unstyled { margin: 0 0 ($line-height / 2) 0; list-style: none; }
