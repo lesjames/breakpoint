@@ -1,30 +1,27 @@
 // grid size config
 $column: 48px !default;	// column-width of your grid in pixels
 $gutter: 24px !default;	// gutter-width of your grid in pixels
+$columns: 16 !default; // number of columns needed for layout
+$margin: $gutter / $em; // set an all purpose variable for margins in em
 
-// column-widths in a function, in ems
+// generate a column width with a second arg for context base size
 @function width($col:1, $base:1) { @return (($col * ($column + $gutter) - $gutter) / $base) / $em; }
 
-// create dynamic media queries based off of available grid columns
-@mixin respond-to($size) {
-    @for $i from 5 through 16 {    
-        @if ($size == $i) { @media (min-width: (width($i) + ($gutter / $em) * 2 )) { @content } }
+// create media query break point based on columns with a second arg for setting a width in columns
+@mixin set-bp($bp, $width: false) {
+    @for $i from 5 through $columns {    
+        @if ($bp == $i) { @media (min-width: (width($i) + ($margin * 2))) { @if ($width) { width: width($width); } @content } }
     }    
 }
 
-// mixin that will size an element in columns to be triggered at specific media query size
-@mixin mq($size, $mq:$size) {
-    @include respond-to($mq) { & { width: width($size); } }
-}
-
 // mobile first fluid layout
-.container { width: auto; margin: 0 $gutter; }
+.container { width: auto; margin-left: $margin; margin-right: $margin; }
 .col { float: none; margin-left: 0; width: auto; }
 
-// media query size to turn off fluid and go fixed width
-@mixin triggerGrid($size:8) {
-    @include respond-to(8) {
-        .container { margin: 0 auto; @extend .clearfix; width: width(8); }
-        .col { float: left; margin-left: $gutter / $em; &:first-child { margin-left: 0; } }
+// break point to turn off fluid and go fixed grid (must be fired without a selector on the root)
+@mixin go-fixed($bp) {
+    @include set-bp($bp) {
+        .container { margin-left: auto; margin-right: auto; @extend .clearfix; }
+        .col { float: left; margin-left: $margin; &:first-child { margin-left: 0; } }
     }
 }

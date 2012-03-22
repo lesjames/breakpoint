@@ -1,5 +1,9 @@
 // change box model
-@mixin border-box() { @include box-sizing(border-box); @include ie7 { behavior: url(../js/mylibs/boxsizing.htc); } }
+$elements-path: '/' !default;
+@mixin border-box() {
+	@include box-sizing(border-box);
+	@include ie7 { behavior: url(#{$elements-path}elements/css/boxsizing.htc); }
+}
 
 // function for converting px to em
 @function em($px, $base: 16px) { @return ($px / $base) * 1em; }
@@ -17,17 +21,3 @@
 
 // Clearfix
 @mixin clearfix() { *zoom: 1; &:before, &:after { display: table; content: ""; } &:after { clear: both; } }
-
-// Webkit-style focus
-@mixin tab-focus() {
-    // Default
-    outline: thin dotted #333;
-    // Webkit
-    outline: 5px auto -webkit-focus-ring-color;
-    outline-offset: -2px;
-}
-
-// Font Stacks
-.serif { font-family: Georgia, "Times New Roman", Times, serif; }
-.sans-serif { font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; }
-.monospace { font-family: Menlo, Monaco, "Courier New", monospace; }
