@@ -1,7 +1,6 @@
-@import 'custom/config'; // project specific framework config
-@import 'custom/variables'; // override framework variables for project
+@import 'variables'; // override framework variables for project
 
 @import 'framework/framework'; // load framework
 
-@import 'custom/structure'; // project specific structure
-@import 'custom/components'; // project specific components
+@import 'structure/structure'; // project specific structure
+@import 'components/components'; // project specific components

@@ -1,17 +1,11 @@
-// grid size config
-$column: 48px !default;	// column-width of your grid in pixels
-$gutter: 24px !default;	// gutter-width of your grid in pixels
-$columns: 16 !default; // number of columns needed for layout
-$margin: $gutter / $em; // set an all purpose variable for margins in em
-
 // generate a column width with a second arg for context base size
 @function width($col:1, $base:1) { @return (($col * ($column + $gutter) - $gutter) / $base) / $em; }
 
 // create media query break point based on columns with a second arg for setting a width in columns
 @mixin set-bp($bp, $width: false) {
-    @for $i from 5 through $columns {    
-        @if ($bp == $i) { @media (min-width: (width($i) + ($margin * 2))) { @if ($width) { width: width($width); } @content } }
-    }    
+	@for $i from 5 through $columns {	 
+		@if ($bp == $i) { @media (min-width: (width($i) + ($margin * 2))) { @if ($width) { width: width($width); } @content } }
+	}	 
 }
 
 // mobile first fluid layout
@@ -19,9 +13,16 @@ $margin: $gutter / $em; // set an all purpose variable for margins in em
 .col { float: none; margin-left: 0; width: auto; }
 
 // break point to turn off fluid and go fixed grid (must be fired without a selector on the root)
-@mixin go-fixed($bp) {
-    @include set-bp($bp) {
-        .container { margin-left: auto; margin-right: auto; @extend .clearfix; }
-        .col { float: left; margin-left: $margin; &:first-child { margin-left: 0; } }
-    }
+@mixin set-fixed-bp($bp, $width: false) {
+	@include set-bp($bp) {
+		.container { @if ($width) { width: width($width); } margin-left: auto; margin-right: auto; @extend .clearfix; }
+		.col { float: left; margin-left: $margin; &:first-child { margin-left: 0; } }
+	}
+}
+
+// overrides the mobile fluid layout with a fixed grid that isn't tied to a break point
+// use for non-responsive designs or a vintage ie fallback
+@mixin set-no-bp($width: false) {
+	.container { @if ($width) { width: width($width); } margin-left: auto; margin-right: auto; @extend .clearfix; }
+	.col { float: left; margin-left: $margin; &:first-child { margin-left: 0; } }
 }

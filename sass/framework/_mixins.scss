@@ -1,5 +1,4 @@
 // change box model
-$elements-path: '/' !default;
 @mixin border-box() {
 	@include box-sizing(border-box);
 	@include ie7 { behavior: url(#{$elements-path}elements/css/boxsizing.htc); }
@@ -14,10 +13,7 @@ $elements-path: '/' !default;
 @mixin ie7 { .lt-ie8 & { @content } }
 @mixin ie8 { .lt-ie9 & { @content } }
 
-// graceful degredation
+// fallback selectors
 @mixin no-rgba { .no-rgba & { @content } }
 @mixin no-cssgradients { .no-cssgradients & { @content } }
 @mixin no-svg { .no-svg & { @content } }
-
-// Clearfix
-@mixin clearfix() { *zoom: 1; &:before, &:after { display: table; content: ""; } &:after { clear: both; } }
