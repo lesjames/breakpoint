@@ -2,9 +2,14 @@
 @function width($col:1, $base:1) { @return (($col * ($column + $gutter) - $gutter) / $base) / $em; }
 
 // create media query break point based on columns with a second arg for setting a width in columns
-@mixin set-bp($bp, $width: false) {
-	@for $i from 5 through $columns {	 
-		@if ($bp == $i) { @media (min-width: (width($i) + ($margin * 2))) { @if ($width) { width: width($width); } @content } }
+@mixin set-bp($bp, $width: false, $content: false) {
+	@for $i from 1 through $columns {	 
+		@if ($bp == $i) {
+			@media (min-width: (width($i) + ($margin * 2))) {
+				@if ($width) { width: width($width); }
+				@if ($content) { @content }
+			}
+		}
 	}	 
 }
 
@@ -13,9 +18,9 @@
 .col { float: none; margin-left: 0; width: auto; }
 
 // break point to turn off fluid and go fixed grid (must be fired without a selector on the root)
-@mixin set-fixed-bp($bp, $width: false) {
-	@include set-bp($bp) {
-		.container { @if ($width) { width: width($width); } margin-left: auto; margin-right: auto; @extend .clearfix; }
+@mixin set-fixed-bp($bp) {
+	@include set-bp($bp, $content: true) {
+		.container { margin-left: auto; margin-right: auto; @include clearfix; }
 		.col { float: left; margin-left: $margin; &:first-child { margin-left: 0; } }
 	}
 }
@@ -23,6 +28,6 @@
 // overrides the mobile fluid layout with a fixed grid that isn't tied to a break point
 // use for non-responsive designs or a vintage ie fallback
 @mixin set-no-bp($width: false) {
-	.container { @if ($width) { width: width($width); } margin-left: auto; margin-right: auto; @extend .clearfix; }
+	.container { @if ($width) { width: width($width); } margin-left: auto; margin-right: auto; @include clearfix; }
 	.col { float: left; margin-left: $margin; &:first-child { margin-left: 0; } }
 }

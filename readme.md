@@ -21,24 +21,23 @@ layout and the mixins will generate the media query needed to trigger that layou
 
 The important mixins to remember are set-fixed-bp() and set-bp().
 
-### set-fixed-bp($bp, $width: false)
+### set-fixed-bp($bp)
 
 This mixin takes a mandatory argument which is the number of 
 columns needed to trigger a fixed width layout. This mixin converts 
 the .container class into a fixed width centered div and the .col 
-class into a floated column with margin-left. An optional second
-argument will set the column width of the .container class for
-that break point. This mixin must be fired without a selector on 
-the root.
+class into a floated column with margin-left. This mixin must be
+fired without a selector on the root.
 	
 	// set the fixed grid to trigger when 6 columns are available
 	@include set-fixed-bp(6);
 
-### set-bp($bp, $width: false)
+### set-bp($bp, $width: false, $content: false)
 
 This mixin takes a mandatory argument which is the number of columns 
 needed to trigger a set of styles. A second argument can be passed to 
-quickly set the element's width in columns.
+quickly set the element's width in columns. If passing a content block
+then the third argument must be set to true.
 	
 	// when 6 columns are available set .main to be 4 columns wide
 	.main { @include set-bp(6, 4); }
@@ -52,8 +51,8 @@ Additional styles can be passed a content block.
 	
 	// set widths for multiple break points and change any number of internal styles
 	.main {
-		@include set-bp(7, 5) { background: white; }
-		@include set-bp(10, 7) { background: gray; color: white; }
+		@include set-bp(7, 5, true) { background: white; }
+		@include set-bp(10, 7, true) { background: gray; color: white; }
 	}
 
 ### set-no-bp($width: false)
