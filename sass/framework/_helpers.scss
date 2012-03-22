@@ -18,4 +18,4 @@
 .clearfix { *zoom: 1; &:before, &:after { display: table; content: ""; } &:after { clear: both; } }
 
 // unstyle lists
-ul.unstyled, ol.unstyled { margin: 0 0 ($line-height / 2) 0; list-style: none; }
+ul.unstyled, ol.unstyled { margin: 0 0 1em; list-style: none; padding: 0; }
