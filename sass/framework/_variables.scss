@@ -1,8 +1,6 @@
 // typography
 $font-size: 16px !default; 		// Your base font-size in pixels
-$line-height: 1.5em !default;   // 24px line height
 $em: $font-size / 1em !default;	// Shorthand for outputting ems
-$text-color: #333 !default;
 
 // grid size config
 $column: 48px !default;	// column-width of your grid in pixels

@@ -20,7 +20,7 @@
 // break point to turn off fluid and go fixed grid (must be fired without a selector on the root)
 @mixin set-fixed-bp($bp) {
 	@include set-bp($bp, $content: true) {
-		.container { margin-left: auto; margin-right: auto; @include clearfix; }
+		.container { margin-left: auto; margin-right: auto; @extend .clearfix; }
 		.col { float: left; margin-left: $margin; &:first-child { margin-left: 0; } }
 	}
 }
@@ -28,6 +28,11 @@
 // overrides the mobile fluid layout with a fixed grid that isn't tied to a break point
 // use for non-responsive designs or a vintage ie fallback
 @mixin set-no-bp($width: false) {
-	.container { @if ($width) { width: width($width); } margin-left: auto; margin-right: auto; @include clearfix; }
+	.container { @if ($width) { width: width($width); } margin-left: auto; margin-right: auto; @extend .clearfix; }
 	.col { float: left; margin-left: $margin; &:first-child { margin-left: 0; } }
+}
+
+// sandbox a set of styles between two breakpoints
+@mixin set-sandbox-bp($min, $max) {
+	@media (min-width: (width($min) + ($margin * 2))) and (max-width: (width($max) + ($margin * 2))) { @content }
 }
