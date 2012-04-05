@@ -2,8 +2,8 @@
 // grid size config
 // ========================================
 
-$column: 48px !default;	// column-width of your grid in pixels
-$gutter: 24px !default;	// gutter-width of your grid in pixels
+$column: 60px !default;	// column-width of your grid in pixels
+$gutter: 20px !default;	// gutter-width of your grid in pixels
 $columns: 16 !default; // number of columns needed for layout
 $ie-support: false !default; // add fallback structure that doesn't use media queries
 
@@ -44,6 +44,7 @@ $ie-support: false !default; // add fallback structure that doesn't use media qu
 			// ie fallback			
 			@if ($ie-support == $bp) {
 				@if ($width) { @include ie8 { width: width($width); } }
+				@if ($content) { & { @include ie8 { @content } } }
 			}
 		}
 	}	 
@@ -73,5 +74,11 @@ $ie-support: false !default; // add fallback structure that doesn't use media qu
 
 @mixin set-sandbox-bp($min, $max) {
 	@media (min-width: (width($min) + (em($gutter) * 2))) and (max-width: (width($max) + (em($gutter) * 2))) { @content }
+	
+	// ie fallback
+	@if ($ie-support >= $min ) { 
+		@if ($ie-support <= $max) {
+			& { @include ie8 { @content } }
+		}
+	}
 }
-
