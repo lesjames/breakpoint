@@ -1,38 +1,77 @@
-// generate a column width with a second arg for context base size
-@function width($col:1, $base:1) { @return (($col * ($column + $gutter) - $gutter) / $base) / $em; }
+// ========================================
+// grid size config
+// ========================================
 
-// create media query break point based on columns with a second arg for setting a width in columns
+$column: 48px !default;	// column-width of your grid in pixels
+$gutter: 24px !default;	// gutter-width of your grid in pixels
+$columns: 16 !default; // number of columns needed for layout
+$ie-support: false !default; // add fallback structure that doesn't use media queries
+
+// ========================================
+// utility functions
+// ========================================
+
+// function for converting px to em
+@function em($px, $base: 16px) { @return (($px / $base) * 1em); }
+
+// generate a column width with a second arg for context base size
+@function width($col:1) { @return (($col * (em($column) + em($gutter)) - em($gutter))) }
+
+// ========================================
+// mobile first fluid layout
+// ========================================
+
+// container class should only be applied to full width elements
+// col class should be applied to every immediate child in a container
+.container { width: auto; margin-left: em($gutter); margin-right: em($gutter); @include clearfix; }
+.col { float: none; margin-left: 0; width: auto; } // is this necessary?
+
+// ========================================
+// create media query break point based on columns
+// ========================================
+
+// second argument sets a width in columns for the selector
+// third argument passes styles to the media query for that selector
 @mixin set-bp($bp, $width: false, $content: false) {
 	@for $i from 1 through $columns {	 
 		@if ($bp == $i) {
-			@media (min-width: (width($i) + ($margin * 2))) {
+		
+			@media (min-width: (width($i) + (em($gutter) * 2))) {
 				@if ($width) { width: width($width); }
 				@if ($content) { @content }
+			}
+
+			// ie fallback			
+			@if ($ie-support == $bp) {
+				@if ($width) { @include ie8 { width: width($width); } }
 			}
 		}
 	}	 
 }
 
-// mobile first fluid layout
-.container { width: auto; margin-left: $margin; margin-right: $margin; }
-.col { float: none; margin-left: 0; width: auto; }
+// ========================================
+// switch from fluid to fixed grid
+// ========================================
 
 // break point to turn off fluid and go fixed grid (must be fired without a selector on the root)
 @mixin set-fixed-bp($bp) {
 	@include set-bp($bp, $content: true) {
-		.container { margin-left: auto; margin-right: auto; @extend .clearfix; }
-		.col { float: left; margin-left: $margin; &:first-child { margin-left: 0; } }
+		.container { margin-left: auto; margin-right: auto; }
+		.col { float: left; margin-left: em($gutter); &:first-child { margin-left: 0; } }
+	}
+	
+	// ie fallback			
+	@if ($ie-support) {
+		.container { @include ie8 { width: width($ie-support); margin-left: auto; margin-right: auto; } }
+		.col { @include ie8 { float: left; margin-left: em($gutter); &:first-child { margin-left: 0; } } }
 	}
 }
 
-// overrides the mobile fluid layout with a fixed grid that isn't tied to a break point
-// use for non-responsive designs or a vintage ie fallback
-@mixin set-no-bp($width: false) {
-	.container { @if ($width) { width: width($width); } margin-left: auto; margin-right: auto; @extend .clearfix; }
-	.col { float: left; margin-left: $margin; &:first-child { margin-left: 0; } }
+// ========================================
+// sandbox a set of styles between two breakpoints
+// ========================================
+
+@mixin set-sandbox-bp($min, $max) {
+	@media (min-width: (width($min) + (em($gutter) * 2))) and (max-width: (width($max) + (em($gutter) * 2))) { @content }
 }
 
-// sandbox a set of styles between two breakpoints
-@mixin set-sandbox-bp($min, $max) {
-	@media (min-width: (width($min) + ($margin * 2))) and (max-width: (width($max) + ($margin * 2))) { @content }
-}

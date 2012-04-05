@@ -1,11 +1,8 @@
-// change box model
+// cross browser border box
 @mixin border-box() {
 	@include box-sizing(border-box);
-	@include ie7 { behavior: url(#{$elements-path}elements/css/boxsizing.htc); }
+	@include ie7 { behavior: image-url('boxsizing.htc'); }
 }
-
-// function for converting px to em
-@function em($px, $base: 16px) { @return ($px / $base) * 1em; }
 
 // cross browser mixins
 @mixin ff { body:not(:-moz-handler-blocked) & { @content } }
@@ -17,3 +14,6 @@
 @mixin no-rgba { .no-rgba & { @content } }
 @mixin no-cssgradients { .no-cssgradients & { @content } }
 @mixin no-svg { .no-svg & { @content } }
+
+// clearfix mixin and class
+@mixin clearfix { *zoom: 1; &:before, &:after { display: table; content: ""; } &:after { clear: both; } }

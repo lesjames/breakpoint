@@ -1,1 +1,43 @@
 // import your structure files here
+
+// temp
+p { padding: 1em; background: #ccc; }
+
+
+
+@include set-fixed-bp(9);
+
+.container {
+	@include set-bp(9, 9);
+	@include set-bp(12, 12);
+	@include set-bp(15, 15);
+}
+
+.main {
+	@include set-bp(9, 6);
+	@include set-bp(12, 8);
+	@include set-bp(15, 10);
+	
+	.nav {
+		@include set-bp(9, 2, true) { p { background: red; } }
+		@include set-bp(12, 3, true) { p { background: blue; } }
+		@include set-bp(15, 4, true) { p { background: green; } }
+	}
+	.content {
+		@include set-bp(9, 4);
+		@include set-bp(12, 5);
+		@include set-bp(15, 6);
+	}
+}
+
+.sidebar {
+	@include set-bp(9, 3);
+	@include set-bp(12, 4);
+	@include set-bp(15, 5);
+}
+
+.widget-container .col {
+	@include set-bp(9, 3);
+	@include set-bp(12, 4);
+	@include set-bp(15, 5);
+}
