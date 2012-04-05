@@ -7,17 +7,16 @@ query for you.
 
 ****
 
-The grid is based on a mobile first fluid layout that can be triggered 
+Breakpoint is a mobile first fluid layout that can be triggered 
 at a break point to go fixed. Styles cascade from smaller break 
 points up into larger ones. Mixins provide simple methods to set 
 the size of containers when certain break points become available. 
 Media queries for any number of columns are automatically generated
-when the screen becomes wide enough for the necessary number of 
-columns to display. Everything is calculated from the column and 
-gutter size width variables.
+when the screen becomes wide enough for their display.
+Everything is calculated from the column and gutter size width variables.
 
 Simply stated you just need to know how many columns you need for a 
-layout and the mixins will generate the media query needed to trigger that layout.
+layout and Breakpoint will generate the media query needed to trigger that layout.
 
 The important mixins to remember are `set-fixed-bp()` and `set-bp()`.
 
@@ -57,14 +56,14 @@ Additional styles can be passed a content block...
 	// set width for multiple break points
 	// and pass styles for those layouts
 	.main {
-		@include set-bp(7, 5, true) { background: white; }
-		@include set-bp(10, 7, true) { background: gray; color: white; }
+		@include set-bp(7, 5, true) { /* styles */ }
+		@include set-bp(10, 7, true) { /* styles */ }
 	}
 
 Passing styles without setting a width requires you using the named argument...
 	
 	.main {
-		@include set-bp(7, $content: true) { background: white; }
+		@include set-bp(7, $content: true) { /* styles */ }
 	}
 
 ## set-sandbox-bp($min, $max)
@@ -76,15 +75,14 @@ to larger layouts.
 
 	.main {
 		@include set-sandbox-bp(6, 10) {
-			// this content only applies when
-			// the layout is between 6 and 10 columns wide
+			/* styles for a breakpoint between 6 and 10 columns */
 		}
 	}
 
 ## IE Support
 
-Vintage IE support for versions that don't support media queries is built in. Set the
-`$ie-support` variable to the number of columns you want IE to recognize as a layout. This
+Older versions of IE don't support media queries but fallback support is built into Breakpoint.
+Set the `$ie-support` variable to the number of columns you want IE to recognize as a layout. This
 overrides the fluid mobile first layout and only serves vintage IE a single fixed layout.
 
 ****
