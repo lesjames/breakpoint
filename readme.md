@@ -32,7 +32,7 @@ This mixin must be fired without a selector on the root.
 	// set the fixed grid to trigger when 6 columns are available
 	@include set-fixed-bp(6);
 
-## set-bp($bp, $width: false, $content: false)
+## set-bp($bp, $width, $content)
 
 This mixin takes a mandatory argument which is the number of columns 
 needed to trigger a set of styles. A second argument can be passed to 
@@ -46,11 +46,16 @@ without setting a width then you must us the named argument `$content = true;`
 The mixin can be used to set multiple break point sizes for an element...
 	
 	// set widths for multiple break points
-	.main { @include set-bp(7, 5); @include set-bp(10, 7); @include set-bp(14, 10); }
+	.main {
+		@include set-bp(7, 5);
+		@include set-bp(10, 7);
+		@include set-bp(14, 10);
+	}
 
 Additional styles can be passed a content block...
 	
-	// set widths for multiple break points and change any number of internal styles
+	// set width for multiple break points
+	// and pass styles for those layouts
 	.main {
 		@include set-bp(7, 5, true) { background: white; }
 		@include set-bp(10, 7, true) { background: gray; color: white; }
@@ -71,7 +76,8 @@ to larger layouts.
 
 	.main {
 		@include set-sandbox-bp(6, 10) {
-			// this content only applies when the layout is between 6 and 10 columns wide
+			// this content only applies when
+			// the layout is between 6 and 10 columns wide
 		}
 	}
 

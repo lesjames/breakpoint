@@ -15,5 +15,5 @@
 @mixin no-cssgradients { .no-cssgradients & { @content } }
 @mixin no-svg { .no-svg & { @content } }
 
-// clearfix mixin and class
+// clearfix mixin
 @mixin clearfix { *zoom: 1; &:before, &:after { display: table; content: ""; } &:after { clear: both; } }
