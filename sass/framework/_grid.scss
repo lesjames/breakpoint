@@ -2,10 +2,11 @@
 // grid size config
 // ========================================
 
-$column: 60px !default;	// column-width of your grid in pixels
-$gutter: 20px !default;	// gutter-width of your grid in pixels
-$columns: 16 !default; // number of columns needed for layout
-$ie-support: false !default; // add fallback structure that doesn't use media queries
+$column:     60px  !default; // column-width of your grid in pixels
+$gutter:     20px  !default; // gutter-width of your grid in pixels
+$columns:    16    !default; // maximum number of columns needed for layout
+$fixed-grid: 4     !default; // number of columns to trigger fixed grid
+$ie-support: false !default; // number of columns for vintage ie
 
 // ========================================
 // utility functions
@@ -14,8 +15,8 @@ $ie-support: false !default; // add fallback structure that doesn't use media qu
 // function for converting px to em
 @function em($px, $base: 16px) { @return (($px / $base) * 1em); }
 
-// generate a column width with a second arg for context base size
-@function width($col:1) { @return (($col * (em($column) + em($gutter)) - em($gutter))) }
+// column width functions
+@function col($col:1) { @return (($col * (em($column) + em($gutter)) - em($gutter))) }
 
 // ========================================
 // mobile first fluid layout
@@ -36,15 +37,15 @@ $ie-support: false !default; // add fallback structure that doesn't use media qu
 	@for $i from 1 through $columns {	 
 		@if ($bp == $i) {
 		
-			@media (min-width: (width($i) + (em($gutter) * 2))) {
-				@if ($width) { width: width($width); }
+			@media (min-width: (col($i) + (em($gutter) * 2))) {
+				@if ($width) { width: col($width); }
 				@if ($content) { @content }
 			}
 
 			// ie fallback			
 			@if ($ie-support == $bp) {
-				@if ($width) { @include ie8 { width: width($width); } }
-				@if ($content) { & { @include ie8 { @content } } }
+				@if ($width) { @include no-mediaquery { width: col($width); } }
+				@if ($content) { @include no-mediaquery { @content } }
 			}
 		}
 	}	 
@@ -57,15 +58,20 @@ $ie-support: false !default; // add fallback structure that doesn't use media qu
 // break point to turn off fluid and go fixed grid (must be fired without a selector on the root)
 @mixin set-fixed-bp($bp) {
 	@include set-bp($bp, $content: true) {
-		.container { margin-left: auto; margin-right: auto; }
+		.container { margin-left: auto; margin-right: auto; width: col($bp); }
 		.col { float: left; margin-left: em($gutter); &:first-child { margin-left: 0; } }
 	}
 	
 	// ie fallback			
 	@if ($ie-support) {
-		.container { @include ie8 { width: width($ie-support); margin-left: auto; margin-right: auto; } }
-		.col { @include ie8 { float: left; margin-left: em($gutter); &:first-child { margin-left: 0; } } }
+		@include no-mediaquery { .container { width: col($ie-support); margin-left: auto; margin-right: auto; } }
+		@include no-mediaquery { .col { float: left; margin-left: em($gutter); &:first-child { margin-left: 0; } } }
 	}
+}
+
+// fire fixed grid from variable
+@if ($fixed-grid) {
+	@include set-fixed-bp($fixed-grid);
 }
 
 // ========================================
@@ -73,12 +79,26 @@ $ie-support: false !default; // add fallback structure that doesn't use media qu
 // ========================================
 
 @mixin set-sandbox-bp($min, $max) {
-	@media (min-width: (width($min) + (em($gutter) * 2))) and (max-width: (width($max) + (em($gutter) * 2))) { @content }
+	@media (min-width: (col($min) + (em($gutter) * 2))) and (max-width: (col($max) + (em($gutter) * 2))) { @content }
 	
 	// ie fallback
-	@if ($ie-support >= $min ) { 
-		@if ($ie-support <= $max) {
-			& { @include ie8 { @content } }
-		}
+	@if ($ie-support) {
+		@if ($ie-support >= $min ) { 
+			@if ($ie-support <= $max) {
+				& { @include no-mediaquery { @content } }
+			}
+		}	
+	}
+}
+
+// ========================================
+// breakpoint mixin
+// ========================================
+
+@mixin breakpoint($col, $sandbox: false) {
+	@if ($sandbox) {
+		@include set-sandbox-bp($col, $sandbox) { @content }
+	} @else {
+		@include set-bp($col, $content: true) { @content }	
 	}
 }
