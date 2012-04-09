@@ -1,6 +1,4 @@
-@import 'variables'; // override framework variables for project
-
-@import 'framework/framework'; // load framework
-
-@import 'structure/structure'; // project specific structure
-@import 'components/components'; // project specific components
+@import 'config'; // configure project sass
+@import 'framework'; // load framework
+@import 'structure'; // project specific structure
+@import 'components'; // project specific components

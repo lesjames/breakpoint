@@ -9,6 +9,7 @@
 @mixin ie6 { .lt-ie7 & { @content } }
 @mixin ie7 { .lt-ie8 & { @content } }
 @mixin ie8 { .lt-ie9 & { @content } }
+@mixin no-mediaquery { .lt-ie9 { @content } }
 
 // fallback selectors
 @mixin no-rgba { .no-rgba & { @content } }

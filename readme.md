@@ -5,89 +5,102 @@ responsive layout. Breakpoint figures out the minimum screen size
 needed to achieve the layout you want and creates the media
 query for you.
 
-****
+## The Grid
 
 Breakpoint is a mobile first fluid layout that can be triggered 
 at a break point to go fixed. Styles cascade from smaller break 
-points up into larger ones. Mixins provide simple methods to set 
-the size of containers when certain break points become available. 
+points up into larger ones. The breakpoint mixin provides a simple method of
+setting element sizes when certain break points become available. 
 Media queries for any number of columns are automatically generated
 when the screen becomes wide enough for their display.
 Everything is calculated from the column and gutter size width variables.
 
 Simply stated you just need to know how many columns you need for a 
-layout and Breakpoint will generate the media query needed to trigger that layout.
+layout and breakpoint will generate the media query needed to trigger that layout.
 
-The important mixins to remember are `set-fixed-bp()` and `set-bp()`.
+### Grid Setup
 
-## set-fixed-bp($bp)
+You can setup your project by defining a couple variables needed to configure
+your grid.
 
-This mixin takes a mandatory argument which is the number of 
-columns needed to trigger a fixed width layout. This mixin converts 
-the .container class into a fixed width centered div and the .col 
-class into a floated column with left margin matching the gutter size.
-This mixin must be fired without a selector on the root.
-	
-	// set the fixed grid to trigger when 6 columns are available
-	@include set-fixed-bp(6);
+```
+$column:	 60px;	// column-width of your grid in pixels
+$gutter:	 20px;	// gutter-width of your grid in pixels
+$columns:	 16;	// maximum number of columns needed for layout
+$fixed-grid: 8;		// number of columns to trigger fixed grid
+$ie-support: false; // number of columns for vintage ie
+```
 
-## set-bp($bp, $width, $content)
+Setting `$column` `$gutter` and `$columns` define your grid. Breakpoint uses
+these values to generate the size of elements and the media queries necessary
+to trigger those element sizes.
 
-This mixin takes a mandatory argument which is the number of columns 
-needed to trigger a set of styles. A second argument can be passed to 
-set the element's width in columns. If passing styles to the media query
-then the third argument must be set to true. If you are just passing styles
-without setting a width then you must us the named argument `$content = true;`
-	
-	// when 6 columns are available set .main to be 4 columns wide
-	.main { @include set-bp(6, 4); }
-	
-The mixin can be used to set multiple break point sizes for an element...
-	
-	// set widths for multiple break points
-	.main {
-		@include set-bp(7, 5);
-		@include set-bp(10, 7);
-		@include set-bp(14, 10);
-	}
+`$fixed-grid` sets the number of columns necessary to transform the grid from a fluid to
+a fixed layout.
 
-Additional styles can be passed a content block...
-	
-	// set width for multiple break points
-	// and pass styles for those layouts
-	.main {
-		@include set-bp(7, 5, true) { /* styles */ }
-		@include set-bp(10, 7, true) { /* styles */ }
-	}
+`$ie-support` set the number of columns that vintage IE should use as a layout. Since
+breakpoint generates most of your structure inside media queries vintage IE won't see
+it and thus serve the single column fluid layout. `$ie-support` will make sure that a
+single, fixed grid layout gets served to vintage IE without media queries.
 
-Passing styles without setting a width requires you using the named argument...
-	
-	.main {
-		@include set-bp(7, $content: true) { /* styles */ }
-	}
+## The Breakpoint Mixin
 
-## set-sandbox-bp($min, $max)
+`breakpoint()` is the mixin you use to create layouts for a specific breakpoint. You pass
+the number of columns you want on screen as an argument and breakpoint creates the media query
+for you.
 
-Although the mobile first approach of cascading styles up to larger layouts should be
-your mindset, sometimes you need to sandbox styles between two breakpoints. Using this
-mixin will pass styles to a min/max media query and prevent those styles from cascading up
-to larger layouts.
+```
+@include breakpoint(8) {
+  .container  { width: col(8); }
+  .main       { width: col(5); }
+  .sidebar    { width: col(3); }
+}
 
-	.main {
-		@include set-sandbox-bp(6, 10) {
-			/* styles for a breakpoint between 6 and 10 columns */
-		}
-	}
+@include breakpoint(12) {
+  .container  { width: col(12); }
+  .main       { width: col(8); }
+  .sidebar    { width: col(4); }
+}
+```
 
-## IE Support
+The code above generates the following markup...
 
-Older versions of IE don't support media queries but fallback support is built into Breakpoint.
-Set the `$ie-support` variable to the number of columns you want IE to recognize as a layout. This
-overrides the fluid mobile first layout and only serves vintage IE a single fixed layout.
+```
+@media (min-width: 41.25em) {
+  .container { width: 38.75em; }
+  .main      { width: 23.75em; }
+  .sidebar   { width: 13.75em; }
+}
 
-****
+@media (min-width: 61.25em) {
+  .container { width: 58.75em; }
+  .main      { width: 38.75em; }
+  .sidebar   { width: 18.75em; }
+}
+```
 
-#### Credits
+### Sandboxing
+
+Breakpoint uses a mobile first approach to cascading styles up to larger layouts. Sometimes
+it might be necessary to sandbox some styles between two breakpoints to prevent them
+from cascading up to larger layouts. The `breakpoint()` mixin will accept a second
+argument for cases like this and generate a min/max width media query for those styles.
+
+```
+@include breakpoint(9, 11) {
+  .main { /* sandboxed styles */ }
+}
+```
+
+will generate...
+
+```
+@media (min-width: 46.25em) and (max-width: 56.25em) {
+  .main { /* sandboxed styles */ }
+}
+```
+
+## Credits
 
 Breakpoint uses the following frameworks and technologies:
 

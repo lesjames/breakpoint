@@ -1,0 +1,16 @@
+// ========================================
+// grid size config (overrides defaults)
+// ========================================
+
+$column:	 60px;	// column-width of your grid in pixels
+$gutter:	 20px;	// gutter-width of your grid in pixels
+$columns:	 16;	// maximum number of columns needed for layout
+$fixed-grid: 8;		// number of columns to trigger fixed grid
+$ie-support: false; // number of columns for vintage ie
+
+@import 'framework/grid'; // import grid mixins
+
+// ========================================
+// project layout structure
+// ========================================
+
