@@ -29,6 +29,7 @@ $gutter:	 20px;	// gutter-width of your grid in pixels
 $columns:	 16;	// maximum number of columns needed for layout
 $fixed-grid: 8;		// number of columns to trigger fixed grid
 $ie-support: false; // number of columns for vintage ie
+$show-grid:  false; // shows a visual grid overlay
 ```
 
 Setting `$column` `$gutter` and `$columns` define your grid. Breakpoint uses
@@ -38,10 +39,18 @@ to trigger those element sizes.
 `$fixed-grid` sets the number of columns necessary to transform the grid from a fluid to
 a fixed layout.
 
+#### IE Support
+
 `$ie-support` set the number of columns that vintage IE should use as a layout. Since
 breakpoint generates most of your structure inside media queries vintage IE won't see
 it and thus serve the single column fluid layout. `$ie-support` will make sure that a
-single, fixed grid layout gets served to vintage IE without media queries.
+single, fixed grid layout gets served to vintage IE without media queries. You need to
+make sure that the column count you set for `$ie-support` matches another layout in your
+code.
+
+#### Grid Overlay
+
+Setting `$show-grid` to true will generate a visual overlay of your grid for testing.
 
 ## The Breakpoint Mixin
 

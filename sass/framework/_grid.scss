@@ -7,6 +7,7 @@ $gutter:     20px  !default; // gutter-width of your grid in pixels
 $columns:    16    !default; // maximum number of columns needed for layout
 $fixed-grid: 4     !default; // number of columns to trigger fixed grid
 $ie-support: false !default; // number of columns for vintage ie
+$show-grid:  false !default; // shows a visual grid overlay
 
 // =========================================================
 // utility functions
@@ -40,6 +41,16 @@ $ie-support: false !default; // number of columns for vintage ie
 			@media (min-width: (col($i) + (em($gutter) * 2))) {
 				@if ($width) { width: col($width); }
 				@if ($content) { @content }
+				
+				// generate a visual grid overlay
+				@if ($show-grid) {
+					body::after {
+						content: ''; position: absolute; top: 0; bottom: 0; left: 50%;
+						width: col($bp)+(em($gutter)*2); margin-left: (col($bp)+(em($gutter)*2))/2*-1;
+						@include background(linear-gradient(left, transparentize(red, .9) em($gutter),  transparentize(red, .8) em($gutter),  transparentize(red, .8) (em($gutter) + em($column))));
+						@include background-size((em($gutter) + em($column)));
+					}
+				}
 			}
 
 			// ie fallback			

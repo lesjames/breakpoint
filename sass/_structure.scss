@@ -7,6 +7,7 @@ $gutter:	 20px;	// gutter-width of your grid in pixels
 $columns:	 16;	// maximum number of columns needed for layout
 $fixed-grid: 8;		// number of columns to trigger fixed grid
 $ie-support: false; // number of columns for vintage ie (must match a layout)
+$show-grid:  true; // shows a visual grid overlay
 
 @import 'framework/grid'; // import grid mixins after variables for overrides
 
