@@ -1,6 +1,6 @@
-// ========================================
+// =========================================================
 // grid size config
-// ========================================
+// =========================================================
 
 $column:     60px  !default; // column-width of your grid in pixels
 $gutter:     20px  !default; // gutter-width of your grid in pixels
@@ -8,9 +8,9 @@ $columns:    16    !default; // maximum number of columns needed for layout
 $fixed-grid: 4     !default; // number of columns to trigger fixed grid
 $ie-support: false !default; // number of columns for vintage ie
 
-// ========================================
+// =========================================================
 // utility functions
-// ========================================
+// =========================================================
 
 // function for converting px to em
 @function em($px, $base: 16px) { @return (($px / $base) * 1em); }
@@ -18,18 +18,18 @@ $ie-support: false !default; // number of columns for vintage ie
 // column width functions
 @function col($col:1) { @return (($col * (em($column) + em($gutter)) - em($gutter))) }
 
-// ========================================
+// =========================================================
 // mobile first fluid layout
-// ========================================
+// =========================================================
 
 // container class should only be applied to full width elements
 // col class should be applied to every immediate child in a container
 .container { width: auto; margin-left: em($gutter); margin-right: em($gutter); @include clearfix; }
 .col { float: none; margin-left: 0; width: auto; } // is this necessary?
 
-// ========================================
+// =========================================================
 // create media query break point based on columns (private)
-// ========================================
+// =========================================================
 
 // second argument sets a width in columns for the selector
 // third argument passes styles to the media query for that selector
@@ -51,9 +51,9 @@ $ie-support: false !default; // number of columns for vintage ie
 	}	 
 }
 
-// ========================================
+// =========================================================
 // switch from fluid to fixed grid (private)
-// ========================================
+// =========================================================
 
 // break point to turn off fluid and go fixed grid (must be fired without a selector on the root)
 @mixin set-fixed-bp($bp) {
@@ -74,9 +74,9 @@ $ie-support: false !default; // number of columns for vintage ie
 	@include set-fixed-bp($fixed-grid);
 }
 
-// ========================================
+// =========================================================
 // sandbox a set of styles between two breakpoints (private)
-// ========================================
+// =========================================================
 
 @mixin set-sandbox-bp($min, $max) {
 	@media (min-width: (col($min) + (em($gutter) * 2))) and (max-width: (col($max) + (em($gutter) * 2))) { @content }
@@ -91,9 +91,9 @@ $ie-support: false !default; // number of columns for vintage ie
 	}
 }
 
-// ========================================
+// =========================================================
 // breakpoint mixin (public)
-// ========================================
+// =========================================================
 
 @mixin breakpoint($col, $sandbox: false) {
 	@if ($sandbox) {
@@ -102,3 +102,12 @@ $ie-support: false !default; // number of columns for vintage ie
 		@include set-bp($col, $content: true) { @content }	
 	}
 }
+
+// =========================================================
+// global size adjust (public)
+// =========================================================
+
+@mixin bump($factor) {
+	body { font-size: ($factor * 2 + 16) / 16 * 1em; }
+}
+

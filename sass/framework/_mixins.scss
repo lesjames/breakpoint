@@ -6,7 +6,6 @@
 
 // cross browser mixins
 @mixin ff { body:not(:-moz-handler-blocked) & { @content } }
-@mixin ie6 { .lt-ie7 & { @content } }
 @mixin ie7 { .lt-ie8 & { @content } }
 @mixin ie8 { .lt-ie9 & { @content } }
 @mixin no-mediaquery { .lt-ie9 { @content } }
