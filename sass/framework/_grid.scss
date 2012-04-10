@@ -28,7 +28,7 @@ $ie-support: false !default; // number of columns for vintage ie
 .col { float: none; margin-left: 0; width: auto; } // is this necessary?
 
 // ========================================
-// create media query break point based on columns
+// create media query break point based on columns (private)
 // ========================================
 
 // second argument sets a width in columns for the selector
@@ -52,7 +52,7 @@ $ie-support: false !default; // number of columns for vintage ie
 }
 
 // ========================================
-// switch from fluid to fixed grid
+// switch from fluid to fixed grid (private)
 // ========================================
 
 // break point to turn off fluid and go fixed grid (must be fired without a selector on the root)
@@ -75,7 +75,7 @@ $ie-support: false !default; // number of columns for vintage ie
 }
 
 // ========================================
-// sandbox a set of styles between two breakpoints
+// sandbox a set of styles between two breakpoints (private)
 // ========================================
 
 @mixin set-sandbox-bp($min, $max) {
@@ -85,14 +85,14 @@ $ie-support: false !default; // number of columns for vintage ie
 	@if ($ie-support) {
 		@if ($ie-support >= $min ) { 
 			@if ($ie-support <= $max) {
-				& { @include no-mediaquery { @content } }
+				@include no-mediaquery { @content }
 			}
 		}	
 	}
 }
 
 // ========================================
-// breakpoint mixin
+// breakpoint mixin (public)
 // ========================================
 
 @mixin breakpoint($col, $sandbox: false) {
