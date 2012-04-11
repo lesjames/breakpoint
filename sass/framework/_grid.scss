@@ -90,7 +90,13 @@ $show-grid:  false !default; // shows a visual grid overlay
 // =========================================================
 
 @mixin set-sandbox-bp($min, $max) {
-	@media (min-width: (col($min) + (em($gutter) * 2))) and (max-width: (col($max) + (em($gutter) * 2))) { @content }
+	
+	// if min is set to 0 then create a max width media query only
+	@if ($min == 0) {
+		@media (max-width: (col($max) + (em($gutter) * 2))) { @content }
+	} @else {
+		@media (min-width: (col($min) + (em($gutter) * 2))) and (max-width: (col($max) + (em($gutter) * 2))) { @content }
+	}
 	
 	// ie fallback
 	@if ($ie-support) {

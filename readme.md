@@ -109,6 +109,9 @@ will generate...
 }
 ```
 
+**Pro Tip**: If you set the min column to 0 when sandboxing then breakpoint will create
+a max width media query. Use this if you need styles to cascade down instead of up.
+
 ## Credits
 
 Breakpoint uses the following frameworks and technologies:
