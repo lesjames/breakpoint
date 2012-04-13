@@ -90,7 +90,7 @@ The code above generates the following markup...
 
 ### Sandboxing
 
-Breakpoint uses a mobile first approach to cascading styles up to larger layouts. Sometimes
+Breakpoint uses a mobile first approach of cascading styles up to larger layouts. Sometimes
 it might be necessary to sandbox some styles between two breakpoints to prevent them
 from cascading up to larger layouts. The `breakpoint()` mixin will accept a second
 argument for cases like this and generate a min/max width media query for those styles.

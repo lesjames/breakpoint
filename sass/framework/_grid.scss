@@ -69,14 +69,14 @@ $show-grid:  false !default; // shows a visual grid overlay
 // break point to turn off fluid and go fixed grid (must be fired without a selector on the root)
 @mixin set-fixed-bp($bp) {
 	@include set-bp($bp, $content: true) {
-		.container { margin-left: auto; margin-right: auto; width: col($bp); }
-		.col { float: left; margin-left: em($gutter); &:first-child { margin-left: 0; } }
+		.container { margin-left: auto; margin-right: auto; width: col($bp) + em($gutter); position: relative; left: -(em($gutter)/2); }
+		.col { float: left; margin-left: em($gutter); }
 	}
 	
 	// ie fallback			
 	@if ($ie-support) {
 		@include no-mediaquery { .container { width: col($ie-support); margin-left: auto; margin-right: auto; } }
-		@include no-mediaquery { .col { float: left; margin-left: em($gutter); &:first-child { margin-left: 0; } } }
+		@include no-mediaquery { .col { float: left; margin-left: em($gutter); } }
 	}
 }
 
@@ -116,7 +116,7 @@ $show-grid:  false !default; // shows a visual grid overlay
 	@if ($sandbox) {
 		@include set-sandbox-bp($col, $sandbox) { @content }
 	} @else {
-		@include set-bp($col, $content: true) { @content }	
+		@include set-bp($col, $content: true) { .container { width: col($col) + em($gutter); } @content }	
 	}
 }
 

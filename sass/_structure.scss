@@ -2,12 +2,12 @@
 // grid size config (overrides defaults)
 // =========================================================
 
-$column:	 60px;	// column-width of your grid in pixels
-$gutter:	 20px;	// gutter-width of your grid in pixels
-$columns:	 16;	// maximum number of columns needed for layout
-$fixed-grid: 8;		// number of columns to trigger fixed grid
+$column:     60px;  // column-width of your grid in pixels
+$gutter:     20px;  // gutter-width of your grid in pixels
+$columns:    16;    // maximum number of columns needed for layout
+$fixed-grid: 1;     // number of columns to trigger fixed grid
 $ie-support: false; // number of columns for vintage ie (must match a layout)
-$show-grid:  false; // shows a visual grid overlay
+$show-grid:  true; // shows a visual grid overlay
 
 @import 'framework/grid'; // import grid mixins after variables for overrides
 
@@ -15,3 +15,35 @@ $show-grid:  false; // shows a visual grid overlay
 // project layout structure
 // =========================================================
 
+@include breakpoint(4) {
+	.twelve .col { width: col(1); }
+	.six .col { width: col(2); }
+	.four .col { width: col(4); }
+	.three .col { width: col(4); }
+	.two .col { width: col(4); }
+}
+
+
+@include breakpoint(8) {
+	.twelve .col { width: col(1); }
+	.six .col { width: col(2); }
+	.four .col { width: col(4); }
+	.three .col { width: col(4); }
+	.two .col { width: col(8); }
+}
+
+
+@include breakpoint(12) {
+	.twelve .col { width: col(1); }
+	.six .col { width: col(2); }
+	.four .col { width: col(3); }
+	.three .col { width: col(4); }
+	.two .col { width: col(6); }
+}
+
+
+.twelve .col { background: red; }
+.six .col { background: orange; }
+.four .col { background: green; }
+.three .col { background: blue; }
+.two .col { background: purple; }
