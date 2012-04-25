@@ -5,6 +5,7 @@
 $column:     60px  !default; // column-width of your grid in pixels
 $gutter:     20px  !default; // gutter-width of your grid in pixels
 $columns:    16    !default; // maximum number of columns needed for layout
+$responsive: true  !default; // need responsive?
 $fixed-grid: 4     !default; // number of columns to trigger fixed grid
 $ie-support: false !default; // number of columns for vintage ie
 $show-grid:  false !default; // shows a visual grid overlay
@@ -24,9 +25,13 @@ $show-grid:  false !default; // shows a visual grid overlay
 // =========================================================
 
 // container class should only be applied to full width elements
-// col class should be applied to every immediate child in a container
-.container { width: auto; margin-left: em($gutter); margin-right: em($gutter); @include clearfix; }
-.col { float: none; margin-left: 0; width: auto; } // is this necessary?
+@if ($responsive) {
+	.container { width: auto; margin-left: em($gutter); margin-right: em($gutter); }
+} @else {
+	.container { margin-left: auto; margin-right: auto; }
+	.subcontainer { margin-left: em($gutter)/-1; }
+	.col { float: left; margin-left: em($gutter); }
+}
 
 // =========================================================
 // create media query break point based on columns (private)
@@ -69,13 +74,15 @@ $show-grid:  false !default; // shows a visual grid overlay
 // break point to turn off fluid and go fixed grid (must be fired without a selector on the root)
 @mixin set-fixed-bp($bp) {
 	@include set-bp($bp, $content: true) {
-		.container { margin-left: auto; margin-right: auto; width: col($bp) + em($gutter); position: relative; left: -(em($gutter)/2); }
+		.container { margin-left: auto; margin-right: auto; width: col($bp); }
+		.subcontainer { margin-left: em($gutter)/-1; }
 		.col { float: left; margin-left: em($gutter); }
 	}
 	
 	// ie fallback			
 	@if ($ie-support) {
-		@include no-mediaquery { .container { width: col($ie-support); margin-left: auto; margin-right: auto; } }
+		@include no-mediaquery { .container { margin-left: auto; margin-right: auto; width: col($ie-support); } }
+		@include no-mediaquery { .subcontainer { margin-left: em($gutter)/-1; } }
 		@include no-mediaquery { .col { float: left; margin-left: em($gutter); } }
 	}
 }
@@ -116,7 +123,7 @@ $show-grid:  false !default; // shows a visual grid overlay
 	@if ($sandbox) {
 		@include set-sandbox-bp($col, $sandbox) { @content }
 	} @else {
-		@include set-bp($col, $content: true) { .container { width: col($col) + em($gutter); } @content }	
+		@include set-bp($col, $content: true) { @content }	
 	}
 }
 

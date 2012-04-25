@@ -5,7 +5,10 @@
 $column:     60px;  // column-width of your grid in pixels
 $gutter:     20px;  // gutter-width of your grid in pixels
 $columns:    16;    // maximum number of columns needed for layout
-$fixed-grid: 1;     // number of columns to trigger fixed grid
+
+$responsive: true; // need responsive?
+$fixed-grid: 4;     // number of columns to trigger fixed grid
+
 $ie-support: false; // number of columns for vintage ie (must match a layout)
 $show-grid:  true; // shows a visual grid overlay
 
@@ -16,6 +19,7 @@ $show-grid:  true; // shows a visual grid overlay
 // =========================================================
 
 @include breakpoint(4) {
+	.container { width: col(4); }
 	.twelve .col { width: col(1); }
 	.six .col { width: col(2); }
 	.four .col { width: col(4); }
@@ -25,6 +29,7 @@ $show-grid:  true; // shows a visual grid overlay
 
 
 @include breakpoint(8) {
+	.container { width: col(8); }
 	.twelve .col { width: col(1); }
 	.six .col { width: col(2); }
 	.four .col { width: col(4); }
@@ -34,6 +39,7 @@ $show-grid:  true; // shows a visual grid overlay
 
 
 @include breakpoint(12) {
+	.container { width: col(12); }
 	.twelve .col { width: col(1); }
 	.six .col { width: col(2); }
 	.four .col { width: col(3); }

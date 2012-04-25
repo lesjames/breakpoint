@@ -2,29 +2,17 @@
   width: auto;
   margin-left: 1.25em;
   margin-right: 1.25em;
-  *zoom: 1;
-}
-.container:before, .container:after {
-  display: table;
-  content: "";
-}
-.container:after {
-  clear: both;
 }
 
-.col {
-  float: none;
-  margin-left: 0;
-  width: auto;
-}
-
-@media (min-width: 6.25em) {
+@media (min-width: 21.25em) {
   .container {
     margin-left: auto;
     margin-right: auto;
-    width: 5em;
-    position: relative;
-    left: -0.625em;
+    width: 18.75em;
+  }
+
+  .subcontainer {
+    margin-left: -1.25em;
   }
 
   .col {
@@ -38,8 +26,8 @@
     top: 0;
     bottom: 0;
     left: 50%;
-    width: 6.25em;
-    margin-left: -3.125em;
+    width: 21.25em;
+    margin-left: -10.625em;
     background: -webkit-gradient(linear, 0% 50%, 100% 50%, color-stop(25%, rgba(255, 0, 0, 0.1)), color-stop(25%, rgba(255, 0, 0, 0.2)), color-stop(100%, rgba(255, 0, 0, 0.2)));
     background: -webkit-linear-gradient(left, rgba(255, 0, 0, 0.1) 1.25em, rgba(255, 0, 0, 0.2) 1.25em, rgba(255, 0, 0, 0.2) 5em);
     background: -moz-linear-gradient(left, rgba(255, 0, 0, 0.1) 1.25em, rgba(255, 0, 0, 0.2) 1.25em, rgba(255, 0, 0, 0.2) 5em);
@@ -54,7 +42,7 @@
 }
 @media (min-width: 21.25em) {
   .container {
-    width: 20em;
+    width: 18.75em;
   }
 
   .twelve .col {
@@ -99,7 +87,7 @@
 }
 @media (min-width: 41.25em) {
   .container {
-    width: 40em;
+    width: 38.75em;
   }
 
   .twelve .col {
@@ -144,7 +132,7 @@
 }
 @media (min-width: 61.25em) {
   .container {
-    width: 60em;
+    width: 58.75em;
   }
 
   .twelve .col {
