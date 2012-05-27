@@ -14,7 +14,7 @@ $ie-support: false !default; // number of columns for IE fallback (must match a 
 @function em($px, $base: 16px) { @return ($px / $base) * 1em; }
 
 // column widths
-@function fixed($col) { @return $col * ( em($grid-column) + em($grid-gutter) ) - em($grid-gutter) }
+@function fixed($col) { @return $col * ( em($grid-column) + em($grid-gutter) ) }
 @function fluid($col, $avail) { @return (100% / $avail) * $col; }
 
 
@@ -23,15 +23,15 @@ $ie-support: false !default; // number of columns for IE fallback (must match a 
 
 @mixin breakpoint($min, $max: false) {
 	@if ($max) {
-	// create min/max mq
+		// create min/max mq
 		@if ($min == 0) {
-			@media ( max-width: fixed($max) + em($grid-gutter) * 2 ) { @content }
+			@media ( max-width: fixed($max) + em($grid-gutter) ) { @content }
 		} @else {
-			@media ( min-width: fixed($min) + em($grid-gutter) * 2 ) and ( max-width: fixed($max) + em($grid-gutter) * 2 ) { @content }
+			@media ( min-width: fixed($min) + em($grid-gutter) ) and ( max-width: fixed($max) + em($grid-gutter) ) { @content }
 		}	
 	} @else {
 		// create min width mq	
-		@media ( min-width: fixed($min) + em($grid-gutter) * 2 ) {
+		@media ( min-width: fixed($min) + em($grid-gutter) ) {
 			@if($grid-overlay) { @include grid-overlay($min); }
 			@content
 		}
@@ -47,11 +47,11 @@ $ie-support: false !default; // number of columns for IE fallback (must match a 
 
 @mixin grid-overlay($col: false) {
 	body::after {
-		content: ''; position: fixed; top: 0; bottom: 0;
+		content: ''; position: fixed; top: 0; bottom: 0; pointer-events: none;
 		@include background(linear-gradient(left, transparentize(red, .9) $grid-gutter,  transparentize(red, .8) $grid-gutter,  transparentize(red, .8) $grid-gutter + $grid-column));
 		@if ($col) {
 			left: 50%;
-			width: fixed($col) + em($grid-gutter) * 2; margin-left: fixed($col) / -2 - em($grid-gutter);
+			width: fixed($col) + em($grid-gutter); margin-left: fixed($col) / -2 - (em($grid-gutter)/2);
 			@include background-size($grid-gutter + $grid-column);
 		} @else {
 			left: -$grid-gutter; right: 0;
