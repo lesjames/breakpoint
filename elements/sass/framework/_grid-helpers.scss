@@ -1,0 +1,62 @@
+// Variables
+// =============================================================================
+
+$grid-direction: left !default; // switch to 'right' for rtl
+$grid-column: 60px !default; // can be px, em, or %
+$grid-gutter: 20px !default; // can be px, em, or %
+$grid-overlay: false !default; // generate visual grid overlay
+$ie-support: false !default; // number of columns for IE fallback (must match a breakpoint)
+
+// Functions
+// =============================================================================
+
+// converting px to em
+@function em($px, $base: 16px) { @return ($px / $base) * 1em; }
+
+// column widths
+@function fixed($col) { @return $col * ( em($grid-column) + em($grid-gutter) ) - em($grid-gutter) }
+@function fluid($col, $avail) { @return (100% / $avail) * $col; }
+
+
+// Breakpoint mixin 
+// =============================================================================
+
+@mixin breakpoint($min, $max: false) {
+	@if ($max) {
+	// create min/max mq
+		@if ($min == 0) {
+			@media ( max-width: fixed($max) + em($grid-gutter) * 2 ) { @content }
+		} @else {
+			@media ( min-width: fixed($min) + em($grid-gutter) * 2 ) and ( max-width: fixed($max) + em($grid-gutter) * 2 ) { @content }
+		}	
+	} @else {
+		// create min width mq	
+		@media ( min-width: fixed($min) + em($grid-gutter) * 2 ) {
+			@if($grid-overlay) { @include grid-overlay($min); }
+			@content
+		}
+		// ie fallback		
+		@if ($ie-support and $min <= $ie-support) {	
+			@include no-mediaquery { @content } 
+		}
+	}
+}
+
+// Grid overlay
+// =============================================================================
+
+@mixin grid-overlay($col: false) {
+	body::after {
+		content: ''; position: fixed; top: 0; bottom: 0;
+		@include background(linear-gradient(left, transparentize(red, .9) $grid-gutter,  transparentize(red, .8) $grid-gutter,  transparentize(red, .8) $grid-gutter + $grid-column));
+		@if ($col) {
+			left: 50%;
+			width: fixed($col) + em($grid-gutter) * 2; margin-left: fixed($col) / -2 - em($grid-gutter);
+			@include background-size($grid-gutter + $grid-column);
+		} @else {
+			left: -$grid-gutter; right: 0;
+			@include background-size(25%);
+		}
+	}
+}
+@if($grid-overlay) { @include grid-overlay; }

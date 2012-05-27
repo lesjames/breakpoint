@@ -1,7 +1,7 @@
 // cross browser border box
 @mixin border-box() {
 	@include box-sizing(border-box);
-	@include ie7 { behavior: image-url('boxsizing.htc'); }
+	@include ie7 { behavior: url(/elements/js/boxsizing.htc); }
 }
 
 // cross browser mixins

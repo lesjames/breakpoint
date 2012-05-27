@@ -1,0 +1,18 @@
+// Variables
+// =============================================================================
+
+$grid-direction: left; // switch to 'right' for rtl
+$grid-column: 60px; // can be px, em, or %
+$grid-gutter: 20px; // can be px, em, or %
+$grid-overlay: false; // generate visual grid overlay
+$ie-support: false; // fallback breakpoint
+
+// Import grid framework
+// =============================================================================
+
+@import 'framework/grid-helpers';
+@import 'framework/grid-core';
+
+// Structure
+// =============================================================================
+
