@@ -1,11 +1,11 @@
 // Variables
 // =============================================================================
 
-$grid-direction: left !default; // switch to 'right' for rtl
 $grid-column: 60px !default; // can be px, em, or %
 $grid-gutter: 20px !default; // can be px, em, or %
 $grid-overlay: false !default; // generate visual grid overlay
 $ie-support: false !default; // number of columns for IE fallback (must match a breakpoint)
+$grid-direction: left !default; // switch to 'right' for rtl
 
 // Functions
 // =============================================================================
@@ -33,6 +33,8 @@ $ie-support: false !default; // number of columns for IE fallback (must match a 
 		// create min width mq	
 		@media ( min-width: fixed($min) + em($grid-gutter) ) {
 			@if($grid-overlay) { @include grid-overlay($min); }
+			// proper sizing of wrapper
+			.wrapper { width: fixed($min) - em($grid-gutter); margin-left: auto; margin-right: auto; }
 			@content
 		}
 		// ie fallback		
@@ -48,13 +50,13 @@ $ie-support: false !default; // number of columns for IE fallback (must match a 
 @mixin grid-overlay($col: false) {
 	body::after {
 		content: ''; position: fixed; top: 0; bottom: 0; pointer-events: none;
-		@include background(linear-gradient(left, transparentize(red, .9) $grid-gutter,  transparentize(red, .8) $grid-gutter,  transparentize(red, .8) $grid-gutter + $grid-column));
+		@include background(linear-gradient(left, transparent $grid-gutter,  transparentize(red, .9) $grid-gutter,  transparentize(red, .9) $grid-gutter + $grid-column));
 		@if ($col) {
 			left: 50%;
 			width: fixed($col) + em($grid-gutter); margin-left: fixed($col) / -2 - (em($grid-gutter)/2);
 			@include background-size($grid-gutter + $grid-column);
 		} @else {
-			left: -$grid-gutter; right: 0;
+			left: 0; right: $grid-gutter;
 			@include background-size(25%);
 		}
 	}

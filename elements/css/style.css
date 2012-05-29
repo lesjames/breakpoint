@@ -1,0 +1,235 @@
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+nav,
+section,
+summary {
+  display: block;
+}
+
+audio,
+canvas,
+video {
+  display: inline-block;
+  *display: inline;
+  *zoom: 1;
+}
+
+audio:not([controls]) {
+  display: none;
+  height: 0;
+}
+
+[hidden] {
+  display: none;
+}
+
+figure {
+  margin: 0;
+}
+
+html {
+  font-size: 100%;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+}
+
+html,
+button,
+input,
+select,
+textarea {
+  font-family: sans-serif;
+}
+
+body {
+  margin: 0;
+}
+
+body::after {
+  content: '';
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  pointer-events: none;
+  background: -webkit-gradient(linear, 0% 50%, 80 50%, color-stop(25%, transparent), color-stop(25%, rgba(255, 0, 0, 0.1)), color-stop(100%, rgba(255, 0, 0, 0.1)));
+  background: -webkit-linear-gradient(left, transparent 20px, rgba(255, 0, 0, 0.1) 20px, rgba(255, 0, 0, 0.1) 80px);
+  background: -moz-linear-gradient(left, transparent 20px, rgba(255, 0, 0, 0.1) 20px, rgba(255, 0, 0, 0.1) 80px);
+  background: -o-linear-gradient(left, transparent 20px, rgba(255, 0, 0, 0.1) 20px, rgba(255, 0, 0, 0.1) 80px);
+  background: -ms-linear-gradient(left, transparent 20px, rgba(255, 0, 0, 0.1) 20px, rgba(255, 0, 0, 0.1) 80px);
+  background: linear-gradient(left, transparent 20px, rgba(255, 0, 0, 0.1) 20px, rgba(255, 0, 0, 0.1) 80px);
+  left: 0;
+  right: 20px;
+  -webkit-background-size: 25%;
+  -moz-background-size: 25%;
+  -o-background-size: 25%;
+  background-size: 25%;
+}
+
+/* Grid based on https://github.com/necolas/griddle by Nicolas Gallagher (@necolas) */
+.wrapper {
+  margin-left: 1.25em;
+  margin-right: 1.25em;
+}
+
+.grid {
+  display: block;
+  padding: 0;
+  margin: 0 -0.625em;
+  text-align: left;
+  letter-spacing: -0.31em;
+  word-spacing: -0.43em;
+  text-rendering: optimizespeed;
+}
+
+.grid > .grid {
+  overflow: hidden;
+  margin-right: 0;
+  margin-left: 0;
+}
+
+.grid-cell {
+  width: 100%;
+  display: -moz-inline-box;
+  -moz-box-orient: vertical;
+  display: inline-block;
+  vertical-align: middle;
+  *vertical-align: auto;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0 0.625em;
+  /* controls vertical positioning of units */
+  vertical-align: top;
+  /* keeps unit content correctly aligned */
+  text-align: left;
+  /* reset text defaults */
+  letter-spacing: normal;
+  word-spacing: normal;
+  text-rendering: auto;
+}
+.grid-cell {
+  *display: inline;
+}
+.lt-ie8 .grid-cell {
+  behavior: url(/elements/js/boxsizing.htc);
+}
+
+.grid-center {
+  text-align: center;
+}
+
+.grid-cell-center {
+  display: block;
+  margin: 0 auto;
+}
+
+.grid-cell p {
+  background: #EEE;
+  padding: .25em .5em;
+  font-size: .75em;
+}
+
+.fluid-demo p::before {
+  content: '100% fluid for mobile';
+}
+
+.fixed-demo p::before {
+  content: '100% fluid for mobile';
+}
+
+@media (min-width: 41.25em) {
+  body::after {
+    content: '';
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    pointer-events: none;
+    background: -webkit-gradient(linear, 0% 50%, 80 50%, color-stop(25%, transparent), color-stop(25%, rgba(255, 0, 0, 0.1)), color-stop(100%, rgba(255, 0, 0, 0.1)));
+    background: -webkit-linear-gradient(left, transparent 20px, rgba(255, 0, 0, 0.1) 20px, rgba(255, 0, 0, 0.1) 80px);
+    background: -moz-linear-gradient(left, transparent 20px, rgba(255, 0, 0, 0.1) 20px, rgba(255, 0, 0, 0.1) 80px);
+    background: -o-linear-gradient(left, transparent 20px, rgba(255, 0, 0, 0.1) 20px, rgba(255, 0, 0, 0.1) 80px);
+    background: -ms-linear-gradient(left, transparent 20px, rgba(255, 0, 0, 0.1) 20px, rgba(255, 0, 0, 0.1) 80px);
+    background: linear-gradient(left, transparent 20px, rgba(255, 0, 0, 0.1) 20px, rgba(255, 0, 0, 0.1) 80px);
+    left: 50%;
+    width: 41.25em;
+    margin-left: -20.625em;
+    -webkit-background-size: 80px;
+    -moz-background-size: 80px;
+    -o-background-size: 80px;
+    background-size: 80px;
+  }
+
+  .wrapper {
+    width: 38.75em;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .fluid-demo .grid-cell {
+    width: 50%;
+  }
+  .fluid-demo p::before {
+    content: '50% fluid at 8 col';
+  }
+
+  .fixed-demo .grid-cell {
+    width: 10em;
+  }
+  .fixed-demo p::before {
+    content: '2 col fixed at 8 col';
+  }
+}
+@media (min-width: 61.25em) {
+  body::after {
+    content: '';
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    pointer-events: none;
+    background: -webkit-gradient(linear, 0% 50%, 80 50%, color-stop(25%, transparent), color-stop(25%, rgba(255, 0, 0, 0.1)), color-stop(100%, rgba(255, 0, 0, 0.1)));
+    background: -webkit-linear-gradient(left, transparent 20px, rgba(255, 0, 0, 0.1) 20px, rgba(255, 0, 0, 0.1) 80px);
+    background: -moz-linear-gradient(left, transparent 20px, rgba(255, 0, 0, 0.1) 20px, rgba(255, 0, 0, 0.1) 80px);
+    background: -o-linear-gradient(left, transparent 20px, rgba(255, 0, 0, 0.1) 20px, rgba(255, 0, 0, 0.1) 80px);
+    background: -ms-linear-gradient(left, transparent 20px, rgba(255, 0, 0, 0.1) 20px, rgba(255, 0, 0, 0.1) 80px);
+    background: linear-gradient(left, transparent 20px, rgba(255, 0, 0, 0.1) 20px, rgba(255, 0, 0, 0.1) 80px);
+    left: 50%;
+    width: 61.25em;
+    margin-left: -30.625em;
+    -webkit-background-size: 80px;
+    -moz-background-size: 80px;
+    -o-background-size: 80px;
+    background-size: 80px;
+  }
+
+  .wrapper {
+    width: 58.75em;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .fluid-demo .grid-cell {
+    width: 25%;
+  }
+  .fluid-demo p::before {
+    content: '25% fluid at 12 col';
+  }
+
+  .fixed-demo .grid-cell {
+    width: 15em;
+  }
+  .fixed-demo p::before {
+    content: '3 col fixed at 12 col';
+  }
+}
+@media (min-width: 46.25em) and (max-width: 56.25em) {
+  .main {
+    /* sandboxed styles */
+  }
+}

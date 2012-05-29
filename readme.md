@@ -1,18 +1,20 @@
 # Breakpoint
 
-Breakpoint aims to take some of the pain out of creating a
-responsive layout. Breakpoint figures out the minimum screen size
-needed to achieve the layout you want and creates the media
-query for you.
+Breakpoint is a grid system based on the concept that columns shouldn't
+stretch but get added or taken away as the screen changes size. This concept
+was taken from the [Frameless Grid](http://framelessgrid.com/) system developed by Joni Korpi.
+The Breakpoint grid is also floatless by using inline-block cells and border box sizing. This
+layout technique is taken from [Griddle](https://github.com/necolas/griddle) by Nicolas Gallagher.
+Breakpoint generates media queries at column break points so that your layout always has enough
+room to fit on the screen. It has helper functions to calculate both fluid and fixed widths for
+your columns.
 
 ## The Grid
 
-Breakpoint is a mobile first fluid layout that can be triggered 
-at a break point to go fixed. Styles cascade from smaller break 
-points up into larger ones. The breakpoint mixin provides a simple method of
-setting element sizes when certain break points become available. 
-Media queries for any number of columns are automatically generated
-when the screen becomes wide enough for their display.
+Breakpoint is a mobile first fluid layout that gets triggered 
+at a break point to go fixed width. Styles cascade from smaller break 
+points up into larger ones. The `breakpoint()` mixin provides a simple method of
+setting media query sizes when certain column break points become available. 
 Everything is calculated from the column and gutter size width variables.
 
 Simply stated you just need to know how many columns you need for a 
@@ -20,55 +22,52 @@ layout and breakpoint will generate the media query needed to trigger that layou
 
 ### Grid Setup
 
-You can setup your project by defining a couple variables needed to configure
-your grid.
+The grid column and gutter sizes don't change when the layout gets triggered into
+a fixed width. These sizes are set by the following variables...
 
 ```
-$column:	 60px;	// column-width of your grid in pixels
-$gutter:	 20px;	// gutter-width of your grid in pixels
-$columns:	 16;	// maximum number of columns needed for layout
-$fixed-grid: 8;		// number of columns to trigger fixed grid
-$ie-support: false; // number of columns for vintage ie
-$show-grid:  false; // shows a visual grid overlay
+$grid-column: 60px;
+$grid-gutter: 20px;
 ```
-
-Setting `$column` `$gutter` and `$columns` define your grid. Breakpoint uses
-these values to generate the size of elements and the media queries necessary
-to trigger those element sizes.
-
-`$fixed-grid` sets the number of columns necessary to transform the grid from a fluid to
-a fixed layout.
 
 #### IE Support
 
-`$ie-support` set the number of columns that vintage IE should use as a layout. Since
-breakpoint generates most of your structure inside media queries vintage IE won't see
-it and thus serve the single column fluid layout. `$ie-support` will make sure that a
-single, fixed grid layout gets served to vintage IE without media queries. You need to
-make sure that the column count you set for `$ie-support` matches another layout in your
-code.
+`$ie-support` sets the number of columns that vintage IE should use as a layout. Since
+breakpoint generates your fixed width structure inside media queries vintage IE won't see
+it and thus serve the mobile first fluid layout. `$ie-support` will make sure that a
+single, fixed width layout gets served to vintage IE without media queries. You need to
+make sure that the column count you set for `$ie-support` matches a layout break point.
 
 #### Grid Overlay
 
-Setting `$show-grid` to true will generate a visual overlay of your grid for testing.
+Setting `$grid-overlay` to true will generate a visual overlay of your grid for testing.
 
 ## The Breakpoint Mixin
 
 `breakpoint()` is the mixin you use to create layouts for a specific breakpoint. You pass
-the number of columns you want on screen as an argument and breakpoint creates the media query
-for you.
+the number of columns you want on screen as an argument and breakpoint creates the media query needed
+to trigger this layout when the screen becomes wide enough. Note that a matching centering `.wrapper` class is
+auto generated for each break point.
 
 ```
-@include breakpoint(8) {
-  .container  { width: col(8); }
-  .main       { width: col(5); }
-  .sidebar    { width: col(3); }
+// 8 column breakpoint
+@include breakpoint(8){
+	.fluid-demo {
+		.grid-cell { width: fluid(4,8); }
+	}
+	.fixed-demo {
+		.grid-cell { width: fixed(2); }
+	}
 }
 
-@include breakpoint(12) {
-  .container  { width: col(12); }
-  .main       { width: col(8); }
-  .sidebar    { width: col(4); }
+// 12 column breakpoint
+@include breakpoint(12){
+	.fluid-demo {
+		.grid-cell { width: fluid(3,12); }
+	}
+	.fixed-demo {
+		.grid-cell { width: fixed(3); }
+	}
 }
 ```
 
@@ -76,15 +75,31 @@ The code above generates the following markup...
 
 ```
 @media (min-width: 41.25em) {
-  .container { width: 38.75em; }
-  .main      { width: 23.75em; }
-  .sidebar   { width: 13.75em; }
+  .wrapper {
+    width: 38.75em;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .fluid-demo .grid-cell {
+    width: 50%;
+  }
+  .fixed-demo .grid-cell {
+    width: 10em;
+  }
 }
 
 @media (min-width: 61.25em) {
-  .container { width: 58.75em; }
-  .main      { width: 38.75em; }
-  .sidebar   { width: 18.75em; }
+  .wrapper {
+    width: 58.75em;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .fluid-demo .grid-cell {
+    width: 25%;
+  }
+  .fixed-demo .grid-cell {
+    width: 15em;
+  }
 }
 ```
 
@@ -121,3 +136,5 @@ Breakpoint uses the following frameworks and technologies:
 [Frameless Grid](http://framelessgrid.com/), 
 [Sass](http://sass-lang.com/), 
 [Compass](http://compass-style.org/)
+
+Sass 3.2 is necessary to pass styles to media queries. Install with `$ gem install sass --pre`
