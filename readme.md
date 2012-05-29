@@ -30,6 +30,13 @@ $grid-column: 60px;
 $grid-gutter: 20px;
 ```
 
+### Grid Markup
+
+Breakpoint uses three classes to establish a grid. First `.wrapper` is used as
+a fixed width centering div. `.grid` is the parent container for your cells and is always
+100% fluid in width. `.grid-cell` is the child unit and can be set to either fixed or
+fluid widths.
+
 #### IE Support
 
 `$ie-support` sets the number of columns that vintage IE should use as a layout. Since
@@ -127,12 +134,17 @@ will generate...
 **Pro Tip**: If you set the min column to 0 when sandboxing then breakpoint will create
 a max width media query. Use this if you need styles to cascade down instead of up.
 
+## Changelog
+
+5/28/12 - Pushed version 2.0
+
 ## Credits
 
 Breakpoint uses the following frameworks and technologies:
 
 [H5BP](http://html5boilerplate.com/), 
-[normalize.css](http://necolas.github.com/normalize.css/), 
+[normalize.css](http://necolas.github.com/normalize.css/),
+[Griddle](https://github.com/necolas/griddle), 
 [Frameless Grid](http://framelessgrid.com/), 
 [Sass](http://sass-lang.com/), 
 [Compass](http://compass-style.org/)
