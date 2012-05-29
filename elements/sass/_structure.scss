@@ -30,11 +30,11 @@ $ie-support: false; // fallback breakpoint
 // 8 column breakpoint
 @include breakpoint(8){
 	.fluid-demo {
-		.grid-cell { width: fluid(4,8); }
+		.grid-cell { width: fluid-cell(4,8); }
 		p::before { content: '50% fluid at 8 col' }
 	}
 	.fixed-demo {
-		.grid-cell { width: fixed(2); }
+		.grid-cell { width: fixed-cell(2); }
 		p::before { content: '2 col fixed at 8 col' }
 	}
 }
@@ -42,11 +42,11 @@ $ie-support: false; // fallback breakpoint
 // 12 column breakpoint
 @include breakpoint(12){
 	.fluid-demo {
-		.grid-cell { width: fluid(3,12); }
+		.grid-cell { width: fluid-cell(3,12); }
 		p::before { content: '25% fluid at 12 col' }
 	}
 	.fixed-demo {
-		.grid-cell { width: fixed(3); }
+		.grid-cell { width: fixed-cell(3); }
 		p::before { content: '3 col fixed at 12 col' }
 	}
 }

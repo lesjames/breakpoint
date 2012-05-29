@@ -14,8 +14,9 @@ $grid-direction: left !default; // switch to 'right' for rtl
 @function em($px, $base: 16px) { @return ($px / $base) * 1em; }
 
 // column widths
-@function fixed($col) { @return $col * ( em($grid-column) + em($grid-gutter) ) }
-@function fluid($col, $avail) { @return (100% / $avail) * $col; }
+@function fixed-cell($col) { @return $col * ( em($grid-column) + em($grid-gutter) ) }
+@function fixed-col($col) { @return $col * ( em($grid-column) + em($grid-gutter) ) - em($grid-gutter) }
+@function fluid-cell($col, $avail) { @return (100% / $avail) * $col; }
 
 
 // Breakpoint mixin 
@@ -25,22 +26,22 @@ $grid-direction: left !default; // switch to 'right' for rtl
 	@if ($max) {
 		// create min/max mq
 		@if ($min == 0) {
-			@media ( max-width: fixed($max) + em($grid-gutter) ) { @content }
+			@media ( max-width: fixed-cell($max) + em($grid-gutter) ) { @content }
 		} @else {
-			@media ( min-width: fixed($min) + em($grid-gutter) ) and ( max-width: fixed($max) + em($grid-gutter) ) { @content }
+			@media ( min-width: fixed-cell($min) + em($grid-gutter) ) and ( max-width: fixed-cell($max) + em($grid-gutter) ) { @content }
 		}	
 	} @else {
 		// create min width mq	
-		@media ( min-width: fixed($min) + em($grid-gutter) ) {
+		@media ( min-width: fixed-cell($min) + em($grid-gutter) ) {
 			@if($grid-overlay) { @include grid-overlay($min); }
 			// proper sizing of wrapper
-			.wrapper { width: fixed($min) - em($grid-gutter); margin-left: auto; margin-right: auto; }
+			.wrapper { width: fixed-cell($min) - em($grid-gutter); margin-left: auto; margin-right: auto; }
 			@content
 		}
 		// ie fallback		
 		@if ($ie-support and $min <= $ie-support) {	
 			@include no-mediaquery {
-				.wrapper { width: fixed($min) - em($grid-gutter); margin-left: auto; margin-right: auto; }
+				.wrapper { width: fixed-cell($min) - em($grid-gutter); margin-left: auto; margin-right: auto; }
 				@content
 			} 
 		}
@@ -56,7 +57,7 @@ $grid-direction: left !default; // switch to 'right' for rtl
 		@include background(linear-gradient(left, transparent $grid-gutter,  transparentize(red, .9) $grid-gutter,  transparentize(red, .9) $grid-gutter + $grid-column));
 		@if ($col) {
 			left: 50%;
-			width: fixed($col) + em($grid-gutter); margin-left: fixed($col) / -2 - (em($grid-gutter)/2);
+			width: fixed-cell($col) + em($grid-gutter); margin-left: fixed-cell($col) / -2 - (em($grid-gutter)/2);
 			@include background-size($grid-gutter + $grid-column);
 		} @else {
 			left: 0; right: $grid-gutter;

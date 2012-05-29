@@ -37,6 +37,17 @@ a fixed width centering div. `.grid` is the parent container for your cells and 
 100% fluid in width. `.grid-cell` is the child unit and can be set to either fixed or
 fluid widths.
 
+### Helper Functions
+
+`fluid-cell($col, $available)` calculates a percentage based on how many columns you want
+against how many columns are available.
+
+`fixed-cell($col)` calculates a fixed width for grid cells. Since this function accounts
+for border-box padding you should only use this function for sizing `.grid-cell` units.
+
+`fixed-col($col)` calculates a fixed width for items outside of the grid system. This function
+does not assume border-box sizing and should be applied to elements other than `.grid-cell` units. 
+
 #### IE Support
 
 `$ie-support` sets the number of columns that vintage IE should use as a layout. Since
@@ -60,20 +71,20 @@ auto generated for each break point.
 // 8 column breakpoint
 @include breakpoint(8){
 	.fluid-demo {
-		.grid-cell { width: fluid(4,8); }
+		.grid-cell { width: fluid-cell(4,8); }
 	}
 	.fixed-demo {
-		.grid-cell { width: fixed(2); }
+		.grid-cell { width: fixed-cell(2); }
 	}
 }
 
 // 12 column breakpoint
 @include breakpoint(12){
 	.fluid-demo {
-		.grid-cell { width: fluid(3,12); }
+		.grid-cell { width: fluid-cell(3,12); }
 	}
 	.fixed-demo {
-		.grid-cell { width: fixed(3); }
+		.grid-cell { width: fixed-cell(3); }
 	}
 }
 ```
