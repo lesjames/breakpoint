@@ -48,24 +48,6 @@ for border-box padding you should only use this function for sizing `.grid-cell`
 `fixed-col($col)` calculates a fixed width for items outside of the grid system. This function
 does not assume border-box sizing and should be applied to elements other than `.grid-cell` units. 
 
-#### IE Support
-
-`$ie-support` sets the number of columns that vintage IE should use as a layout. Since
-breakpoint generates your fixed width structure inside media queries vintage IE won't see
-it and thus serve the mobile first fluid layout. `$ie-support` will make sure that a
-single, fixed width layout gets served to vintage IE without media queries. You need to
-make sure that the column count you set for `$ie-support` matches a layout break point.
-
-#### Grid Overlay
-
-Setting `$grid-overlay` to true will generate a visual overlay of your grid for testing.
-
-#### JS Hook
-
-Breakpoint creates a hidden label (width on the head tag) that can be read by JavaScript so that you can pass
-the current number of columns to your scripts. This can be used to conditionally load
-assests at certain breakpoints or trigger other scripty stuff.
-
 ## The Breakpoint Mixin
 
 `breakpoint()` is the mixin you use to create layouts for a specific breakpoint. You pass
@@ -151,8 +133,29 @@ will generate...
 **Pro Tip**: If you set the min column to 0 when sandboxing then breakpoint will create
 a max width media query. Use this if you need styles to cascade down instead of up.
 
+## Other Features
+
+### IE Support
+
+`$ie-support` sets the number of columns that vintage IE should use as a layout. Since
+breakpoint generates your fixed width structure inside media queries vintage IE won't see
+it and thus serve the mobile first fluid layout. `$ie-support` will make sure that a
+single, fixed width layout gets served to vintage IE without media queries. You need to
+make sure that the column count you set for `$ie-support` matches a layout break point.
+
+### Grid Overlay
+
+Setting `$grid-overlay` to true will generate a visual overlay of your grid for testing.
+
+### JS Hook
+
+Breakpoint creates a hidden label (width on the head tag) that can be read by JavaScript so that you can pass
+the current number of columns to your scripts. This can be used to conditionally load
+assests at certain breakpoints or trigger other scripty stuff.
+
 ## Changelog
 
+6/11/12 - Reorg and cleanup. Added JS hook and script
 5/28/12 - Pushed version 2.0
 
 ## Credits
