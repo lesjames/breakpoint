@@ -155,7 +155,7 @@ assests at certain breakpoints or trigger other scripty stuff.
 
 ## Changelog
 
-6/11/12 - Reorg and cleanup. Added JS hook and script
+6/11/12 - Reorg and cleanup. Added JS hook and script  
 5/28/12 - Pushed version 2.0
 
 ## Credits
