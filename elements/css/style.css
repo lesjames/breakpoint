@@ -139,6 +139,10 @@ li {
   list-style: none;
 }
 
+head {
+  width: 0;
+}
+
 body::after {
   content: '';
   position: fixed;
@@ -255,6 +259,10 @@ body::after {
     background-size: 80px;
   }
 
+  head {
+    width: 8px;
+  }
+
   .wrapper {
     width: 38.75em;
     margin-left: auto;
@@ -295,6 +303,10 @@ body::after {
     -moz-background-size: 80px;
     -o-background-size: 80px;
     background-size: 80px;
+  }
+
+  head {
+    width: 12px;
   }
 
   .wrapper {
