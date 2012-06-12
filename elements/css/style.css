@@ -210,7 +210,7 @@ body::after {
   *display: inline;
 }
 .lt-ie8 .grid-cell {
-  behavior: url(../js/boxsizing.htc);
+  behavior: url(/elements/js/boxsizing.htc);
 }
 
 .grid-center {

@@ -21,9 +21,14 @@ var detect_mq = {
 	  } else {
 		  log('The grid is ' + dmq_size + ' columns wide');
 	  }
-
+	  
   }
 };
+
+// fallback script if no media query support
+if(!Modernizr.mq('(min-width: 0px)')) {
+  // alert('Fallback for no MQ');
+}
 
 
 (function (win) {
