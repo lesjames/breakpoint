@@ -1,3 +1,21 @@
+.clearfix {
+  *zoom: 1;
+}
+.clearfix:before, .clearfix:after {
+  display: table;
+  content: "";
+}
+.clearfix:after {
+  clear: both;
+}
+
+/* normalize.css 2012-03-11T12:53 UTC - http://github.com/necolas/normalize.css */
+/* =============================================================================
+   HTML5 display definitions
+   ========================================================================== */
+/*
+ * Corrects block display not defined in IE6/7/8/9 & FF3
+ */
 article,
 aside,
 details,
@@ -12,6 +30,16 @@ summary {
   display: block;
 }
 
+/*
+ * Addresses margin not present in IE6/7/8/9, S5, O11
+ */
+figure {
+  margin: 0;
+}
+
+/*
+ * Corrects inline-block display not defined in IE6/7/8/9 & FF3
+ */
 audio,
 canvas,
 video {
@@ -20,25 +48,44 @@ video {
   *zoom: 1;
 }
 
+/*
+ * Prevents modern browsers from displaying 'audio' without controls
+ * Remove excess height in iOS5 devices
+ */
 audio:not([controls]) {
   display: none;
   height: 0;
 }
 
+/*
+ * Addresses styling for 'hidden' attribute not present in IE7/8/9, FF3, S4
+ * Known issue: no IE6 support
+ */
 [hidden] {
   display: none;
 }
 
-figure {
-  margin: 0;
-}
-
+/* =============================================================================
+   Base
+   ========================================================================== */
+/*
+ * 1. Corrects text resizing oddly in IE6/7 when body font-size is set using em units
+ *    http://clagnut.com/blog/348/#c790
+ * 2. Prevents iOS text size adjust after orientation change, without disabling user zoom
+ *    www.456bereastreet.com/archive/201012/controlling_text_size_in_safari_for_ios_without_disabling_user_zoom/
+ */
 html {
   font-size: 100%;
+  /* 1 */
   -webkit-text-size-adjust: 100%;
+  /* 2 */
   -ms-text-size-adjust: 100%;
+  /* 2 */
 }
 
+/*
+ * Addresses font-family inconsistency between 'textarea' and other form elements.
+ */
 html,
 button,
 input,
@@ -47,8 +94,49 @@ textarea {
   font-family: sans-serif;
 }
 
+/*
+ * Addresses margins handled incorrectly in IE6/7
+ */
 body {
   margin: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: inherit;
+  line-height: inherit;
+  font-size: inherit;
+  margin: 0;
+}
+
+p {
+  margin: 0;
+}
+
+blockquote {
+  margin: 0;
+}
+
+ol,
+ul {
+  margin: 0;
+  padding: 0;
+}
+
+dl,
+dd {
+  margin: 0;
+}
+
+li {
+  display: block;
+  padding: 0;
+  margin: 0;
+  list-style: none;
 }
 
 body::after {
@@ -118,7 +206,7 @@ body::after {
   *display: inline;
 }
 .lt-ie8 .grid-cell {
-  behavior: url(/elements/js/boxsizing.htc);
+  behavior: url(../js/boxsizing.htc);
 }
 
 .grid-center {
@@ -134,6 +222,7 @@ body::after {
   background: #EEE;
   padding: .25em .5em;
   font-size: .75em;
+  margin: 1em 0;
 }
 
 .fluid-demo p::before {

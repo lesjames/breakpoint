@@ -1,4 +1,11 @@
-@import 'config'; // configure project sass
-@import 'framework'; // load framework
-@import 'structure'; // project specific structure
-@import 'components'; // project specific components
+// project specific variables and mixins and reset config
+@import 'config';
+
+// framework should not be modified per project
+@import 'framework';
+
+// each component style should be agnostic to it's surroundings
+@import 'components';
+
+// sturcture loaded last for proper media query cascading
+@import 'structure';

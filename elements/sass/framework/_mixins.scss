@@ -1,19 +1,14 @@
 // cross browser border box
 @mixin border-box() {
 	@include box-sizing(border-box);
-	@include ie7 { behavior: url(/elements/js/boxsizing.htc); }
+	@include ie7 { behavior: url(../js/boxsizing.htc); }
 }
 
 // cross browser mixins
 @mixin ff { body:not(:-moz-handler-blocked) & { @content } }
 @mixin ie7 { .lt-ie8 & { @content } }
 @mixin ie8 { .lt-ie9 & { @content } }
-@mixin no-mediaquery { .lt-ie9 { @content } }
-
-// fallback selectors
-@mixin no-rgba { .no-rgba & { @content } }
-@mixin no-cssgradients { .no-cssgradients & { @content } }
-@mixin no-svg { .no-svg & { @content } }
 
 // clearfix mixin
 @mixin clearfix { *zoom: 1; &:before, &:after { display: table; content: ""; } &:after { clear: both; } }
+.clearfix { @include clearfix; }

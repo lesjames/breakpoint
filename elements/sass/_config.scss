@@ -1,6 +1,6 @@
-// ========================================
+// ==========================================================================
 // normalize config (uncomment variables to activate reset sections)
-// ========================================
+// ==========================================================================
 
 $normalize-html5: true;
 $normalize-base: true;
@@ -12,17 +12,13 @@ $normalize-base: true;
 // $normalize-forms: true;
 // $normalize-tables: true;
 
-// $typography-reset: true; // opt in typography reset
-// $lists-reset: true; // reset list styles
+// other resets
+// ==========================================================================
 
+$typography-reset: true;
 
-// ========================================
-// helper styles
-// ========================================
-
-// $helper-styles: true;
 // $print-styles: true;
 
-// ========================================
-// project variables
-// ========================================
+// ==========================================================================
+// project specific variables and mixins
+// ==========================================================================

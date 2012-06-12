@@ -18,7 +18,6 @@ $grid-direction: left !default; // switch to 'right' for rtl
 @function fixed-col($col) { @return $col * ( em($grid-column) + em($grid-gutter) ) - em($grid-gutter) }
 @function fluid-cell($col, $avail) { @return (100% / $avail) * $col; }
 
-
 // Breakpoint mixin 
 // =============================================================================
 
