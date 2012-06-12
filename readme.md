@@ -60,6 +60,12 @@ make sure that the column count you set for `$ie-support` matches a layout break
 
 Setting `$grid-overlay` to true will generate a visual overlay of your grid for testing.
 
+#### JS Hook
+
+Breakpoint creates a hidden label (width on the head tag) that can be read by JavaScript so that you can pass
+the current number of columns to your scripts. This can be used to conditionally load
+assests at certain breakpoints or trigger other scripty stuff.
+
 ## The Breakpoint Mixin
 
 `breakpoint()` is the mixin you use to create layouts for a specific breakpoint. You pass
