@@ -1,9 +1,9 @@
 // Variables
 // =============================================================================
 
-$grid-column: 60px; // can be px, em, or %
-$grid-gutter: 20px; // can be px, em, or %
-$grid-overlay: true; // generate visual grid overlay
+$grid-column: 60px;
+$grid-gutter: 20px;
+$grid-overlay: false; // generate visual grid overlay
 $ie-support: false; // fallback breakpoint
 
 // Import grid framework
@@ -15,42 +15,14 @@ $ie-support: false; // fallback breakpoint
 // Structure
 // =============================================================================
 
-// visualize grid cells
-.grid-cell p { background: #EEE; padding: .25em .5em; font-size: .75em; margin: 1em 0; }
-
-// mobile first style
-.fluid-demo {
-	p::before { content: '100% fluid for mobile' }
+@include breakpoint(9) {
+	.content { width: fluid-cell(5,9); }
+	.sub-content { width: fluid-cell(4,9); }
+	.feature { width: fluid-cell(3,9); }
 }
 
-.fixed-demo {
-	p::before { content: '100% fluid for mobile' }
-}
-
-// 8 column breakpoint
-@include breakpoint(8){
-	.fluid-demo {
-		.grid-cell { width: fluid-cell(4,8); }
-		p::before { content: '50% fluid at 8 col' }
-	}
-	.fixed-demo {
-		.grid-cell { width: fixed-cell(2); }
-		p::before { content: '2 col fixed at 8 col' }
-	}
-}
-
-// 12 column breakpoint
-@include breakpoint(12){
-	.fluid-demo {
-		.grid-cell { width: fluid-cell(3,12); }
-		p::before { content: '25% fluid at 12 col' }
-	}
-	.fixed-demo {
-		.grid-cell { width: fixed-cell(3); }
-		p::before { content: '3 col fixed at 12 col' }
-	}
-}
-
-@include breakpoint(9, 11) {
-  .main { /* sandboxed styles */ }
+@include breakpoint(12) {
+	.content { width: fluid-cell(8,12); }
+	.sub-content { width: fluid-cell(4,12); }
+	.feature { width: fluid-cell(4,12); }
 }

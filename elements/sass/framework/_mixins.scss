@@ -12,3 +12,6 @@
 // clearfix mixin
 @mixin clearfix { *zoom: 1; &:before, &:after { display: table; content: ""; } &:after { clear: both; } }
 .clearfix { @include clearfix; }
+
+// converting px to em
+@function em($px, $base: 16px) { @return ($px / $base) * 1em; }
