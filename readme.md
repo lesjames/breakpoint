@@ -39,13 +39,14 @@ fluid widths.
 
 ### Helper Functions
 
-`fluid-cell($col, $available)` calculates a percentage based on how many columns you want
-against how many columns are available.
+`fluid($col)` calculates a percentage based on how many columns you want. Has an optional
+second argument that can override the number of availiable columns when calulating the
+percentage.
 
-`fixed-cell($col)` calculates a fixed width for grid cells. Since this function accounts
+`fixed($col)` calculates a fixed width for grid cells. Since this function accounts
 for border-box padding you should only use this function for sizing `.grid-cell` units.
 
-`fixed-col($col)` calculates a fixed width for items outside of the grid system. This function
+`no-grid-fixed($col)` calculates a fixed width for items outside of the grid system. This function
 does not assume border-box sizing and should be applied to elements other than `.grid-cell` units. 
 
 ## The Breakpoint Mixin
@@ -59,20 +60,20 @@ auto generated for each break point.
 // 8 column breakpoint
 @include breakpoint(8){
 	.fluid-demo {
-		.grid-cell { width: fluid-cell(4,8); }
+		.grid-cell { width: fluid(4); }
 	}
 	.fixed-demo {
-		.grid-cell { width: fixed-cell(2); }
+		.grid-cell { width: fixed(2); }
 	}
 }
 
 // 12 column breakpoint
 @include breakpoint(12){
 	.fluid-demo {
-		.grid-cell { width: fluid-cell(3,12); }
+		.grid-cell { width: fluid(3); }
 	}
 	.fixed-demo {
-		.grid-cell { width: fixed-cell(3); }
+		.grid-cell { width: fixed(3); }
 	}
 }
 ```
@@ -153,8 +154,15 @@ Breakpoint creates a hidden label (width on the head tag) that can be read by Ja
 the current number of columns to your scripts. This can be used to conditionally load
 assests at certain breakpoints or trigger other scripty stuff.
 
+### Vertical Rhythm
+
+Added Zurb Foundation's implementation of vertical rhythm. This requires the
+[Modular Scale](https://github.com/scottkellum/modular-scale) gem
+to be importated into the config.rb file. 
+
 ## Changelog
 
+6/28/12 - Simplified helper functions. Added vertical rhythm component.  
 6/11/12 - Reorg and cleanup. Added JS hook and script  
 5/28/12 - Pushed version 2.0
 
@@ -166,6 +174,7 @@ Breakpoint uses the following frameworks and technologies:
 [normalize.css](http://necolas.github.com/normalize.css/),
 [Griddle](https://github.com/necolas/griddle), 
 [Frameless Grid](http://framelessgrid.com/), 
+[Zurb Foundation](https://github.com/zurb/foundation/blob/3.0-scss/scss/typography.scss),  
 [Sass](http://sass-lang.com/), 
 [Compass](http://compass-style.org/)
 

@@ -1,9 +1,9 @@
-// Variables
+// Grid Variables
 // =============================================================================
 
 $grid-column: 60px;
 $grid-gutter: 20px;
-$grid-overlay: true; // generate visual grid overlay
+$grid-overlay: false; // generate visual grid overlay
 $ie-support: false; // fallback breakpoint
 
 // Import grid framework
@@ -16,13 +16,13 @@ $ie-support: false; // fallback breakpoint
 // =============================================================================
 
 @include breakpoint(9) {
-	.content { width: fluid-cell(5,9); }
-	.sub-content { width: fluid-cell(4,9); }
-	.feature { width: fluid-cell(3,9); }
+	.content { width: fluid(5); }
+	.sub-content { width: fluid(4); }
+	.feature { width: fluid(3); }
 }
 
 @include breakpoint(12) {
-	.content { width: fluid-cell(8,12); }
-	.sub-content { width: fluid-cell(4,12); }
-	.feature { width: fluid-cell(4,12); }
+	.content { width: fluid(8); }
+	.sub-content { width: fluid(4); }
+	.feature { width: fluid(4); }
 }

@@ -6,16 +6,17 @@ $grid-gutter: 20px !default; // can be px, em, or %
 $grid-overlay: false !default; // generate visual grid overlay
 $ie-support: false !default; // number of columns for IE fallback (must match a breakpoint)
 $grid-direction: left !default; // switch to 'right' for rtl
+$current-bp: 0; // init breakpoint variable
 
 // Functions
 // =============================================================================
 
 // column widths for elements with .grid-cell class
-@function fixed-cell($col) { @return $col * ( em($grid-column) + em($grid-gutter) ) }
-@function fluid-cell($col, $avail) { @return (100% / $avail) * $col; }
+@function fixed($col) { @return $col * ( em($grid-column) + em($grid-gutter) ) }
+@function fluid($col, $avail: $current-bp) { @return (100% / $avail) * $col; }
 
 // column width for elements not in grid
-@function fixed-col($col) { @return $col * ( em($grid-column) + em($grid-gutter) ) - em($grid-gutter) }
+@function no-grid-fixed($col) { @return $col * ( em($grid-column) + em($grid-gutter) ) - em($grid-gutter) }
 
 // Breakpoint mixin 
 // =============================================================================
@@ -24,27 +25,31 @@ $grid-direction: left !default; // switch to 'right' for rtl
 head { width: 0; }
 
 @mixin breakpoint($min, $max: false) {
+
+	// set current breakpoint for fluid function
+	$current-bp: $min;
+
 	@if ($max) {
 		// create min/max mq
 		@if ($min == 0) {
-			@media ( max-width: fixed-cell($max) + em($grid-gutter) ) { @content }
+			@media ( max-width: fixed($max) + em($grid-gutter) ) { @content }
 		} @else {
-			@media ( min-width: fixed-cell($min) + em($grid-gutter) ) and ( max-width: fixed-cell($max) + em($grid-gutter) ) { @content }
+			@media ( min-width: fixed($min) + em($grid-gutter) ) and ( max-width: fixed($max) + em($grid-gutter) ) { @content }
 		}	
 	} @else {
 		// create min width mq	
-		@media ( min-width: fixed-cell($min) + em($grid-gutter) ) {
+		@media ( min-width: fixed($min) + em($grid-gutter) ) {
 			@if($grid-overlay) { @include grid-overlay($min); }
 			// create hook for js
 			head { width: #{$min + 'px'}; }
 			// proper sizing of wrapper
-			.wrapper { width: fixed-cell($min) - em($grid-gutter); margin-left: auto; margin-right: auto; }
+			.wrapper { width: fixed($min) - em($grid-gutter); margin-left: auto; margin-right: auto; }
 			@content
 		}
 		// ie fallback		
 		@if ($ie-support and $min <= $ie-support) {	
 			.lt-ie9 {
-				.wrapper { width: fixed-cell($min) - em($grid-gutter); margin-left: auto; margin-right: auto; }
+				.wrapper { width: fixed($min) - em($grid-gutter); margin-left: auto; margin-right: auto; }
 				@content
 			}
 		}
@@ -60,7 +65,7 @@ head { width: 0; }
 		@include background(linear-gradient(left, transparent $grid-gutter,  transparentize(red, .9) $grid-gutter,  transparentize(red, .9) $grid-gutter + $grid-column));
 		@if ($col) {
 			left: 50%;
-			width: fixed-cell($col) + em($grid-gutter); margin-left: fixed-cell($col) / -2 - (em($grid-gutter)/2);
+			width: fixed($col) + em($grid-gutter); margin-left: fixed($col) / -2 - (em($grid-gutter)/2);
 			@include background-size($grid-gutter + $grid-column);
 		} @else {
 			left: 0; right: $grid-gutter;

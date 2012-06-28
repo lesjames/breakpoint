@@ -257,26 +257,6 @@ head {
   width: 0;
 }
 
-body::after {
-  content: '';
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  pointer-events: none;
-  background: -webkit-gradient(linear, 0% 50%, 80 50%, color-stop(25%, transparent), color-stop(25%, rgba(255, 0, 0, 0.1)), color-stop(100%, rgba(255, 0, 0, 0.1)));
-  background: -webkit-linear-gradient(left, transparent 20px, rgba(255, 0, 0, 0.1) 20px, rgba(255, 0, 0, 0.1) 80px);
-  background: -moz-linear-gradient(left, transparent 20px, rgba(255, 0, 0, 0.1) 20px, rgba(255, 0, 0, 0.1) 80px);
-  background: -o-linear-gradient(left, transparent 20px, rgba(255, 0, 0, 0.1) 20px, rgba(255, 0, 0, 0.1) 80px);
-  background: -ms-linear-gradient(left, transparent 20px, rgba(255, 0, 0, 0.1) 20px, rgba(255, 0, 0, 0.1) 80px);
-  background: linear-gradient(left, transparent 20px, rgba(255, 0, 0, 0.1) 20px, rgba(255, 0, 0, 0.1) 80px);
-  left: 0;
-  right: 20px;
-  -webkit-background-size: 25%;
-  -moz-background-size: 25%;
-  -o-background-size: 25%;
-  background-size: 25%;
-}
-
 /* Grid based on https://github.com/necolas/griddle by Nicolas Gallagher (@necolas) */
 .wrapper {
   margin-left: 1.25em;
@@ -337,27 +317,6 @@ body::after {
 }
 
 @media (min-width: 46.25em) {
-  body::after {
-    content: '';
-    position: fixed;
-    top: 0;
-    bottom: 0;
-    pointer-events: none;
-    background: -webkit-gradient(linear, 0% 50%, 80 50%, color-stop(25%, transparent), color-stop(25%, rgba(255, 0, 0, 0.1)), color-stop(100%, rgba(255, 0, 0, 0.1)));
-    background: -webkit-linear-gradient(left, transparent 20px, rgba(255, 0, 0, 0.1) 20px, rgba(255, 0, 0, 0.1) 80px);
-    background: -moz-linear-gradient(left, transparent 20px, rgba(255, 0, 0, 0.1) 20px, rgba(255, 0, 0, 0.1) 80px);
-    background: -o-linear-gradient(left, transparent 20px, rgba(255, 0, 0, 0.1) 20px, rgba(255, 0, 0, 0.1) 80px);
-    background: -ms-linear-gradient(left, transparent 20px, rgba(255, 0, 0, 0.1) 20px, rgba(255, 0, 0, 0.1) 80px);
-    background: linear-gradient(left, transparent 20px, rgba(255, 0, 0, 0.1) 20px, rgba(255, 0, 0, 0.1) 80px);
-    left: 50%;
-    width: 46.25em;
-    margin-left: -23.125em;
-    -webkit-background-size: 80px;
-    -moz-background-size: 80px;
-    -o-background-size: 80px;
-    background-size: 80px;
-  }
-
   head {
     width: 9px;
   }
@@ -381,27 +340,6 @@ body::after {
   }
 }
 @media (min-width: 61.25em) {
-  body::after {
-    content: '';
-    position: fixed;
-    top: 0;
-    bottom: 0;
-    pointer-events: none;
-    background: -webkit-gradient(linear, 0% 50%, 80 50%, color-stop(25%, transparent), color-stop(25%, rgba(255, 0, 0, 0.1)), color-stop(100%, rgba(255, 0, 0, 0.1)));
-    background: -webkit-linear-gradient(left, transparent 20px, rgba(255, 0, 0, 0.1) 20px, rgba(255, 0, 0, 0.1) 80px);
-    background: -moz-linear-gradient(left, transparent 20px, rgba(255, 0, 0, 0.1) 20px, rgba(255, 0, 0, 0.1) 80px);
-    background: -o-linear-gradient(left, transparent 20px, rgba(255, 0, 0, 0.1) 20px, rgba(255, 0, 0, 0.1) 80px);
-    background: -ms-linear-gradient(left, transparent 20px, rgba(255, 0, 0, 0.1) 20px, rgba(255, 0, 0, 0.1) 80px);
-    background: linear-gradient(left, transparent 20px, rgba(255, 0, 0, 0.1) 20px, rgba(255, 0, 0, 0.1) 80px);
-    left: 50%;
-    width: 61.25em;
-    margin-left: -30.625em;
-    -webkit-background-size: 80px;
-    -moz-background-size: 80px;
-    -o-background-size: 80px;
-    background-size: 80px;
-  }
-
   head {
     width: 12px;
   }
