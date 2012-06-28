@@ -171,10 +171,10 @@ to be importated into the config.rb file.
 Breakpoint uses the following frameworks and technologies:
 
 [H5BP](http://html5boilerplate.com/), 
-[normalize.css](http://necolas.github.com/normalize.css/),
+[normalize.css](http://necolas.github.com/normalize.css/), 
 [Griddle](https://github.com/necolas/griddle), 
 [Frameless Grid](http://framelessgrid.com/), 
-[Zurb Foundation](https://github.com/zurb/foundation/blob/3.0-scss/scss/typography.scss),  
+[Zurb Foundation](https://github.com/zurb/foundation/blob/3.0-scss/scss/typography.scss), 
 [Sass](http://sass-lang.com/), 
 [Compass](http://compass-style.org/)
 
