@@ -15,8 +15,16 @@ $normalize-base: true;
 // other resets
 // ==========================================================================
 
-$modular-scale: true;
+// $modular-scale: true;
 // $print-styles: true;
+
+// Grid Variables
+// =============================================================================
+
+$grid-column: 60px;
+$grid-gutter: 20px;
+$grid-overlay: true; // generate visual grid overlay
+$ie-support: 9; // fallback breakpoint
 
 // ==========================================================================
 // project specific variables and mixins
