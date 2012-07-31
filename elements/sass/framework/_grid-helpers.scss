@@ -18,11 +18,13 @@ $current-bp: 0; // init breakpoint variable
 // column width for elements not in grid
 @function no-grid-fixed($col) { @return $col * ( em($grid-column) + em($grid-gutter) ) - em($grid-gutter) }
 
+// Javascript hook 
+// =============================================================================
+head { width: 0; }
+@media (min-width: 0px) { head { width: 1px; } }
+
 // Breakpoint mixin 
 // =============================================================================
-
-// create 'label' for mobile
-head { width: 0; }
 
 @mixin breakpoint($min, $max: false) {
 
