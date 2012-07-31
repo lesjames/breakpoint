@@ -20,14 +20,14 @@ $current-bp: 0; // init breakpoint variable
 
 // Javascript hook 
 // =============================================================================
-head { width: 0; }
-@media (min-width: 0px) { head { width: 1px; } }
+head { font-family: 'no-support'; }
+@media (min-width: 0px) { head { font-family: 'mobile'; } }
 
 // Breakpoint mixin 
 // =============================================================================
 
-@mixin breakpoint($min, $max: false) {
-
+@mixin breakpoint($min, $max: false, $label: false) {
+    
 	// set current breakpoint for fluid function
 	$current-bp: $min;
 
@@ -43,7 +43,7 @@ head { width: 0; }
 		@media ( min-width: fixed($min) + em($grid-gutter) ) {
 			@if($grid-overlay) { @include grid-overlay($min); }
 			// create hook for js
-			head { width: #{$min + 'px'}; }
+			@if($label) { head { font-family: $label; } }			
 			// proper sizing of wrapper
 			.wrapper { width: fixed($min) - em($grid-gutter); margin-left: auto; margin-right: auto; }
 			@content
