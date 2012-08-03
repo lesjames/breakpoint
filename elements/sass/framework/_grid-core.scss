@@ -10,6 +10,10 @@
 	margin-right: em($grid-gutter);
 }
 
+// for responsive images
+img { max-width: 100%; }
+.no-js .responsive-image { display: none; }
+
 // Grid container
 // Must only contain `.grid` or `.grid-cell` components as children.
 

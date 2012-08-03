@@ -1,22 +1,10 @@
 // Structure
 // =============================================================================
 
+@include breakpoint(6, $label: 'tablet'){}
 
-@include breakpoint(6) {
-	.content { width: fluid(3); }
-	.sub-content { width: fluid(3); }
-	.feature { width: fluid(6); }
-}
-
-
-@include breakpoint(9) {
-	.content { width: fluid(6); }
-	.sub-content { width: fluid(3); }
-	.feature { width: fluid(3); }
-}
-
-@include breakpoint(12) {
-	.content { width: fluid(8); }
-	.sub-content { width: fluid(4); }
-	.feature { width: fluid(4); }
+@include breakpoint(9, $label: 'desktop'){
+    .content { width: fluid(6); }
+    .sub-content { width: fluid(3); }
+    .feature { width: fixed(3); }
 }

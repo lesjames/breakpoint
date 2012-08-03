@@ -102,165 +102,47 @@ body {
   margin: 0;
 }
 
-body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, form, fieldset, p, blockquote, th, td {
-  margin: 0;
-  padding: 0;
-}
-
-p {
-  font-size: 1em;
-  line-height: 1.6;
-  margin-bottom: 1.063em;
-}
-
-h1, h2, h3, h4, h5, h6 {
-  text-rendering: optimizeLegibility;
-  line-height: 1.1;
-}
-h1 small, h2 small, h3 small, h4 small, h5 small, h6 small {
-  font-size: 60%;
-  color: #888;
-  line-height: 0;
-}
-
-h1 {
-  font-size: 2.625em;
-  margin-bottom: 0.381em;
-  margin-top: 0.381em;
-}
-
-h2 {
-  font-size: 1.75em;
-  margin-bottom: 0.571em;
-  margin-top: 0.571em;
-}
-
-h3 {
-  font-size: 1.625em;
-  margin-bottom: 0.615em;
-  margin-top: 0.615em;
-}
-
-h4 {
-  font-size: 1.063em;
-  margin-bottom: 0.941em;
-  margin-top: 0.941em;
-}
-
-h5 {
-  font-size: 1em;
-  margin-bottom: 1em;
-  margin-top: 1em;
-}
-
-h6 {
-  font-size: 1em;
-  margin-bottom: 1em;
-  margin-top: 1em;
-}
-
-hr {
-  border: solid #ddd;
-  border-width: 1px 0 0;
-  clear: both;
-  margin: 1.375em 0 1.313em;
-  height: 0;
-}
-
-em, i {
-  font-style: italic;
-  line-height: inherit;
-}
-
-strong, b {
-  font-weight: bold;
-  line-height: inherit;
-}
-
-small {
-  font-size: 60%;
-  line-height: inherit;
-}
-
-code {
-  font-weight: bold;
-  background: #ffff99;
-}
-
-/* Lists */
-ul, ol {
-  font-size: 1em;
-  line-height: 1.6;
-  margin-bottom: 1.063em;
-  list-style-position: outside;
-}
-
-ul.square, ul.circle, ul.disc {
-  margin-left: 1.063em;
-}
-
-ul.square {
-  list-style-type: square;
-}
-
-ul.circle {
-  list-style-type: circle;
-}
-
-ul.disc {
-  list-style-type: disc;
-}
-
-ul.large li {
-  line-height: 1.313em;
-}
-
-/*  Blockquotes  */
-blockquote, blockquote p {
-  line-height: 1.5;
-  color: #777;
-}
-
-blockquote {
-  margin: 0 0 1.063em;
-  padding: 0.563em 1.25em 0 1.188em;
-  border-left: 1px solid #ddd;
-}
-
-blockquote cite {
-  display: block;
-  font-size: 0.938em;
-  color: #555;
-}
-
-blockquote cite:before {
-  content: "\2014 \0020";
-}
-
-blockquote cite a, blockquote cite a:visited {
-  color: #555;
-}
-
-abbr, acronym {
-  text-transform: uppercase;
-  font-size: 90%;
-  color: #222;
-  border-bottom: 1px solid #ddd;
-  cursor: help;
-}
-
-abbr {
-  text-transform: none;
-}
-
 head {
-  width: 0;
+  font-family: 'no-support';
+}
+
+@media (min-width: 0px) {
+  head {
+    font-family: 'mobile';
+  }
+}
+body::after {
+  content: '';
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  pointer-events: none;
+  background: -webkit-gradient(linear, 0% 50%, 80 50%, color-stop(25%, transparent), color-stop(25%, rgba(255, 0, 0, 0.1)), color-stop(100%, rgba(255, 0, 0, 0.1)));
+  background: -webkit-linear-gradient(left, transparent 20px, rgba(255, 0, 0, 0.1) 20px, rgba(255, 0, 0, 0.1) 80px);
+  background: -moz-linear-gradient(left, transparent 20px, rgba(255, 0, 0, 0.1) 20px, rgba(255, 0, 0, 0.1) 80px);
+  background: -o-linear-gradient(left, transparent 20px, rgba(255, 0, 0, 0.1) 20px, rgba(255, 0, 0, 0.1) 80px);
+  background: -ms-linear-gradient(left, transparent 20px, rgba(255, 0, 0, 0.1) 20px, rgba(255, 0, 0, 0.1) 80px);
+  background: linear-gradient(left, transparent 20px, rgba(255, 0, 0, 0.1) 20px, rgba(255, 0, 0, 0.1) 80px);
+  left: 0;
+  right: 20px;
+  -webkit-background-size: 25%;
+  -moz-background-size: 25%;
+  -o-background-size: 25%;
+  background-size: 25%;
 }
 
 /* Grid based on https://github.com/necolas/griddle by Nicolas Gallagher (@necolas) */
 .wrapper {
   margin-left: 1.25em;
   margin-right: 1.25em;
+}
+
+img {
+  max-width: 100%;
+}
+
+.no-js .responsive-image {
+  display: none;
 }
 
 .grid {
@@ -316,36 +198,72 @@ head {
   margin: 0 auto;
 }
 
-@media (min-width: 46.25em) {
+@media (min-width: 31.25em) {
+  body::after {
+    content: '';
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    pointer-events: none;
+    background: -webkit-gradient(linear, 0% 50%, 80 50%, color-stop(25%, transparent), color-stop(25%, rgba(255, 0, 0, 0.1)), color-stop(100%, rgba(255, 0, 0, 0.1)));
+    background: -webkit-linear-gradient(left, transparent 20px, rgba(255, 0, 0, 0.1) 20px, rgba(255, 0, 0, 0.1) 80px);
+    background: -moz-linear-gradient(left, transparent 20px, rgba(255, 0, 0, 0.1) 20px, rgba(255, 0, 0, 0.1) 80px);
+    background: -o-linear-gradient(left, transparent 20px, rgba(255, 0, 0, 0.1) 20px, rgba(255, 0, 0, 0.1) 80px);
+    background: -ms-linear-gradient(left, transparent 20px, rgba(255, 0, 0, 0.1) 20px, rgba(255, 0, 0, 0.1) 80px);
+    background: linear-gradient(left, transparent 20px, rgba(255, 0, 0, 0.1) 20px, rgba(255, 0, 0, 0.1) 80px);
+    left: 50%;
+    width: 31.25em;
+    margin-left: -15.625em;
+    -webkit-background-size: 80px;
+    -moz-background-size: 80px;
+    -o-background-size: 80px;
+    background-size: 80px;
+  }
+
   head {
-    width: 9px;
+    font-family: "tablet";
+  }
+
+  .wrapper {
+    width: 28.75em;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+.lt-ie9 .wrapper {
+  width: 28.75em;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@media (min-width: 46.25em) {
+  body::after {
+    content: '';
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    pointer-events: none;
+    background: -webkit-gradient(linear, 0% 50%, 80 50%, color-stop(25%, transparent), color-stop(25%, rgba(255, 0, 0, 0.1)), color-stop(100%, rgba(255, 0, 0, 0.1)));
+    background: -webkit-linear-gradient(left, transparent 20px, rgba(255, 0, 0, 0.1) 20px, rgba(255, 0, 0, 0.1) 80px);
+    background: -moz-linear-gradient(left, transparent 20px, rgba(255, 0, 0, 0.1) 20px, rgba(255, 0, 0, 0.1) 80px);
+    background: -o-linear-gradient(left, transparent 20px, rgba(255, 0, 0, 0.1) 20px, rgba(255, 0, 0, 0.1) 80px);
+    background: -ms-linear-gradient(left, transparent 20px, rgba(255, 0, 0, 0.1) 20px, rgba(255, 0, 0, 0.1) 80px);
+    background: linear-gradient(left, transparent 20px, rgba(255, 0, 0, 0.1) 20px, rgba(255, 0, 0, 0.1) 80px);
+    left: 50%;
+    width: 46.25em;
+    margin-left: -23.125em;
+    -webkit-background-size: 80px;
+    -moz-background-size: 80px;
+    -o-background-size: 80px;
+    background-size: 80px;
+  }
+
+  head {
+    font-family: "desktop";
   }
 
   .wrapper {
     width: 43.75em;
-    margin-left: auto;
-    margin-right: auto;
-  }
-
-  .content {
-    width: 55.556%;
-  }
-
-  .sub-content {
-    width: 44.444%;
-  }
-
-  .feature {
-    width: 33.333%;
-  }
-}
-@media (min-width: 61.25em) {
-  head {
-    width: 12px;
-  }
-
-  .wrapper {
-    width: 58.75em;
     margin-left: auto;
     margin-right: auto;
   }
@@ -359,6 +277,20 @@ head {
   }
 
   .feature {
-    width: 33.333%;
+    width: 15em;
   }
+}
+.lt-ie9 .wrapper {
+  width: 43.75em;
+  margin-left: auto;
+  margin-right: auto;
+}
+.lt-ie9 .content {
+  width: 66.667%;
+}
+.lt-ie9 .sub-content {
+  width: 33.333%;
+}
+.lt-ie9 .feature {
+  width: 15em;
 }
