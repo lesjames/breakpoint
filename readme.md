@@ -162,6 +162,7 @@ to be importated into the config.rb file.
 
 ## Changelog
 
+8/3/12  - Reworked responsive images and dom labels  
 6/28/12 - Simplified helper functions. Added vertical rhythm component.  
 6/11/12 - Reorg and cleanup. Added JS hook and script  
 5/28/12 - Pushed version 2.0
