@@ -9,6 +9,19 @@ Breakpoint generates media queries at column break points so that your layout al
 room to fit on the screen. It has helper functions to calculate both fluid and fixed widths for
 your columns.
 
+## Installation
+
+You need to be careful when installing the bleeding edge version of Sass. There have been cases when installing the latest build will cause conflicts
+with Compass and Modular Scale. This build of Sass is known to be compatible with Breakpoint...
+
+`$ gem install sass -v 3.2.0.alpha.237`
+
+Breakpoint also requires Compass and Modular scale...
+
+`$ gem install compass`
+
+`$ gem install modular-scale`
+
 ## The Grid
 
 Breakpoint is a mobile first fluid layout that gets triggered 
