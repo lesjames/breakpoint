@@ -190,5 +190,5 @@ Breakpoint uses the following frameworks and technologies:
 [Frameless Grid](http://framelessgrid.com/), 
 [Zurb Foundation](https://github.com/zurb/foundation/blob/3.0-scss/scss/typography.scss), 
 [Sass](http://sass-lang.com/), 
-[Compass](http://compass-style.org/),  
+[Compass](http://compass-style.org/), 
 [Conditional CSS](http://adactio.com/journal/5429/)
