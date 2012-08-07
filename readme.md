@@ -191,5 +191,4 @@ Breakpoint uses the following frameworks and technologies:
 [Zurb Foundation](https://github.com/zurb/foundation/blob/3.0-scss/scss/typography.scss), 
 [Sass](http://sass-lang.com/), 
 [Compass](http://compass-style.org/)
-
-Sass 3.2 is necessary to pass styles to media queries. Install with `$ gem install sass --pre`
+[Conditional CSS](http://adactio.com/journal/5429/)
