@@ -167,14 +167,9 @@ Breakpoint creates a hidden label (width on the head tag) that can be read by Ja
 the current number of columns to your scripts. This can be used to conditionally load
 assests at certain breakpoints or trigger other scripty stuff.
 
-### Vertical Rhythm
-
-Added Zurb Foundation's implementation of vertical rhythm. This requires the
-[Modular Scale](https://github.com/scottkellum/modular-scale) gem
-to be importated into the config.rb file. 
-
 ## Changelog
 
+8/8/12  - Removed modular scale  
 8/3/12  - Reworked responsive images and dom labels  
 6/28/12 - Simplified helper functions. Added vertical rhythm component.  
 6/11/12 - Reorg and cleanup. Added JS hook and script  
@@ -188,7 +183,6 @@ Breakpoint uses the following frameworks and technologies:
 [normalize.css](http://necolas.github.com/normalize.css/), 
 [Griddle](https://github.com/necolas/griddle), 
 [Frameless Grid](http://framelessgrid.com/), 
-[Zurb Foundation](https://github.com/zurb/foundation/blob/3.0-scss/scss/typography.scss), 
 [Sass](http://sass-lang.com/), 
 [Compass](http://compass-style.org/), 
 [Conditional CSS](http://adactio.com/journal/5429/)
