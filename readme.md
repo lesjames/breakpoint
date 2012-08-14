@@ -14,13 +14,11 @@ your columns.
 You need to be careful when installing the bleeding edge version of Sass. There have been cases when installing the latest build will cause conflicts
 with Compass and Modular Scale. This build of Sass is known to be compatible with Breakpoint...
 
-`$ gem install sass -v 3.2.0.alpha.237`
+`$ gem install sass`
 
-Breakpoint also requires Compass and Modular scale...
+Breakpoint also requires Compass
 
 `$ gem install compass`
-
-`$ gem install modular-scale`
 
 ## The Grid
 
