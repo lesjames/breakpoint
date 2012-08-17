@@ -26,36 +26,75 @@ head { font-family: 'no-support'; }
 // Breakpoint mixin
 // =============================================================================
 
-@mixin breakpoint($min, $max: false, $label: false) {
+@mixin breakpoint($min: false, $max: false, $label: false, $orientation: false, $wrapper: true, $pixel-ratio: false) {
 
 	// set current breakpoint for fluid function
 	$current-bp: $min;
 
-	@if ($max) {
-		// create min/max mq
-		@if ($min == 0) {
-			@media ( max-width: fixed($max) + em($grid-gutter) ) { @content }
-		} @else {
-			@media ( min-width: fixed($min) + em($grid-gutter) ) and ( max-width: fixed($max) + em($grid-gutter) ) { @content }
-		}
-	} @else {
-		// create min width mq
-		@media ( min-width: fixed($min) + em($grid-gutter) ) {
-			@if($grid-overlay) { @include grid-overlay($min); }
-			// create hook for js
-			@if($label) { head { font-family: $label; } }
-			// proper sizing of wrapper
-            .wrapper { width: fixed($min) - em($grid-gutter); margin-left: auto; margin-right: auto; }
-			@content
-		}
-		// ie fallback
-		@if ($ie-support and $min <= $ie-support) {
-			.lt-ie9 {
-				.wrapper { width: fixed($min) - em($grid-gutter); margin-left: auto; margin-right: auto; }
-				@content
-			}
+	// min width mq
+	@if ($min and $max == false) {
+		@if ($min > 0) {
+    		// create min width mq
+    		// can we remove duplication of code here?
+    		@if ($orientation) {
+        		@media ( min-width: fixed($min) + em($grid-gutter) ) and ( orientation: $orientation ) {
+            		@include breakpoint-extras($min, $wrapper, $label ) { @content };
+        		}
+    		} @else {
+        		@media ( min-width: fixed($min) + em($grid-gutter) ) {
+            		@include breakpoint-extras($min, $wrapper, $label ) { @content };
+        		}
+    		}
+    		// ie fallback
+    		@if ($ie-support and $min <= $ie-support and $orientation == false) {
+    			.lt-ie9 {
+                    @include breakpoint-extras($min, $wrapper, $label: false, $grid-overlay: false) { @content };
+    			}
+    		}
 		}
 	}
+
+	// max width mq
+	@if ($max) {
+		// create max only mq
+		@if ($min == 0 or $min == false) {
+    		@if ($orientation) {
+            	@media ( max-width: fixed($max) + em($grid-gutter) ) and ( orientation: $orientation ) { @content }
+    		} @else {
+        		@media ( max-width: fixed($max) + em($grid-gutter) ) { @content }
+    		}
+		// create min and max mq
+		} @else {
+    		@if ($orientation) {
+        		@media ( min-width: fixed($min) + em($grid-gutter) ) and ( max-width: fixed($max) + em($grid-gutter) ) and ( orientation: $orientation ) { @content }
+    		} @else {
+            	@media ( min-width: fixed($min) + em($grid-gutter) ) and ( max-width: fixed($max) + em($grid-gutter) ) { @content }
+    		}
+		}
+	}
+
+	// orientation only mq
+	@if ($min == false and $max == false) {
+    	@if ($orientation) {
+        	@media ( orientation: $orientation ) { @content }
+    	}
+	}
+
+	// pixel ratio mq
+	@if ($pixel-ratio) {
+    	@media ( -webkit-min-device-pixel-ratio: $pixel-ratio), ( min-device-pixel-ratio: $pixel-ratio) { @content }
+	}
+
+}
+
+// private mixin for generating extras in a min width mq
+@mixin breakpoint-extras($min, $wrapper, $label, $grid-overlay) {
+	@if($grid-overlay) { @include grid-overlay($min); }
+	// create hook for js
+	@if($label) { head { font-family: $label; } }
+	// proper sizing of wrapper
+    @if($wrapper) { .wrapper { width: fixed($min) - em($grid-gutter); margin-left: auto; margin-right: auto; } }
+	@content
 }
 
 // Grid overlay
@@ -64,7 +103,7 @@ head { font-family: 'no-support'; }
 @mixin grid-overlay($col: false) {
 	body::after {
 		content: ''; position: fixed; top: 0; bottom: 0; pointer-events: none;
-		@include background(linear-gradient(left, transparent $grid-gutter,  transparentize(red, .9) $grid-gutter,  transparentize(red, .9) $grid-gutter + $grid-column));
+		@include background(linear-gradient(left, transparent $grid-gutter, transparentize(red, .9) $grid-gutter, transparentize(red, .9) $grid-gutter + $grid-column));
 		@if ($col) {
 			left: 50%;
 			width: fixed($col) + em($grid-gutter); margin-left: fixed($col) / -2 - (em($grid-gutter)/2);
