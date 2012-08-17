@@ -9,12 +9,12 @@
   clear: both;
 }
 
-/* normalize.css 2012-03-11T12:53 UTC - http://github.com/necolas/normalize.css */
-/* =============================================================================
+/* normalize.css v1.0.0 | MIT License | git.io/normalize */
+/* ==========================================================================
    HTML5 display definitions
    ========================================================================== */
 /*
- * Corrects block display not defined in IE6/7/8/9 & FF3
+ * Corrects `block` display not defined in IE 6/7/8/9 and Firefox 3.
  */
 article,
 aside,
@@ -31,14 +31,14 @@ summary {
 }
 
 /*
- * Addresses margin not present in IE6/7/8/9, S5, O11
+ * Addresses margin not present in IE 6/7/8/9, Safari 5, and Opera 11.
  */
 figure {
   margin: 0;
 }
 
 /*
- * Corrects inline-block display not defined in IE6/7/8/9 & FF3
+ * Corrects `inline-block` display not defined in IE 6/7/8/9 and Firefox 3.
  */
 audio,
 canvas,
@@ -49,8 +49,8 @@ video {
 }
 
 /*
- * Prevents modern browsers from displaying 'audio' without controls
- * Remove excess height in iOS5 devices
+ * Prevents modern browsers from displaying `audio` without controls.
+ * Remove excess height in iOS 5 devices.
  */
 audio:not([controls]) {
   display: none;
@@ -58,21 +58,22 @@ audio:not([controls]) {
 }
 
 /*
- * Addresses styling for 'hidden' attribute not present in IE7/8/9, FF3, S4
- * Known issue: no IE6 support
+ * Addresses styling for `hidden` attribute not present in IE 7/8/9, Firefox 3,
+ * and Safari 4.
+ * Known issue: no IE 6 support.
  */
 [hidden] {
   display: none;
 }
 
-/* =============================================================================
+/* ==========================================================================
    Base
    ========================================================================== */
 /*
- * 1. Corrects text resizing oddly in IE6/7 when body font-size is set using em units
- *    http://clagnut.com/blog/348/#c790
- * 2. Prevents iOS text size adjust after orientation change, without disabling user zoom
- *    www.456bereastreet.com/archive/201012/controlling_text_size_in_safari_for_ios_without_disabling_user_zoom/
+ * 1. Corrects text resizing oddly in IE 6/7 when body `font-size` is set using
+ *    `em` units.
+ * 2. Prevents iOS text size adjust after orientation change, without disabling
+ *    user zoom.
  */
 html {
   font-size: 100%;
@@ -84,7 +85,8 @@ html {
 }
 
 /*
- * Addresses font-family inconsistency between 'textarea' and other form elements.
+ * Addresses `font-family` inconsistency between `textarea` and other form
+ * elements.
  */
 html,
 button,
@@ -95,7 +97,7 @@ textarea {
 }
 
 /*
- * Addresses margins handled incorrectly in IE6/7
+ * Addresses margins handled incorrectly in IE 6/7.
  */
 body {
   margin: 0;

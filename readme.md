@@ -141,9 +141,11 @@ will generate...
   .main { /* sandboxed styles */ }
 }
 ```
+### Other Media Queries
 
-**Pro Tip**: If you set the min column to 0 when sandboxing then breakpoint will create
-a max width media query. Use this if you need styles to cascade down instead of up.
+You can view a full range of [breakpoint mixin examples](https://github.com/lesjames/Breakpoint/wiki/Breakpoint-Mixin-Test-Cases) on the wiki.
+In addition to min and max width combinations you can create orientation and pixel ratio media queries. There are also arguments
+for creating breakpoint labels and disabling the wrapper class sizing.
 
 ## Other Features
 
@@ -167,10 +169,11 @@ assests at certain breakpoints or trigger other scripty stuff.
 
 ## Changelog
 
-8/8/12  - Removed modular scale  
-8/3/12  - Reworked responsive images and dom labels  
+8/17/12 - Added orientation and pixel ratio mqs. Added argument to disable wrapper class.  
+8/8/12  - Removed modular scale.  
+8/3/12  - Reworked responsive images and dom labels.  
 6/28/12 - Simplified helper functions. Added vertical rhythm component.  
-6/11/12 - Reorg and cleanup. Added JS hook and script  
+6/11/12 - Reorg and cleanup. Added JS hook and script.  
 5/28/12 - Pushed version 2.0
 
 ## Credits
