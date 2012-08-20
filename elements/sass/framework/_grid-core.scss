@@ -3,6 +3,9 @@
 // Grid Core
 // =============================================================================
 
+// establish base font size in config so that media queries can be resized if the base context chagnes
+body { font-size: $base-font-size; }
+
 // wrapper defaults to 100% fluid with side gutters
 // when triggering a breakpoint wrapper becomes fixed width and centered
 .wrapper {

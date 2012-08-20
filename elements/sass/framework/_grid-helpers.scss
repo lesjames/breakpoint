@@ -37,11 +37,11 @@ head { font-family: 'no-support'; }
     		// create min width mq
     		// can we remove duplication of code here?
     		@if ($orientation) {
-        		@media ( min-width: fixed($min) + em($grid-gutter) ) and ( orientation: $orientation ) {
+        		@media ( min-width: fixed($min) + em($grid-gutter) * ($base-font-size / 16px) ) and ( orientation: $orientation ) {
             		@include breakpoint-extras($min, $wrapper, $label ) { @content };
         		}
     		} @else {
-        		@media ( min-width: fixed($min) + em($grid-gutter) ) {
+        		@media ( min-width: (fixed($min) + em($grid-gutter)) * ($base-font-size / 16px) ) {
             		@include breakpoint-extras($min, $wrapper, $label ) { @content };
         		}
     		}
@@ -59,16 +59,16 @@ head { font-family: 'no-support'; }
 		// create max only mq
 		@if ($min == 0 or $min == false) {
     		@if ($orientation) {
-            	@media ( max-width: fixed($max) + em($grid-gutter) ) and ( orientation: $orientation ) { @content }
+            	@media ( max-width: fixed($max) + em($grid-gutter) * ($base-font-size / 16px) ) and ( orientation: $orientation ) { @content }
     		} @else {
-        		@media ( max-width: fixed($max) + em($grid-gutter) ) { @content }
+        		@media ( max-width: fixed($max) + em($grid-gutter) * ($base-font-size / 16px) ) { @content }
     		}
 		// create min and max mq
 		} @else {
     		@if ($orientation) {
-        		@media ( min-width: fixed($min) + em($grid-gutter) ) and ( max-width: fixed($max) + em($grid-gutter) ) and ( orientation: $orientation ) { @content }
+        		@media ( min-width: fixed($min) + em($grid-gutter) * ($base-font-size / 16px) ) and ( max-width: fixed($max) + em($grid-gutter) ) and ( orientation: $orientation ) { @content }
     		} @else {
-            	@media ( min-width: fixed($min) + em($grid-gutter) ) and ( max-width: fixed($max) + em($grid-gutter) ) { @content }
+            	@media ( min-width: fixed($min) + em($grid-gutter) * ($base-font-size / 16px) ) and ( max-width: fixed($max) + em($grid-gutter) ) { @content }
     		}
 		}
 	}

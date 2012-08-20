@@ -133,6 +133,10 @@ body::after {
 }
 
 /* Grid based on https://github.com/necolas/griddle by Nicolas Gallagher (@necolas) */
+body {
+  font-size: 16px;
+}
+
 .wrapper {
   margin-left: 1.25em;
   margin-right: 1.25em;
