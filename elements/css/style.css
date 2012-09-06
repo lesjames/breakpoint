@@ -122,7 +122,6 @@ body::after {
   background: -webkit-linear-gradient(left, transparent 20px, rgba(255, 0, 0, 0.1) 20px, rgba(255, 0, 0, 0.1) 80px);
   background: -moz-linear-gradient(left, transparent 20px, rgba(255, 0, 0, 0.1) 20px, rgba(255, 0, 0, 0.1) 80px);
   background: -o-linear-gradient(left, transparent 20px, rgba(255, 0, 0, 0.1) 20px, rgba(255, 0, 0, 0.1) 80px);
-  background: -ms-linear-gradient(left, transparent 20px, rgba(255, 0, 0, 0.1) 20px, rgba(255, 0, 0, 0.1) 80px);
   background: linear-gradient(left, transparent 20px, rgba(255, 0, 0, 0.1) 20px, rgba(255, 0, 0, 0.1) 80px);
   left: 0;
   right: 20px;
@@ -168,11 +167,12 @@ img {
 
 .grid-cell {
   width: 100%;
-  display: -moz-inline-box;
-  -moz-box-orient: vertical;
+  display: -moz-inline-stack;
   display: inline-block;
   vertical-align: middle;
   *vertical-align: auto;
+  zoom: 1;
+  *display: inline;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
@@ -186,9 +186,6 @@ img {
   letter-spacing: normal;
   word-spacing: normal;
   text-rendering: auto;
-}
-.grid-cell {
-  *display: inline;
 }
 .lt-ie8 .grid-cell {
   behavior: url(/elements/js/boxsizing.htc);
@@ -214,7 +211,6 @@ img {
     background: -webkit-linear-gradient(left, transparent 20px, rgba(255, 0, 0, 0.1) 20px, rgba(255, 0, 0, 0.1) 80px);
     background: -moz-linear-gradient(left, transparent 20px, rgba(255, 0, 0, 0.1) 20px, rgba(255, 0, 0, 0.1) 80px);
     background: -o-linear-gradient(left, transparent 20px, rgba(255, 0, 0, 0.1) 20px, rgba(255, 0, 0, 0.1) 80px);
-    background: -ms-linear-gradient(left, transparent 20px, rgba(255, 0, 0, 0.1) 20px, rgba(255, 0, 0, 0.1) 80px);
     background: linear-gradient(left, transparent 20px, rgba(255, 0, 0, 0.1) 20px, rgba(255, 0, 0, 0.1) 80px);
     left: 50%;
     width: 31.25em;
@@ -252,7 +248,6 @@ img {
     background: -webkit-linear-gradient(left, transparent 20px, rgba(255, 0, 0, 0.1) 20px, rgba(255, 0, 0, 0.1) 80px);
     background: -moz-linear-gradient(left, transparent 20px, rgba(255, 0, 0, 0.1) 20px, rgba(255, 0, 0, 0.1) 80px);
     background: -o-linear-gradient(left, transparent 20px, rgba(255, 0, 0, 0.1) 20px, rgba(255, 0, 0, 0.1) 80px);
-    background: -ms-linear-gradient(left, transparent 20px, rgba(255, 0, 0, 0.1) 20px, rgba(255, 0, 0, 0.1) 80px);
     background: linear-gradient(left, transparent 20px, rgba(255, 0, 0, 0.1) 20px, rgba(255, 0, 0, 0.1) 80px);
     left: 50%;
     width: 46.25em;
@@ -274,11 +269,11 @@ img {
   }
 
   .content {
-    width: 66.667%;
+    width: 66.66667%;
   }
 
   .sub-content {
-    width: 33.333%;
+    width: 33.33333%;
   }
 
   .feature {
@@ -291,10 +286,10 @@ img {
   margin-right: auto;
 }
 .lt-ie9 .content {
-  width: 66.667%;
+  width: 66.66667%;
 }
 .lt-ie9 .sub-content {
-  width: 33.333%;
+  width: 33.33333%;
 }
 .lt-ie9 .feature {
   width: 15em;

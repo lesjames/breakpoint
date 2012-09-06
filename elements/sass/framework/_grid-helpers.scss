@@ -28,6 +28,14 @@ head { font-family: 'no-support'; }
 
 @mixin breakpoint($min: false, $max: false, $label: false, $orientation: false, $wrapper: true, $resolution: false) {
 
+    // set warnings if arguments are invalid
+    @if ($min == false and $max == false and $label == false and $orientation == false and $wrapper == true and $resolution == false) {
+    	@warn "breakpoint requires you to pass some kind of argument. It can't read your mind. :)";
+    }
+    @if ($min == 0 and $max == false and $label == false and $orientation == false and $wrapper == true and $resolution == false) {
+    	@warn "If you pass zero as a minimum you need to specify a max column value.";
+    }
+
 	// set current breakpoint for fluid function
 	$current-bp: $min;
 
