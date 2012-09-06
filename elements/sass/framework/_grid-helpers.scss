@@ -26,7 +26,7 @@ head { font-family: 'no-support'; }
 // Breakpoint mixin
 // =============================================================================
 
-@mixin breakpoint($min: false, $max: false, $label: false, $orientation: false, $wrapper: true, $pixel-ratio: false) {
+@mixin breakpoint($min: false, $max: false, $label: false, $orientation: false, $wrapper: true, $resolution: false) {
 
 	// set current breakpoint for fluid function
 	$current-bp: $min;
@@ -38,11 +38,11 @@ head { font-family: 'no-support'; }
     		// can we remove duplication of code here?
     		@if ($orientation) {
         		@media ( min-width: fixed($min) + em($grid-gutter) * ($base-font-size / 16px) ) and ( orientation: $orientation ) {
-            		@include breakpoint-extras($min, $wrapper, $label ) { @content };
+            		@include breakpoint-extras($min, $wrapper, $label, $grid-overlay) { @content };
         		}
     		} @else {
         		@media ( min-width: (fixed($min) + em($grid-gutter)) * ($base-font-size / 16px) ) {
-            		@include breakpoint-extras($min, $wrapper, $label ) { @content };
+            		@include breakpoint-extras($min, $wrapper, $label, $grid-overlay) { @content };
         		}
     		}
     		// ie fallback
@@ -81,10 +81,22 @@ head { font-family: 'no-support'; }
 	}
 
 	// pixel ratio mq
-	@if ($pixel-ratio) {
-    	@media ( -webkit-min-device-pixel-ratio: $pixel-ratio), ( min-device-pixel-ratio: $pixel-ratio) { @content }
+	@if ($resolution) {    	
+    	// warn if invalid value
+    	@if ($resolution != 'high' and $resolution != 'low') {
+        	@warn "$resolution only supports values of 'high' or 'low'";
+    	}
+    	@if ($resolution == 'high') {
+            @media (-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi) { @content }	
+    	}
+    	@if ($resolution == 'low') {
+        	@media (-webkit-max-device-pixel-ratio: 1.5), (max-resolution: 144dpi) { @content }
+    	}
+		// ie fallback
+		@if ($ie-support and $resolution == 'low') {
+			.lt-ie9 { @content }
+		}
 	}
-
 }
 
 // private mixin for generating extras in a min width mq

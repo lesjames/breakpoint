@@ -169,6 +169,7 @@ assests at certain breakpoints or trigger other scripty stuff.
 
 ## Changelog
 
+9/6/12  - Fixed pixel ratio mq to either be high or low res conditional  
 8/17/12 - Added orientation and pixel ratio mqs. Added argument to disable wrapper class.  
 8/8/12  - Removed modular scale.  
 8/3/12  - Reworked responsive images and dom labels.  
@@ -186,4 +187,6 @@ Breakpoint uses the following frameworks and technologies:
 [Frameless Grid](http://framelessgrid.com/), 
 [Sass](http://sass-lang.com/), 
 [Compass](http://compass-style.org/), 
-[Conditional CSS](http://adactio.com/journal/5429/)
+[Conditional CSS](http://adactio.com/journal/5429/),
+[jQuery](http://jquery.com/), 
+[Modernizr](http://modernizr.com/)
