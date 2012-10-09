@@ -13,7 +13,15 @@
             }, options),
             findLabel = function(){
                 // grab the current breakpoint label
-                var label = $('head').css('font-family');
+                var selector = $('body')[0];
+                var label = getComputedStyle(selector, '::before')['content'];
+                
+                // remove any quotes from string
+                label = label.replace(/['"]/g,'');                                
+
+                // no mq support? probably vintage IE so go with the desktop image
+                (label === 'no-support') ? label = 'desktop' : label;
+                
                 return label;
             },
             searchArr = function(arr, label) {
@@ -37,7 +45,7 @@
             setSource = function(){
                 // what is our breakpoint label?
                 var label = findLabel();
-
+                                                
                 // should only fire if a change was made
                 if (label !== currentLabel) {
                     that.each(function(){
@@ -46,10 +54,10 @@
                         var srcArr = findSource.call(this),
                             arrMatch = searchArr(srcArr, label),
                             src;
-
+                        
                         // if we don't have a matching src then use the fallback
                         (arrMatch) ? src = $(this).attr(settings.prefix + label) : src = $(this).attr(settings.prefix + settings.fallback);
-
+                        
                         // create a src for the image
                         $(this).attr('src', src);
 

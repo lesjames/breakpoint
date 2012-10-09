@@ -6,5 +6,5 @@
 @include breakpoint(9, $label: 'desktop'){
     .content { width: fluid(6); }
     .sub-content { width: fluid(3); }
-    .feature { width: fixed(3); }
+    .feature { width: fluid(3); }
 }

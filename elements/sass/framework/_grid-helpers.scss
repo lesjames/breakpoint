@@ -20,8 +20,8 @@ $current-bp: 0; // init breakpoint variable
 
 // Javascript hook
 // =============================================================================
-head { font-family: 'no-support'; }
-@media (min-width: 0px) { head { font-family: 'mobile'; } }
+body::before { content: 'no-support'; display: none; }
+@media (min-width: 0px) { body::before { content: 'mobile'; } }
 
 // Breakpoint mixin
 // =============================================================================
@@ -111,7 +111,7 @@ head { font-family: 'no-support'; }
 @mixin breakpoint-extras($min, $wrapper, $label, $grid-overlay) {
 	@if($grid-overlay) { @include grid-overlay($min); }
 	// create hook for js
-	@if($label) { head { font-family: $label; } }
+	@if($label) { body::before { content: $label; } }
 	// proper sizing of wrapper
     @if($wrapper) { .wrapper { width: fixed($min) - em($grid-gutter); margin-left: auto; margin-right: auto; } }
 	@content
