@@ -11,7 +11,4 @@ if (!(window.console && console.log)) {
     }());
 }
 
-// responsive images
-$('.responsive-image').breakpoint(function(){
-    console.log('my callback');
-});
+$('.responsive-image').breakpoint();
