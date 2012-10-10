@@ -20,8 +20,7 @@ $current-bp: 0; // init breakpoint variable
 
 // Javascript hook
 // =============================================================================
-body::before { content: 'no-support'; display: none; }
-@media (min-width: 0px) { body::before { content: 'mobile'; } }
+@media (min-width: 0px) { body::before { content: 'mobile'; display: none; } }
 
 // Breakpoint mixin
 // =============================================================================

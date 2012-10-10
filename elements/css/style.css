@@ -103,14 +103,10 @@ body {
   margin: 0;
 }
 
-body::before {
-  content: 'no-support';
-  display: none;
-}
-
 @media (min-width: 0px) {
   body::before {
     content: 'mobile';
+    display: none;
   }
 }
 body::after {
