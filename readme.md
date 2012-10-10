@@ -208,14 +208,14 @@ $('.responsive-image').breakpoint({
 
 ## Changelog
 
-10/10/12 - Rewrote responsive images script
-9/6/12   - Fixed pixel ratio mq to either be high or low res conditional  
-8/17/12  - Added orientation and pixel ratio mqs. Added argument to disable wrapper class.  
-8/8/12   - Removed modular scale.  
-8/3/12   - Reworked responsive images and dom labels.  
-6/28/12  - Simplified helper functions. Added vertical rhythm component.  
-6/11/12  - Reorg and cleanup. Added JS hook and script.  
-5/28/12  - Pushed version 2.0
+10/10/12 - Rewrote responsive images script  
+9/6/12 - Fixed pixel ratio mq to either be high or low res conditional  
+8/17/12 - Added orientation and pixel ratio mqs. Added argument to disable wrapper class.  
+8/8/12 - Removed modular scale.  
+8/3/12 - Reworked responsive images and dom labels.  
+6/28/12 - Simplified helper functions. Added vertical rhythm component.  
+6/11/12 - Reorg and cleanup. Added JS hook and script.  
+5/28/12 - Pushed version 2.0
 
 ## Credits
 
