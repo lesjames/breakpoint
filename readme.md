@@ -161,21 +161,61 @@ make sure that the column count you set for `$ie-support` matches a layout break
 
 Setting `$grid-overlay` to true will generate a visual overlay of your grid for testing.
 
-### JS Hook
+## Responsive Images
 
-Breakpoint creates a hidden label (width on the head tag) that can be read by JavaScript so that you can pass
-the current number of columns to your scripts. This can be used to conditionally load
-assests at certain breakpoints or trigger other scripty stuff.
+Breakpoint creates a hook in your CSS that can be read by Javascript. JS uses this hook
+to determine what layout is active. Using this information JS can conditionally load
+images by defining data attributes on your image tags. Your HTML should look like this...
+
+```
+<img class="responsive-image" data-mobile="/elements/img/mobile.gif" data-desktop="/elements/img/desktop.gif" />
+<noscript><img src="/elements/img/desktop.gif" /></noscript>
+```
+
+In breakpoint you create labels for like so...
+
+`@include breakpoint(9, $label: 'desktop')`
+
+This creates a label of 'desktop' which gets matched to the image source in the 'data-desktop'
+attribute. Breakpoint will then load that image into your layout. Labels can be given any name you
+want, just make sure that the CSS label has a matching HTML label.
+
+Breakpoint's responsive image script is a jQuery plugin and it is applied to an image like so...
+
+`$('.responsive-image').breakpoint();`
+
+There are a couple of options that you can set too.
+
+* 'delay' - Delay sets the time difference between the window resize and running the respoinsive image scripts. Delay is
+useful for preventing the scripts from firing on every pixel change as you resize the window. Default delay is `200`.
+* 'callback' - You can define a callback function to fire when the responsive image scripts have finished.
+* 'prefix' - If you want a custom HTML attribute label prefix. The default prefix is `data-`
+* 'fallback' - This is a label that you can set for browsers that don't support media queries. Default label is 'desktop',
+* 'fallbackSrc' - Something crashing and burning? Do you have matching labels in CSS and HTML? If something is failing you
+can set a fallback source that will be used if something went horribly wrong.
+
+Here is an example of using options...
+
+```
+$('.responsive-image').breakpoint({
+  'delay' : 50,
+  'callback' : function(){
+    // do something awesome
+  },
+  'prefix' : 'data-src-'
+});
+```
 
 ## Changelog
 
-9/6/12  - Fixed pixel ratio mq to either be high or low res conditional  
-8/17/12 - Added orientation and pixel ratio mqs. Added argument to disable wrapper class.  
-8/8/12  - Removed modular scale.  
-8/3/12  - Reworked responsive images and dom labels.  
-6/28/12 - Simplified helper functions. Added vertical rhythm component.  
-6/11/12 - Reorg and cleanup. Added JS hook and script.  
-5/28/12 - Pushed version 2.0
+10/10/12 - Rewrote responsive images script
+9/6/12   - Fixed pixel ratio mq to either be high or low res conditional  
+8/17/12  - Added orientation and pixel ratio mqs. Added argument to disable wrapper class.  
+8/8/12   - Removed modular scale.  
+8/3/12   - Reworked responsive images and dom labels.  
+6/28/12  - Simplified helper functions. Added vertical rhythm component.  
+6/11/12  - Reorg and cleanup. Added JS hook and script.  
+5/28/12  - Pushed version 2.0
 
 ## Credits
 
