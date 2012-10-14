@@ -57,7 +57,7 @@
                         // pull the fallback src if no label is found
                         if (src === undefined) { src = settings.fallbackSrc; }
                         // if something crashed and burned
-                        if (src === null) { console.log('Breakpoint warning: there is no fallback attr or src set for '+ settings.fallback) }
+                        if (src === null) { console.warn('Breakpoint warning: there is no fallback attr or src set for '+ settings.fallback) }
                         
                         // create a src for the image
                         $(this).attr('src', src);
