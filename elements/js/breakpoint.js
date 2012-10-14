@@ -52,10 +52,12 @@
 
                         // if we don't have a matching src then use the fallback
                         label = (arrMatch) ? label : settings.fallback;
-                        src = $(this).attr(settings.prefix + label);
+                        src = $(this).attr(settings.prefix + label);                      
                         
-                        // if something crashed and burned
+                        // pull the fallback src if no label is found
                         if (src === undefined) { src = settings.fallbackSrc; }
+                        // if something crashed and burned
+                        if (src === null) { console.log('Breakpoint warning: there is no fallback attr or src set for '+ settings.fallback) }
                         
                         // create a src for the image
                         $(this).attr('src', src);
