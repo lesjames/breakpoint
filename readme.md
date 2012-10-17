@@ -19,7 +19,7 @@ Breakpoint requires Sass 3.2 and Compass
 
 You can then start a new Breakpoint project by cloning the repo
 
-'$ git clone https://github.com/lesjames/Breakpoint.git MYPROJECTNAME'
+`$ git clone https://github.com/lesjames/Breakpoint.git MYPROJECTNAME`
 
 ## The Grid
 
@@ -89,25 +89,16 @@ auto generated for each break point.
 }
 ```
 
-The code above generates the following markup...
+The code above generates the following markup (formatted for readability)
 
 ```
 @media (min-width: 41.25em) {
-    .wrapper {
-        width: 38.75em;
-        margin-left: auto;
-        margin-right: auto;
-    }
+    .wrapper { width: 38.75em; margin-left: auto; margin-right: auto; }
     .main { width: 62.5%; }
     .sidebar { width: 37.5%; }
 }
-
 @media (min-width: 61.25em) {
-    .wrapper {
-        width: 58.75em;
-        margin-left: auto;
-        margin-right: auto;
-    }
+    .wrapper { width: 58.75em; margin-left: auto; margin-right: auto; }
     .main { width: 66.66667%; }
     .sidebar { width: 33.33333%; }
 }
