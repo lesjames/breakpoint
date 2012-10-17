@@ -11,14 +11,15 @@ your columns.
 
 ## Installation
 
-You need to be careful when installing the bleeding edge version of Sass. There have been cases when installing the latest build will cause conflicts
-with Compass and Modular Scale. This build of Sass is known to be compatible with Breakpoint...
+Breakpoint requires Sass 3.2 and Compass
 
 `$ gem install sass`
 
-Breakpoint also requires Compass
-
 `$ gem install compass`
+
+You can then start a new Breakpoint project by cloning the repo
+
+'$ git clone https://github.com/lesjames/Breakpoint.git MYPROJECTNAME'
 
 ## The Grid
 
@@ -50,12 +51,19 @@ fluid widths.
 
 ### Helper Functions
 
+Sizing `.grid-cell` elements in your layout requires a class name to hook onto and a helper
+function for translating a column count into a width.
+
+`.sidebar { width: fluid(3); }`
+
+There are a couple functions for sizing elements but by default you should use the fluid() 
+function for sizing `.grid-cell` elements.
+
 `fluid($col)` calculates a percentage based on how many columns you want. Has an optional
 second argument that can override the number of availiable columns when calulating the
 percentage.
 
-`fixed($col)` calculates a fixed width for grid cells. Since this function accounts
-for border-box padding you should only use this function for sizing `.grid-cell` units.
+`fixed($col)` calculates a fixed width for grid cells.
 
 `no-grid-fixed($col)` calculates a fixed width for items outside of the grid system. This function
 does not assume border-box sizing and should be applied to elements other than `.grid-cell` units. 
@@ -69,23 +77,15 @@ auto generated for each break point.
 
 ```
 // 8 column breakpoint
-@include breakpoint(8){
-	.fluid-demo {
-		.grid-cell { width: fluid(4); }
-	}
-	.fixed-demo {
-		.grid-cell { width: fixed(2); }
-	}
+@include breakpoint(8) {
+    .main {  width: fluid(5); }
+	.sidebar { width: fluid(3); }
 }
 
 // 12 column breakpoint
-@include breakpoint(12){
-	.fluid-demo {
-		.grid-cell { width: fluid(3); }
-	}
-	.fixed-demo {
-		.grid-cell { width: fixed(3); }
-	}
+@include breakpoint(12) {
+	.main {  width: fluid(8); }
+	.sidebar { width: fluid(4); }
 }
 ```
 
@@ -93,31 +93,23 @@ The code above generates the following markup...
 
 ```
 @media (min-width: 41.25em) {
-  .wrapper {
-    width: 38.75em;
-    margin-left: auto;
-    margin-right: auto;
-  }
-  .fluid-demo .grid-cell {
-    width: 50%;
-  }
-  .fixed-demo .grid-cell {
-    width: 10em;
-  }
+    .wrapper {
+        width: 38.75em;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .main { width: 62.5%; }
+    .sidebar { width: 37.5%; }
 }
 
 @media (min-width: 61.25em) {
-  .wrapper {
-    width: 58.75em;
-    margin-left: auto;
-    margin-right: auto;
-  }
-  .fluid-demo .grid-cell {
-    width: 25%;
-  }
-  .fixed-demo .grid-cell {
-    width: 15em;
-  }
+    .wrapper {
+        width: 58.75em;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .main { width: 66.66667%; }
+    .sidebar { width: 33.33333%; }
 }
 ```
 
