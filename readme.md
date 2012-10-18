@@ -211,5 +211,6 @@ Breakpoint uses the following frameworks and technologies:
 [Sass](http://sass-lang.com/), 
 [Compass](http://compass-style.org/), 
 [Conditional CSS](http://adactio.com/journal/5429/),
+[DetectMQ.js](https://github.com/viljamis/detectMQ.js),
 [jQuery](http://jquery.com/), 
 [Modernizr](http://modernizr.com/)
