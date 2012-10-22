@@ -10,11 +10,12 @@
                 'callback' : function(){},
                 'prefix' : 'data-',
                 'fallback' : 'desktop',
-                'fallbackSrc' : null
+                'fallbackSrc' : null,
+                'debug' : false
             }, options),
             findLabel = function(){
                 // grab the current breakpoint label
-                var label = (window.getComputedStyle) ? getComputedStyle($('body')[0], '::before')['content'] : settings.fallback;
+                var label = (window.getComputedStyle) ? getComputedStyle(document.body, '::before')['content'] : settings.fallback;
                 // remove any quotes from string
                 label = label.replace(/['"]/g,'');
                 return label;
@@ -67,10 +68,19 @@
                     currentLabel = label;
 
                     // if a callback was set then fire it once
-                    settings.callback();
+                    settings.callback();                
                 }
             };
-
+        
+        // create global object with copies of plugin functions for testing
+        if(settings.debug) {
+            breakpoint = {};
+            breakpoint.findLabel = findLabel;
+            breakpoint.searchArr = searchArr;
+            breakpoint.findSource = findSource;
+            breakpoint.setSource = setSource;
+        }
+        
         // resize the image on window resize with a delay
         $(window).bind('resize.breakpoint', function(){
             clearTimeout(resizeTimeout);
