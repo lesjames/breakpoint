@@ -12,11 +12,11 @@ $current-bp: 0; // init breakpoint variable
 // =============================================================================
 
 // column widths for elements with .grid-cell class
-@function fixed($col) { @return $col * ( em($grid-column) + em($grid-gutter) ) }
+@function fixed($col) { @return $col * ( em($grid-column + $grid-gutter) ) }
 @function fluid($col, $avail: $current-bp) { @return (100% / $avail) * $col }
 
 // column width for elements not in grid
-@function no-grid-fixed($col) { @return $col * ( em($grid-column) + em($grid-gutter) ) - em($grid-gutter) }
+@function no-grid-fixed($col) { @return $col * em($grid-column + $grid-gutter) - em($grid-gutter) }
 
 // Javascript hook
 // =============================================================================
