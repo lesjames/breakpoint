@@ -151,8 +151,8 @@ to determine what layout is active. Using this information JS can conditionally 
 images by defining data attributes on your image tags. Your HTML should look like this...
 
 ```
-<img class="responsive-image" data-mobile="/elements/img/mobile.gif" data-desktop="/elements/img/desktop.gif" />
-<noscript><img src="/elements/img/desktop.gif" /></noscript>
+<img class="responsive-image" data-mobile="/static/img/mobile.gif" data-desktop="/static/img/desktop.gif" />
+<noscript><img src="/static/img/desktop.gif" /></noscript>
 ```
 
 In breakpoint you create labels for like so...
