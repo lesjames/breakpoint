@@ -112,7 +112,7 @@ $current-bp: 0; // init breakpoint variable
 	// create hook for js
 	@if($label) { body::before { content: $label; } }
 	// proper sizing of wrapper
-    @if($wrapper) { .wrapper { width: fixed($min) - em($grid-gutter); margin-left: auto; margin-right: auto; } }
+    @if($wrapper) { .wrapper { width: fixed($min) - em($grid-gutter); } }
 	@content
 }
 

@@ -9,8 +9,10 @@ body { font-size: $base-font-size; }
 // wrapper defaults to 100% fluid with side gutters
 // when triggering a breakpoint wrapper becomes fixed width and centered
 .wrapper {
-	margin-left: em($grid-gutter);
-	margin-right: em($grid-gutter);
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: em($grid-gutter);
+    padding-right: em($grid-gutter);
 }
 
 // for responsive images
