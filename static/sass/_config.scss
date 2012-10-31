@@ -26,6 +26,11 @@ $grid-overlay: false; // generate visual grid overlay
 $ie-support: false; // fallback breakpoint
 $base-font-size: 16px;
 
+// Path to server's static files directory
+// Do not use a trailing slash
+// ==========================================================================
+$static-path: '/static';
+
 // ==========================================================================
 // project specific variables and mixins
 // ==========================================================================

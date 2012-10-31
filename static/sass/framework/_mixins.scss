@@ -3,7 +3,7 @@
 	@include box-sizing(border-box);
 	
 	// MUST BE ABSOLUTE PATH
-	@include ie7 { behavior: url(/static/js/boxsizing.htc); }
+	@include ie7 { behavior: url(#{$static-path}/js/boxsizing.htc); }
 }
 
 // cross browser mixins
