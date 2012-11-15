@@ -202,7 +202,7 @@ $('.responsive-image').breakpoint({
 
 ## Credits
 
-Breakpoint uses the following frameworks and technologies:
+Breakpoint uses the following frameworks, technologies and inspirations:
 
 [H5BP](http://html5boilerplate.com/), 
 [normalize.css](http://necolas.github.com/normalize.css/), 
