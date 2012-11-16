@@ -56,11 +56,14 @@
                         
                         // pull the fallback src if no label is found
                         if (src === undefined) { src = settings.fallbackSrc; }
-                        // if something crashed and burned
-                        if (src === null) { console.warn('Breakpoint warning: there is no fallback attr or src set for '+ settings.fallback) }
-                        
-                        // create a src for the image
-                        $(this).attr('src', src);
+                        // if something crashed and burned hide the image, else set the source
+                        if (src === null) {
+                            console.warn('Breakpoint Warning - There is no fallback attr or src set for '+ settings.fallback + '.')
+                            $(this).css('display', 'none');
+                        } else {
+                            $(this).attr('src', src);
+                            if ($(this).css('display') === 'none') { $(this).css('display', 'block'); }
+                        }
 
                     });
                     // set current label
