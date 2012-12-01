@@ -10,8 +10,7 @@
                 'callback' : function(){},
                 'prefix' : 'data-',
                 'fallback' : 'desktop',
-                'fallbackSrc' : null,
-                'debug' : false
+                'fallbackSrc' : null
             }, options),
             findLabel = function(){
                 // grab the current breakpoint label
@@ -71,15 +70,6 @@
                     settings.callback();                
                 }
             };
-        
-        // create global object with copies of plugin functions for testing
-        if(settings.debug) {
-            breakpoint = {};
-            breakpoint.findLabel = findLabel;
-            breakpoint.searchArr = searchArr;
-            breakpoint.findSource = findSource;
-            breakpoint.setSource = setSource;
-        }
         
         // resize the image on window resize with a delay
         $(window).bind('resize.breakpoint', function(){
