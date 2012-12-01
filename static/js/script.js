@@ -15,6 +15,3 @@
         console[methods[length]] = console[methods[length]] || noop;
     }
 }());
-
-// make images responsive
-$('.responsive-image').breakpoint();
