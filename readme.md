@@ -65,8 +65,9 @@ percentage.
 
 `fixed($col)` calculates a fixed width for grid cells.
 
-`no-grid-fixed($col)` calculates a fixed width for items outside of the grid system. This function
-does not assume border-box sizing and should be applied to elements other than `.grid-cell` units. 
+`fixed($col, false)` calculates a fixed width for items outside of the grid system. This function
+does not assume a built in gutter and should be applied to elements other than `.grid-cell` units
+or when calculating measurements like heights. 
 
 ## The Breakpoint Mixin
 
@@ -191,6 +192,7 @@ $('.responsive-image').breakpoint({
 
 ## Changelog
 
+12/12/12 - Removed non grid sizing function in favor of an argument on fixed()
 10/10/12 - Rewrote responsive images script  
 9/6/12 - Fixed pixel ratio mq to either be high or low res conditional  
 8/17/12 - Added orientation and pixel ratio mqs. Added argument to disable wrapper class.  
