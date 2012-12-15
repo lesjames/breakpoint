@@ -21,6 +21,10 @@ You can then start a new Breakpoint project by cloning the repo
 
 `$ git clone https://github.com/lesjames/Breakpoint.git MYPROJECTNAME`
 
+## Resources
+
+There is a writeup about [Breakpoint on 24 Ways](http://24ways.org/2012/redesigning-the-media-query/).
+
 ## The Grid
 
 Breakpoint is a mobile first fluid layout that gets triggered 
