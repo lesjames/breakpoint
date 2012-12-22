@@ -24,7 +24,7 @@ You can then start a new Breakpoint project by cloning the repo
 ## Resources
 
 There is a writeup about [Breakpoint on 24 Ways](http://24ways.org/2012/redesigning-the-media-query/).  
-You can [view a presentation about Breakpoint](http://wordpress.tv/2012/12/18/les-james-responsive-design-with-the-breakpoint-framework/) at on wordpress.tv.
+You can [view a presentation about Breakpoint](http://wordpress.tv/2012/12/18/les-james-responsive-design-with-the-breakpoint-framework/) on wordpress.tv.
 
 ## The Grid
 
