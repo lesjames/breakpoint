@@ -15,6 +15,30 @@
         // the current breakpoint label
         breakpoint = null,
 
+        // get breakpoint label list
+        labels = (function () {
+            var labels = window.getComputedStyle && window.getComputedStyle(document.body, '::after');
+            if (labels) {
+                labels = labels.content || null;
+                if (typeof labels === 'string' || labels instanceof String) {
+                    labels = labels.replace(rxQuotes, '');
+                }
+                if (labels) {
+                    labels = labels.replace(/\s+/g, '');
+                    labels = labels.split(',');
+                }
+            }
+            return labels;
+        }()),
+
+        // searches label array for current breakpoint and returns position
+        searchLabels = function (stringArray, breakpoint) {
+            for (var j=0; j<stringArray.length; j++) {
+                if (stringArray[j].match(breakpoint)) { return j; }
+            }
+            return -1;
+        },
+
         // a utility for converting arguments to an Array
         rest = function(args, nth) {
             var values = [],
@@ -46,12 +70,12 @@
         updateBreakpoint = function() {
 
             var currentBreakpoint = breakpoint,
-                style = window.getComputedStyle && window.getComputedStyle(document.body, "::before");
+                style = window.getComputedStyle && window.getComputedStyle(document.body, '::before');
 
             if (style) {
                 breakpoint = style.content || null;
-                if (typeof breakpoint === "string" || breakpoint instanceof String) {
-                    breakpoint = breakpoint.replace(rxQuotes, "");
+                if (typeof breakpoint === 'string' || breakpoint instanceof String) {
+                    breakpoint = breakpoint.replace(rxQuotes, '');
                 }
             }
 
@@ -63,7 +87,7 @@
 
             } else if (breakpoint !== currentBreakpoint) {
 
-                $("body").trigger($.Event("breakpoint", { breakpoint: breakpoint }));
+                $('body').trigger($.Event('breakpoint', { breakpoint: breakpoint }));
             }
         };
 
@@ -71,7 +95,7 @@
     $(document).ready(updateBreakpoint);
 
     // update the breakpoint on window resize
-    $(window).bind("resize.breakpoint", updateBreakpoint);
+    $(window).bind('resize.breakpoint', updateBreakpoint);
 
     // define the plugin
     $.fn.breakpoint = function(options) {
@@ -79,19 +103,19 @@
         this.each(function() {
 
             var image = $(this),
-                serial = image.data("breakpoint-serial");
+                serial = image.data('breakpoint-serial');
 
             // has this not yet been registered?
             if (!serial) {
                 serial = nextSerial();
-                image.data("breakpoint-serial", serial);
+                image.data('breakpoint-serial', serial);
 
                 // be a good memory citizen
-                $(document).bind("unload.breakpoint.serial" + serial, partial(function(image, serial) {
+                $(document).bind('unload.breakpoint.serial' + serial, partial(function(image, serial) {
 
                     // unbind our closures so garbage collection can happen
-                    image.unbind("breakpoint.serial" + serial);
-                    $(this).unbind("unload.breakpoint.serial" + serial);
+                    image.unbind('breakpoint.serial' + serial);
+                    $(this).unbind('unload.breakpoint.serial' + serial);
                     image = null;
 
                 }, image, serial));
@@ -101,16 +125,15 @@
             options = $.extend({
                 delay : 200,
                 callback: null,
-                prefix: "data-",
-                fallback: "desktop",
-                fallbackSrc: null
+                prefix: 'data-',
+                fallback: 'l'
             }, options || { });
 
             // remove any previous handler
-            $("body").unbind("breakpoint.serial" + serial);
+            $('body').unbind('breakpoint.serial' + serial);
 
             // create the new handler
-            $("body").bind("breakpoint.serial" + serial, (function(image, options) {
+            $('body').bind('breakpoint.serial' + serial, (function(image, options) {
 
                 var
                     // have we set the src at least once?
@@ -125,7 +148,7 @@
                     // set the image's src
                     set = function(breakpoint) {
 
-                        var src;
+                        var src, position;
 
                         // now we've processed this image at least once
                         once = true;
@@ -139,12 +162,34 @@
                         // update?
                         if (breakpoint !== currentBreakpoint) {
 
-                            src = image.attr(options.prefix + breakpoint) || options.fallbackSrc;
+                            // breakpoint position in the array of known breakpoints
+                            position = (labels) ? searchLabels(labels, breakpoint) : null;
+
+                            src = (function () {
+
+                                // find source by first trying the current breakpoint
+                                var src = image.attr(options.prefix + breakpoint),
+                                    i = position - 1;
+
+                                // if no match is found walk backwards through the
+                                // labels array until a matching data attr is found
+                                if (src === undefined) {
+                                    for (i; i >= 0; i = i - 1) {
+                                        src = image.attr(options.prefix + labels[i]);
+                                        if (src !== undefined) {
+                                            break;
+                                        }
+                                    }
+                                }
+
+                                return src;
+                            }());
+
                             if (src) {
-                                image.attr("src", src);
+                                image.attr('src', src);
                             }
 
-                            if (typeof options.callback === "function") {
+                            if (typeof options.callback === 'function') {
                                 options.callback.call(image, breakpoint, src);
                             }
                             currentBreakpoint = breakpoint;

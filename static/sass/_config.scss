@@ -25,6 +25,7 @@ $grid-gutter: 20px;
 $grid-overlay: false; // generate visual grid overlay
 $ie-support: false; // fallback breakpoint
 $base-font-size: 16px;
+$breakpoint-labels: (small); // label names for responsive image matching
 
 // Path to server's static files directory
 // Do not use a trailing slash

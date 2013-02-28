@@ -6,12 +6,13 @@ $grid-gutter: 20px !default; // can be px, em, or %
 $grid-overlay: false !default; // generate visual grid overlay
 $ie-support: false !default; // number of columns for IE fallback (must match a breakpoint)
 $grid-direction: left !default; // switch to 'right' for rtl
+$breakpoint-labels: (small) !default; // default the breakpoint label set to 'small'
 $current-bp: 0; // init breakpoint variable
 
 // Functions
 // =============================================================================
 
-// column widths for elements with .grid-cell class
+// column widths for elements with .grid__cell class
 // pass false as a second argument to remove the built in gutter (for creating height measurements)
 @function fixed($col, $gutter: true) {
     @if ($gutter) { @return $col * ( em($grid-column + $grid-gutter) ) }
@@ -21,7 +22,10 @@ $current-bp: 0; // init breakpoint variable
 
 // Javascript hook
 // =============================================================================
-@media (min-width: 0px) { body::before { content: 'mobile'; display: none; } }
+@media (min-width: 0px) {
+    body::before { content: "#{nth($breakpoint-labels, 1)}"; display: none; }
+    body::after { content: "#{$breakpoint-labels}"; display: none; }
+}
 
 // Breakpoint mixin
 // =============================================================================

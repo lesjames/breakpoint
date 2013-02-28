@@ -97,7 +97,11 @@ body {
 
 @media (min-width: 0px) {
   body::before {
-    content: 'mobile';
+    content: "small";
+    display: none; }
+
+  body::after {
+    content: "small";
     display: none; } }
 /* Grid based on https://github.com/necolas/griddle by Nicolas Gallagher (@necolas) */
 body {
