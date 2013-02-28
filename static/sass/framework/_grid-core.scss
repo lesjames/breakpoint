@@ -53,8 +53,8 @@ img { max-width: 100%; }
 
 .grid-cell {
     width: 100%;
-    @include inline-block;
-    @include border-box;
+    display: inline-block;
+    @include box-sizing('border-box');
     margin: 0;
     padding: 0 0.5 * em($grid-gutter);
     /* controls vertical positioning of units */
