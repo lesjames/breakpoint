@@ -31,7 +31,7 @@
             return (function(fn, args) {
                 return function() {
                     return fn.apply(null, args.concat(rest(arguments)));
-                }
+                };
             })(fn, rest(arguments, 1));
         },
 
@@ -49,7 +49,7 @@
                 style = window.getComputedStyle && window.getComputedStyle(document.body, "::before");
 
             if (style) {
-                breakpoint = style["content"] || null;
+                breakpoint = style.content || null;
                 if (typeof breakpoint === "string" || breakpoint instanceof String) {
                     breakpoint = breakpoint.replace(rxQuotes, "");
                 }
