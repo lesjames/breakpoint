@@ -2,26 +2,26 @@
   "CodeKitInfo" : "This is a CodeKit project configuration file. It is designed to sync project settings across multiple machines. Modifying the contents of this file can be a poor life decision if you don't know what you're doing. This file is not useful unless accompanied by the project that created it in CodeKit. For more information, see: http:\/\/incident57.com\/codekit",
   "creatorBuild" : "8248",
   "files" : {
-    "\/static\/js\/src\/polyfills.js" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/static\/js\/src\/polyfills.js",
-      "outputStyle" : 1,
-      "syntaxCheckerStyle" : 1,
-      "outputAbbreviatedPath" : "\/static\/js\/polyfills.min.js",
-      "fileType" : 64
-    },
-    "\/static\/sass\/framework\/_mixins.scss" : {
+    "\/static\/js\/src\/breakpoint-bindings.js" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 1,
       "hidden" : 0,
       "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/static\/sass\/framework\/_mixins.scss",
+      "inputAbbreviatedPath" : "\/static\/js\/src\/breakpoint-bindings.js",
+      "outputStyle" : 1,
+      "syntaxCheckerStyle" : 1,
+      "outputAbbreviatedPath" : "\/static\/js\/breakpoint-bindings.min.js",
+      "fileType" : 64
+    },
+    "\/static\/sass\/framework\/_grid-core.scss" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 1,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/static\/sass\/framework\/_grid-core.scss",
       "outputStyle" : 0,
       "shouldRunBless" : 0,
-      "outputAbbreviatedPath" : "\/static\/css\/_mixins.css",
+      "outputAbbreviatedPath" : "\/static\/css\/_grid-core.css",
       "fileType" : 4,
       "debugStyle" : 0
     },
@@ -46,15 +46,27 @@
       "fileType" : 2048
     },
     "\/static\/js\/lib\/modernizr-2.6.2.min.js" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
+      "ignoreWasSetByUser" : 1,
+      "ignore" : 1,
       "hidden" : 0,
       "outputPathIsSetByUser" : 0,
       "inputAbbreviatedPath" : "\/static\/js\/lib\/modernizr-2.6.2.min.js",
       "outputStyle" : 1,
-      "syntaxCheckerStyle" : 1,
+      "syntaxCheckerStyle" : 0,
       "outputAbbreviatedPath" : "\/static\/js\/modernizr-2.6.2.min.min.js",
       "fileType" : 64
+    },
+    "\/static\/sass\/_components.scss" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 1,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/static\/sass\/_components.scss",
+      "outputStyle" : 0,
+      "shouldRunBless" : 0,
+      "outputAbbreviatedPath" : "\/static\/css\/_components.css",
+      "fileType" : 4,
+      "debugStyle" : 0
     },
     "\/static\/js\/src\/script.js" : {
       "ignoreWasSetByUser" : 0,
@@ -67,38 +79,26 @@
       "outputAbbreviatedPath" : "\/static\/js\/script.min.js",
       "fileType" : 64
     },
-    "\/static\/js\/lib\/jquery-1.9.1.min.js" : {
-      "ignoreWasSetByUser" : 1,
+    "\/static\/js\/src\/polyfills.js" : {
+      "ignoreWasSetByUser" : 0,
       "ignore" : 1,
       "hidden" : 0,
       "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/static\/js\/lib\/jquery-1.9.1.min.js",
+      "inputAbbreviatedPath" : "\/static\/js\/src\/polyfills.js",
       "outputStyle" : 1,
-      "syntaxCheckerStyle" : 0,
-      "outputAbbreviatedPath" : "\/static\/js\/jquery-1.9.1.min.min.js",
+      "syntaxCheckerStyle" : 1,
+      "outputAbbreviatedPath" : "\/static\/js\/polyfills.min.js",
       "fileType" : 64
     },
-    "\/static\/sass\/framework\/_grid-core.scss" : {
+    "\/static\/sass\/_framework.scss" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 1,
       "hidden" : 0,
       "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/static\/sass\/framework\/_grid-core.scss",
+      "inputAbbreviatedPath" : "\/static\/sass\/_framework.scss",
       "outputStyle" : 0,
       "shouldRunBless" : 0,
-      "outputAbbreviatedPath" : "\/static\/css\/_grid-core.css",
-      "fileType" : 4,
-      "debugStyle" : 0
-    },
-    "\/static\/sass\/_components.scss" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 1,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/static\/sass\/_components.scss",
-      "outputStyle" : 0,
-      "shouldRunBless" : 0,
-      "outputAbbreviatedPath" : "\/static\/css\/_components.css",
+      "outputAbbreviatedPath" : "\/static\/css\/_framework.css",
       "fileType" : 4,
       "debugStyle" : 0
     },
@@ -125,15 +125,26 @@
       "fileType" : 4,
       "debugStyle" : 0
     },
-    "\/static\/sass\/_framework.scss" : {
+    "\/static\/js\/lib\/jquery-1.9.1.min.js" : {
+      "ignoreWasSetByUser" : 1,
+      "ignore" : 1,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/static\/js\/lib\/jquery-1.9.1.min.js",
+      "outputStyle" : 1,
+      "syntaxCheckerStyle" : 0,
+      "outputAbbreviatedPath" : "\/static\/js\/jquery-1.9.1.min.min.js",
+      "fileType" : 64
+    },
+    "\/static\/sass\/_structure.scss" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 1,
       "hidden" : 0,
       "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/static\/sass\/_framework.scss",
+      "inputAbbreviatedPath" : "\/static\/sass\/_structure.scss",
       "outputStyle" : 0,
       "shouldRunBless" : 0,
-      "outputAbbreviatedPath" : "\/static\/css\/_framework.css",
+      "outputAbbreviatedPath" : "\/static\/css\/_structure.css",
       "fileType" : 4,
       "debugStyle" : 0
     },
@@ -146,6 +157,30 @@
       "outputAbbreviatedPath" : "No Output Path",
       "fileType" : 32768
     },
+    "\/static\/sass\/framework\/_print.scss" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 1,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/static\/sass\/framework\/_print.scss",
+      "outputStyle" : 0,
+      "shouldRunBless" : 0,
+      "outputAbbreviatedPath" : "\/static\/css\/_print.css",
+      "fileType" : 4,
+      "debugStyle" : 0
+    },
+    "\/static\/sass\/framework\/_normalize.scss" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 1,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/static\/sass\/framework\/_normalize.scss",
+      "outputStyle" : 0,
+      "shouldRunBless" : 0,
+      "outputAbbreviatedPath" : "\/static\/css\/_normalize.css",
+      "fileType" : 4,
+      "debugStyle" : 0
+    },
     "\/static\/sass\/style.scss" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
@@ -155,6 +190,18 @@
       "outputStyle" : 0,
       "shouldRunBless" : 0,
       "outputAbbreviatedPath" : "\/static\/css\/style.css",
+      "fileType" : 4,
+      "debugStyle" : 0
+    },
+    "\/static\/sass\/framework\/_mixins.scss" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 1,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/static\/sass\/framework\/_mixins.scss",
+      "outputStyle" : 0,
+      "shouldRunBless" : 0,
+      "outputAbbreviatedPath" : "\/static\/css\/_mixins.css",
       "fileType" : 4,
       "debugStyle" : 0
     },
@@ -169,59 +216,19 @@
       "outputAbbreviatedPath" : "\/static\/css\/_grid-helpers.css",
       "fileType" : 4,
       "debugStyle" : 0
-    },
-    "\/static\/js\/src\/breakpoint-bindings.js" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 1,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/static\/js\/src\/breakpoint-bindings.js",
-      "outputStyle" : 1,
-      "syntaxCheckerStyle" : 1,
-      "outputAbbreviatedPath" : "\/static\/js\/breakpoint-bindings.min.js",
-      "fileType" : 64
-    },
-    "\/static\/sass\/framework\/_normalize.scss" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 1,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/static\/sass\/framework\/_normalize.scss",
-      "outputStyle" : 0,
-      "shouldRunBless" : 0,
-      "outputAbbreviatedPath" : "\/static\/css\/_normalize.css",
-      "fileType" : 4,
-      "debugStyle" : 0
-    },
-    "\/static\/sass\/_structure.scss" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 1,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/static\/sass\/_structure.scss",
-      "outputStyle" : 0,
-      "shouldRunBless" : 0,
-      "outputAbbreviatedPath" : "\/static\/css\/_structure.css",
-      "fileType" : 4,
-      "debugStyle" : 0
-    },
-    "\/static\/sass\/framework\/_print.scss" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 1,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/static\/sass\/framework\/_print.scss",
-      "outputStyle" : 0,
-      "shouldRunBless" : 0,
-      "outputAbbreviatedPath" : "\/static\/css\/_print.css",
-      "fileType" : 4,
-      "debugStyle" : 0
     }
   },
   "manualImportLinks" : [
     {
       "type" : 1,
       "position" : 0,
+      "linkedFileAbbreviatedPath" : "\/static\/js\/src\/polyfills.js",
+      "baseFileAbbreviatedPath" : "\/static\/js\/src\/script.js",
+      "followForSyntaxChecking" : 1
+    },
+    {
+      "type" : 1,
+      "position" : 1,
       "linkedFileAbbreviatedPath" : "\/static\/js\/lib\/breakpoint-3.0.0.js",
       "baseFileAbbreviatedPath" : "\/static\/js\/src\/script.js",
       "followForSyntaxChecking" : 1
