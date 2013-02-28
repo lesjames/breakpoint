@@ -51,7 +51,7 @@ img { max-width: 100%; }
 // Grid units
 // No explicit width by default
 
-.grid-cell {
+.grid__cell {
     width: 100%;
     display: inline-block;
     @include box-sizing('border-box');
@@ -71,7 +71,7 @@ img { max-width: 100%; }
 // Allows for automatic unit centering irrespective of the number of
 // units in the grid.
 
-.grid-center {
+.grid--center {
     text-align: center;
 }
 
@@ -79,7 +79,7 @@ img { max-width: 100%; }
 // Set a specific unit to be horizontally centered. Doesn't affect
 // any other units. Can still contain a child `grid` object.
 
-.grid-cell-center {
+.grid__cell--center {
     display: block;
     margin: 0 auto;
 }

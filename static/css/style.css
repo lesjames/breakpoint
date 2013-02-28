@@ -129,7 +129,7 @@ img {
   margin-right: 0;
   margin-left: 0; }
 
-.grid-cell {
+.grid__cell {
   width: 100%;
   display: inline-block;
   -webkit-box-sizing: border-box;
@@ -146,9 +146,9 @@ img {
   word-spacing: normal;
   text-rendering: auto; }
 
-.grid-center {
+.grid--center {
   text-align: center; }
 
-.grid-cell-center {
+.grid__cell--center {
   display: block;
   margin: 0 auto; }
