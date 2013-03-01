@@ -154,60 +154,64 @@ Setting `$grid-overlay` to true will generate a visual overlay of your grid for 
 
 ## Responsive Images
 
-Breakpoint creates a hook in your CSS that can be read by Javascript. JS uses this hook
-to determine what layout is active. Using this information JS can conditionally load
-images by defining data attributes on your image tags. Your HTML should look like this...
+Breakpoint comes with a jQuery plugin that allows you to load images for the currently
+active breakpoint. You just need to label your breakpoints in Sass and JavaScript
+matches that name to a matching data attribute on the image tag.
+
+### HTML
+
+Store source paths in data attributes on an image tag. Make sure you provide
+a `<noscript>` fallback.
 
 ```
-<img class="responsive-image" data-mobile="/static/img/mobile.gif" data-desktop="/static/img/desktop.gif" />
-<noscript><img src="/static/img/desktop.gif" /></noscript>
+<img class="responsive-image" data-small="/static/img/small.gif" data-large="/static/img/large.gif" />
+<noscript><img src="/static/img/small.gif" /></noscript>
 ```
 
-In breakpoint you create labels for like so...
+### Sass
 
-`@include breakpoint(9, $label: 'desktop')`
+When you create a breakpoint, pass it a argument called `$label` with a string as the name you want. 
 
-This creates a label of 'desktop' which gets matched to the image source in the 'data-desktop'
-attribute. Breakpoint will then load that image into your layout. Labels can be given any name you
-want, just make sure that the CSS label has a matching HTML label.
+```
+@include breakpoint(6, $label: 'medium');
+@include breakpoint(9, $label: 'large');
+```
 
-Breakpoint's responsive image script is a jQuery plugin and it is applied to an image like so...
+There is a config variable called `$breakpoint-list` and it defaults the name of the smallest,
+fluid layout to 'small'. You can change this to 'mobile' or any name that makes sense to you.
+
+### jQuery
+
+Apply the Breakpoint plugin on any image you want to make responsive.
 
 `$('.responsive-image').breakpoint();`
 
-There are a couple of options that you can set too.
+There are some options you can pass as an object to the breakpoint plugin.
 
-* 'delay' - Delay sets the time difference between the window resize and running the respoinsive image scripts. Delay is
-useful for preventing the scripts from firing on every pixel change as you resize the window. Default delay is `200`.
-* 'callback' - You can define a callback function to fire when the responsive image scripts have finished.
-* 'prefix' - If you want a custom HTML attribute label prefix. The default prefix is `data-`
-* 'fallback' - This is a label that you can set for browsers that don't support media queries. Default label is 'desktop',
-* 'fallbackSrc' - Something crashing and burning? Do you have matching labels in CSS and HTML? If something is failing you
-can set a fallback source that will be used if something went horribly wrong.
-
-Here is an example of using options...
+`callback`  
+This is a function that will be called once the source of the image is set. The callback
+receives a jQuery object of the image as `this`. The callback gets passed two parameters,
+the current breakpoint label and the source that was applied.
 
 ```
 $('.responsive-image').breakpoint({
-  'delay' : 50,
-  'callback' : function(){
-    // do something awesome
-  },
-  'prefix' : 'data-src-'
+    callback : function (breakpoint, src) {
+        console.log(this, breakpoint, src);
+    }
 });
 ```
 
-## Changelog
+`delay`  
+This is the time it takes to reevaluate responsive images when resizing the screen. It
+defaults to 200 milliseconds.
 
-12/12/12 - Removed non grid sizing function in favor of an argument on fixed()  
-10/10/12 - Rewrote responsive images script  
-9/6/12 - Fixed pixel ratio mq to either be high or low res conditional  
-8/17/12 - Added orientation and pixel ratio mqs. Added argument to disable wrapper class.  
-8/8/12 - Removed modular scale.  
-8/3/12 - Reworked responsive images and dom labels.  
-6/28/12 - Simplified helper functions. Added vertical rhythm component.  
-6/11/12 - Reorg and cleanup. Added JS hook and script.  
-5/28/12 - Pushed version 2.0
+`prefix`  
+Breakpoint assumes that the data attribute is simply the label. So if the label is 'small' then
+breakpoint looks for `data-small` on the image tag. If you want to prefix the label with something
+then use this option. So `prefix : 'foo'` will look for an attribute called `data-foo-small`.
+
+`fallback`  
+This is a label that you can use for browsers that don't support `getComputedStyle`.
 
 ## Credits
 
