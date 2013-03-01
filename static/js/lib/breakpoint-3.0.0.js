@@ -125,8 +125,6 @@
             options = $.extend({
                 delay : 200,
                 callback: null,
-                prefix: 'data-',
-                fallback: 'l'
                 prefix: '',
                 fallback: null
             }, options || { });
@@ -170,7 +168,6 @@
                             src = (function () {
 
                                 // find source by first trying the current breakpoint
-                                var src = image.attr(options.prefix + breakpoint),
                                 var src = image.attr('data-' + options.prefix + breakpoint),
                                     i = position - 1;
 
@@ -178,7 +175,6 @@
                                 // labels array until a matching data attr is found
                                 if (src === undefined) {
                                     for (i; i >= 0; i = i - 1) {
-                                        src = image.attr(options.prefix + labels[i]);
                                         src = image.attr('data-' + options.prefix + labels[i]);
                                         if (src !== undefined) {
                                             break;
