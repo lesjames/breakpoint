@@ -127,6 +127,8 @@
                 callback: null,
                 prefix: 'data-',
                 fallback: 'l'
+                prefix: '',
+                fallback: null
             }, options || { });
 
             // remove any previous handler
@@ -169,6 +171,7 @@
 
                                 // find source by first trying the current breakpoint
                                 var src = image.attr(options.prefix + breakpoint),
+                                var src = image.attr('data-' + options.prefix + breakpoint),
                                     i = position - 1;
 
                                 // if no match is found walk backwards through the
@@ -176,6 +179,7 @@
                                 if (src === undefined) {
                                     for (i; i >= 0; i = i - 1) {
                                         src = image.attr(options.prefix + labels[i]);
+                                        src = image.attr('data-' + options.prefix + labels[i]);
                                         if (src !== undefined) {
                                             break;
                                         }
