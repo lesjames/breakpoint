@@ -188,8 +188,7 @@ Apply the Breakpoint plugin on any image you want to make responsive.
 
 There are some options you can pass as an object to the breakpoint plugin.
 
-`callback`  
-This is a function that will be called once the source of the image is set. The callback
+**callback** - This is a function that will be called once the source of the image is set. The callback
 receives a jQuery object of the image as `this`. The callback gets passed two parameters,
 the current breakpoint label and the source that was applied.
 
@@ -201,17 +200,15 @@ $('.responsive-image').breakpoint({
 });
 ```
 
-`delay`  
-This is the time it takes to reevaluate responsive images when resizing the screen. It
+**delay** - This is the time it takes to reevaluate responsive images when resizing the screen. It
 defaults to 200 milliseconds.
 
-`prefix`  
-Breakpoint assumes that the data attribute is simply the label. So if the label is 'small' then
+**prefix** - Breakpoint assumes that the data attribute is simply the label. So if the label is 'small' then
 breakpoint looks for `data-small` on the image tag. If you want to prefix the label with something
-then use this option. So `prefix : 'foo'` will look for an attribute called `data-foo-small`.
+then use this option.  
+So `prefix : 'foo'` will look for an attribute called `data-foo-small`.
 
-`fallback`  
-This is a label that you can use for browsers that don't support `getComputedStyle`.
+**fallback** - This is a label that you can use for browsers that don't support `getComputedStyle`.
 
 ## Credits
 
