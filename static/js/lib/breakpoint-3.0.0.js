@@ -2,7 +2,7 @@
 
     var
         // regex to strip quotes around the breakpoint label
-        rxQuotes = /^('|")|('|")$/g,
+        rxQuotes = /('|"|\s+)/g,
 
         // defer setting any images until the breakpoint label
         // has been calculated the first time
@@ -22,9 +22,7 @@
                 labels = labels.content || null;
                 if (typeof labels === 'string' || labels instanceof String) {
                     labels = labels.replace(rxQuotes, '');
-                }
-                if (labels) {
-                    labels = labels.replace(/\s+/g, '');
+                    // convert label list into an array
                     labels = labels.split(',');
                 }
             }
@@ -187,6 +185,8 @@
 
                             if (src) {
                                 image.attr('src', src);
+                            } else {
+                                console.warn('Breakpoint could not find a source for: ' + image[0].outerHTML);
                             }
 
                             if (typeof options.callback === 'function') {
