@@ -33,9 +33,14 @@ img { max-width: 100%; }
     // font-family to `sans-serif` and then redeclare the monospace font on
     // the `grid-cell` objects.
     letter-spacing: -0.31em;
-    word-spacing: -0.43em;
     // Protect against WebKit bug with optimizelegibility
     text-rendering: optimizespeed;
+}
+
+// opera needs negative word spacing
+.grid :-o-prefocus,
+.grid {
+    word-spacing: -0.43em;
 }
 
 // Child `grid` object adjustments
