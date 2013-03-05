@@ -2,85 +2,6 @@
   "CodeKitInfo" : "This is a CodeKit project configuration file. It is designed to sync project settings across multiple machines. Modifying the contents of this file can be a poor life decision if you don't know what you're doing. This file is not useful unless accompanied by the project that created it in CodeKit. For more information, see: http:\/\/incident57.com\/codekit",
   "creatorBuild" : "8248",
   "files" : {
-    "\/static\/sass\/config.rb" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/static\/sass\/config.rb",
-      "outputAbbreviatedPath" : "No Output Path",
-      "fileType" : 32768
-    },
-    "\/static\/sass\/_components.scss" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 1,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/static\/sass\/_components.scss",
-      "outputStyle" : 0,
-      "shouldRunBless" : 0,
-      "outputAbbreviatedPath" : "\/static\/css\/_components.css",
-      "fileType" : 4,
-      "debugStyle" : 0
-    },
-    "\/static\/sass\/framework\/_mixins.scss" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 1,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/static\/sass\/framework\/_mixins.scss",
-      "outputStyle" : 0,
-      "shouldRunBless" : 0,
-      "outputAbbreviatedPath" : "\/static\/css\/_mixins.css",
-      "fileType" : 4,
-      "debugStyle" : 0
-    },
-    "\/static\/sass\/framework\/_normalize.scss" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 1,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/static\/sass\/framework\/_normalize.scss",
-      "outputStyle" : 0,
-      "shouldRunBless" : 0,
-      "outputAbbreviatedPath" : "\/static\/css\/_normalize.css",
-      "fileType" : 4,
-      "debugStyle" : 0
-    },
-    "\/static\/sass\/_config.scss" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 1,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/static\/sass\/_config.scss",
-      "outputStyle" : 0,
-      "shouldRunBless" : 0,
-      "outputAbbreviatedPath" : "\/static\/css\/_config.css",
-      "fileType" : 4,
-      "debugStyle" : 0
-    },
-    "\/static\/js\/lib\/modernizr-2.6.2.min.js" : {
-      "ignoreWasSetByUser" : 1,
-      "ignore" : 1,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/static\/js\/lib\/modernizr-2.6.2.min.js",
-      "outputStyle" : 1,
-      "syntaxCheckerStyle" : 0,
-      "outputAbbreviatedPath" : "\/static\/js\/modernizr-2.6.2.min.min.js",
-      "fileType" : 64
-    },
-    "\/static\/js\/script.min.js" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 1,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/static\/js\/script.min.js",
-      "outputStyle" : 1,
-      "syntaxCheckerStyle" : 1,
-      "outputAbbreviatedPath" : "\/static\/js\/script.min.min.js",
-      "fileType" : 64
-    },
     "\/static\/js\/src\/script.js" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
@@ -104,6 +25,37 @@
       "fileType" : 4,
       "debugStyle" : 0
     },
+    "\/index.html" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/index.html",
+      "outputAbbreviatedPath" : "No Output Path",
+      "fileType" : 2048
+    },
+    "\/static\/js\/script.min.js" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 1,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/static\/js\/script.min.js",
+      "outputStyle" : 1,
+      "syntaxCheckerStyle" : 1,
+      "outputAbbreviatedPath" : "\/static\/js\/script.min.min.js",
+      "fileType" : 64
+    },
+    "\/static\/js\/lib\/modernizr-2.6.2.min.js" : {
+      "ignoreWasSetByUser" : 1,
+      "ignore" : 1,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/static\/js\/lib\/modernizr-2.6.2.min.js",
+      "outputStyle" : 1,
+      "syntaxCheckerStyle" : 1,
+      "outputAbbreviatedPath" : "\/static\/js\/modernizr-2.6.2.min.min.js",
+      "fileType" : 64
+    },
     "\/static\/sass\/framework\/_grid-core.scss" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 1,
@@ -115,6 +67,38 @@
       "outputAbbreviatedPath" : "\/static\/css\/_grid-core.css",
       "fileType" : 4,
       "debugStyle" : 0
+    },
+    "\/static\/sass\/_components.scss" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 1,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/static\/sass\/_components.scss",
+      "outputStyle" : 0,
+      "shouldRunBless" : 0,
+      "outputAbbreviatedPath" : "\/static\/css\/_components.css",
+      "fileType" : 4,
+      "debugStyle" : 0
+    },
+    "\/config.rb" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/config.rb",
+      "outputAbbreviatedPath" : "No Output Path",
+      "fileType" : 32768
+    },
+    "\/static\/js\/lib\/jquery-1.9.1.min.js" : {
+      "ignoreWasSetByUser" : 1,
+      "ignore" : 1,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/static\/js\/lib\/jquery-1.9.1.min.js",
+      "outputStyle" : 1,
+      "syntaxCheckerStyle" : 1,
+      "outputAbbreviatedPath" : "\/static\/js\/jquery-1.9.1.min.min.js",
+      "fileType" : 64
     },
     "\/static\/sass\/_framework.scss" : {
       "ignoreWasSetByUser" : 0,
@@ -139,14 +123,28 @@
       "outputAbbreviatedPath" : "\/static\/js\/breakpoint-3.0.0.min.js",
       "fileType" : 64
     },
-    "\/static\/css\/style.css" : {
+    "\/static\/js\/src\/polyfills.js" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 1,
       "hidden" : 0,
       "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/static\/css\/style.css",
-      "outputAbbreviatedPath" : "No Output Path",
-      "fileType" : 16
+      "inputAbbreviatedPath" : "\/static\/js\/src\/polyfills.js",
+      "outputStyle" : 1,
+      "syntaxCheckerStyle" : 1,
+      "outputAbbreviatedPath" : "\/static\/js\/polyfills.min.js",
+      "fileType" : 64
+    },
+    "\/static\/sass\/_structure.scss" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 1,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/static\/sass\/_structure.scss",
+      "outputStyle" : 0,
+      "shouldRunBless" : 0,
+      "outputAbbreviatedPath" : "\/static\/css\/_structure.css",
+      "fileType" : 4,
+      "debugStyle" : 0
     },
     "\/static\/sass\/style.scss" : {
       "ignoreWasSetByUser" : 0,
@@ -157,6 +155,18 @@
       "outputStyle" : 0,
       "shouldRunBless" : 0,
       "outputAbbreviatedPath" : "\/static\/css\/style.css",
+      "fileType" : 4,
+      "debugStyle" : 0
+    },
+    "\/static\/sass\/framework\/_print.scss" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 1,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/static\/sass\/framework\/_print.scss",
+      "outputStyle" : 0,
+      "shouldRunBless" : 0,
+      "outputAbbreviatedPath" : "\/static\/css\/_print.css",
       "fileType" : 4,
       "debugStyle" : 0
     },
@@ -171,58 +181,39 @@
       "outputAbbreviatedPath" : "\/static\/js\/breakpoint-bindings.min.js",
       "fileType" : 64
     },
-    "\/static\/js\/src\/polyfills.js" : {
+    "\/static\/sass\/framework\/_normalize.scss" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 1,
       "hidden" : 0,
       "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/static\/js\/src\/polyfills.js",
-      "outputStyle" : 1,
-      "syntaxCheckerStyle" : 1,
-      "outputAbbreviatedPath" : "\/static\/js\/polyfills.min.js",
-      "fileType" : 64
-    },
-    "\/index.html" : {
-      "ignoreWasSetByUser" : 1,
-      "ignore" : 1,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/index.html",
-      "outputAbbreviatedPath" : "No Output Path",
-      "fileType" : 2048
-    },
-    "\/static\/sass\/framework\/_print.scss" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 1,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/static\/sass\/framework\/_print.scss",
+      "inputAbbreviatedPath" : "\/static\/sass\/framework\/_normalize.scss",
       "outputStyle" : 0,
       "shouldRunBless" : 0,
-      "outputAbbreviatedPath" : "\/static\/css\/_print.css",
+      "outputAbbreviatedPath" : "\/static\/css\/_normalize.css",
       "fileType" : 4,
       "debugStyle" : 0
     },
-    "\/static\/js\/lib\/jquery-1.9.1.min.js" : {
-      "ignoreWasSetByUser" : 1,
-      "ignore" : 1,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/static\/js\/lib\/jquery-1.9.1.min.js",
-      "outputStyle" : 1,
-      "syntaxCheckerStyle" : 0,
-      "outputAbbreviatedPath" : "\/static\/js\/jquery-1.9.1.min.min.js",
-      "fileType" : 64
-    },
-    "\/static\/sass\/_structure.scss" : {
+    "\/static\/sass\/framework\/_mixins.scss" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 1,
       "hidden" : 0,
       "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/static\/sass\/_structure.scss",
+      "inputAbbreviatedPath" : "\/static\/sass\/framework\/_mixins.scss",
       "outputStyle" : 0,
       "shouldRunBless" : 0,
-      "outputAbbreviatedPath" : "\/static\/css\/_structure.css",
+      "outputAbbreviatedPath" : "\/static\/css\/_mixins.css",
+      "fileType" : 4,
+      "debugStyle" : 0
+    },
+    "\/static\/sass\/_config.scss" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 1,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/static\/sass\/_config.scss",
+      "outputStyle" : 0,
+      "shouldRunBless" : 0,
+      "outputAbbreviatedPath" : "\/static\/css\/_config.css",
       "fileType" : 4,
       "debugStyle" : 0
     }
@@ -231,22 +222,22 @@
     {
       "type" : 1,
       "position" : 0,
-      "linkedFileAbbreviatedPath" : "\/static\/js\/src\/polyfills.js",
-      "baseFileAbbreviatedPath" : "\/static\/js\/src\/script.js",
-      "followForSyntaxChecking" : 1
-    },
-    {
-      "type" : 1,
-      "position" : 1,
       "linkedFileAbbreviatedPath" : "\/static\/js\/lib\/breakpoint-3.0.0.js",
       "baseFileAbbreviatedPath" : "\/static\/js\/src\/script.js",
       "followForSyntaxChecking" : 1
     },
     {
       "type" : 1,
-      "position" : 0,
+      "position" : 1,
       "linkedFileAbbreviatedPath" : "\/static\/js\/src\/breakpoint-bindings.js",
-      "baseFileAbbreviatedPath" : "\/static\/js\/lib\/breakpoint-3.0.0.js",
+      "baseFileAbbreviatedPath" : "\/static\/js\/src\/script.js",
+      "followForSyntaxChecking" : 1
+    },
+    {
+      "type" : 1,
+      "position" : 2,
+      "linkedFileAbbreviatedPath" : "\/static\/js\/src\/polyfills.js",
+      "baseFileAbbreviatedPath" : "\/static\/js\/src\/script.js",
       "followForSyntaxChecking" : 1
     }
   ],
@@ -262,7 +253,7 @@
     "hamlOutputFormat" : 2,
     "stylusAutoOutputPathReplace1" : "stylus",
     "lessStrictImports" : 0,
-    "sassAutoOutputPathStyle" : 1,
+    "sassAutoOutputPathStyle" : 2,
     "stylusAutoOutputPathReplace2" : "css",
     "lessAutoOutputPathStyle" : 2,
     "genericWebpageFileExtensionsString" : "html, htm, shtml, shtm, xhtml, php, jsp, asp, aspx, erb, ctp",
@@ -270,7 +261,7 @@
     "javascriptOutputSuffix" : ".min",
     "jadeOutputStyle" : 0,
     "coffeeAutoOutputPathStyle" : 0,
-    "autoSyncProjectSettingsFile" : 1,
+    "autoSyncProjectSettingsFile" : 0,
     "lessAutoOutputPathReplace1" : "less",
     "jadeAutoOutputPathReplace1" : "",
     "lessAutoOutputPathRelativePath" : "..\/css",
@@ -294,7 +285,7 @@
     "javascriptSyntaxCheckerStyle" : 1,
     "sassAutoOutputPathReplace1" : "sass",
     "slimAutoOutputPathReplace1" : "",
-    "sassOutputStyle" : 2,
+    "sassOutputStyle" : 0,
     "coffeeAutoOutputPathRelativePath" : "",
     "slimCompileOnly" : 0,
     "slimLogicless" : 0,
@@ -305,7 +296,7 @@
     "javascriptAutoOutputPathReplace1" : "",
     "stylusOutputStyle" : 0,
     "javascriptAutoOutputPathReplace2" : "",
-    "sassAutoOutputPathRelativePath" : "static\/css\/",
+    "sassAutoOutputPathRelativePath" : "..\/css",
     "coffeeAutoOutputPathReplace1" : "",
     "hamlUseDoubleQuotes" : 0,
     "coffeeAutoOutputPathReplace2" : "",

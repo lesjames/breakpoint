@@ -4,12 +4,11 @@
 http_path = "/"
 css_dir = "static/css"
 sass_dir = "static/sass"
-images_dir = "static/images"
+images_dir = "static/img"
 javascripts_dir = "static/js"
 fonts_dir = "static/fonts"
 
-output_style = :nested
-environment = :development
+output_style = :expanded
 
 # To enable relative paths to assets via compass helper functions. Uncomment:
 # relative_assets = true
