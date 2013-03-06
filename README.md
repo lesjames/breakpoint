@@ -1,4 +1,4 @@
-# Breakpoint
+# Breakpoint - 3.0.0
 
 Breakpoint is a grid system and responsive image solution. It's based on the concept that columns shouldn't
 stretch but get added or taken away as the screen changes size. This concept
