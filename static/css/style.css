@@ -151,6 +151,25 @@ textarea {
     display: none;
   }
 }
+.grid-overlay {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  pointer-events: none;
+  z-index: 10000;
+  background: -webkit-gradient(linear, 0% 50%, 80 50%, color-stop(25%, transparent), color-stop(25%, rgba(255, 0, 0, 0.1)), color-stop(100%, rgba(255, 0, 0, 0.1)));
+  background: -webkit-linear-gradient(left, transparent 20px, rgba(255, 0, 0, 0.1) 20px, rgba(255, 0, 0, 0.1) 80px);
+  background: -moz-linear-gradient(left, transparent 20px, rgba(255, 0, 0, 0.1) 20px, rgba(255, 0, 0, 0.1) 80px);
+  background: -o-linear-gradient(left, transparent 20px, rgba(255, 0, 0, 0.1) 20px, rgba(255, 0, 0, 0.1) 80px);
+  background: linear-gradient(left, transparent 20px, rgba(255, 0, 0, 0.1) 20px, rgba(255, 0, 0, 0.1) 80px);
+  left: 0;
+  right: 20px;
+  -webkit-background-size: 25%;
+  -moz-background-size: 25%;
+  -o-background-size: 25%;
+  background-size: 25%;
+}
+
 /* Grid based on https://github.com/necolas/griddle by Nicolas Gallagher (@necolas) */
 body {
   font-size: 1em;
@@ -180,20 +199,9 @@ img {
   text-rendering: optimizespeed;
 }
 
-.flexbox .grid {
-  display: -webkit-flex;
-  display: flex;
-}
-
-.flexbox .grid__cell {
-  -webkit-flex: 1;
-  -ms-flex: 1;
-  flex: 1;
-}
-
-.flexbox .grid img :-o-prefocus,
-.flexbox .grid img {
-  width: 100%;
+.grid :-o-prefocus,
+.grid {
+  word-spacing: -0.43em;
 }
 
 .grid > .grid {
@@ -232,4 +240,9 @@ img {
 .grid__cell--center {
   display: block;
   margin: 0 auto;
+}
+
+body::after {
+  content: "small";
+  display: none;
 }
