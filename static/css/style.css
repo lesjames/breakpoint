@@ -141,9 +141,19 @@ img {
   text-rendering: optimizespeed;
 }
 
-.grid :-o-prefocus,
-.grid {
-  word-spacing: -0.43em;
+.flexbox .grid {
+  display: -webkit-flex;
+  /* NEW - Chrome */
+  display: flex;
+}
+
+.flexbox .grid__cell {
+  flex: 1;
+}
+
+.flexbox .grid img :-o-prefocus,
+.flexbox .grid img {
+  width: 100%;
 }
 
 .grid > .grid {
@@ -154,7 +164,12 @@ img {
 
 .grid__cell {
   width: 100%;
+  display: -moz-inline-stack;
   display: inline-block;
+  vertical-align: middle;
+  *vertical-align: auto;
+  zoom: 1;
+  *display: inline;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;

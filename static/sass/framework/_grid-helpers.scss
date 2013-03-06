@@ -136,8 +136,8 @@ $current-bp: 0; // init breakpoint variable
 // =============================================================================
 
 @mixin grid-overlay($col: false) {
-	html::after {
-		content: ''; position: fixed; top: 0; bottom: 0; pointer-events: none; z-index: 10000;
+	.grid-overlay {
+		position: fixed; top: 0; bottom: 0; pointer-events: none; z-index: 10000;
 		@include background(linear-gradient(left, transparent $grid-gutter, transparentize(red, .9) $grid-gutter, transparentize(red, .9) $grid-gutter + $grid-column));
 		@if ($col) {
 			left: 50%;

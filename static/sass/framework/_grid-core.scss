@@ -37,10 +37,19 @@ img { max-width: 100%; }
     text-rendering: optimizespeed;
 }
 
-// opera needs negative word spacing
-.grid :-o-prefocus,
-.grid {
-    word-spacing: -0.43em;
+.flexbox .grid {
+    display: -webkit-flex;  /* NEW - Chrome */
+    display: flex;
+}
+
+.flexbox .grid__cell {
+    flex: 1;
+}
+
+// opera has issues with image max-width
+.flexbox .grid img :-o-prefocus,
+.flexbox .grid img {
+    width: 100%;
 }
 
 // Child `grid` object adjustments
@@ -58,7 +67,7 @@ img { max-width: 100%; }
 
 .grid__cell {
     width: 100%;
-    display: inline-block;
+    @include inline-block;
     @include box-sizing('border-box');
     margin: 0;
     padding: 0 0.5 * em($grid-gutter);

@@ -86,6 +86,7 @@
             } else if (breakpoint !== currentBreakpoint) {
 
                 $('body').trigger($.Event('breakpoint', { breakpoint: breakpoint }));
+
             }
         };
 
