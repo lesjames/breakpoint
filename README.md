@@ -71,20 +71,20 @@ auto generated for each break point.
 ```sass
 // 8 column breakpoint
 @include breakpoint(8) {
-    .main {  width: fluid(5); }
+    .main { width: fluid(5); }
 	.sidebar { width: fluid(3); }
 }
 
 // 12 column breakpoint
 @include breakpoint(12) {
-	.main {  width: fluid(8); }
+	.main { width: fluid(8); }
 	.sidebar { width: fluid(4); }
 }
 ```
 
 The code above generates the following markup (formatted for readability)
 
-```sass
+```css
 @media (min-width: 41.25em) {
     .wrapper { width: 38.75em; margin-left: auto; margin-right: auto; }
     .main { width: 62.5%; }
@@ -122,7 +122,7 @@ a `<noscript>` fallback.
 
 When you create a breakpoint, pass it a argument called `$label` with a string as the name you want. 
 
-```
+```sass
 @include breakpoint(6, $label: 'medium');
 @include breakpoint(9, $label: 'large');
 ```
