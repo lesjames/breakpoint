@@ -10,22 +10,35 @@ $breakpoint-list: 'small' !default; // default the breakpoint label set to 'smal
 $breakpoint-list: unquote($breakpoint-list);
 $current-bp: 0; // init breakpoint variable
 
-// Functions
+
+// Functions and Mixins
 // =============================================================================
 
-// column widths for elements with .grid__cell class
+// clearfix mixin
+@mixin clearfix { *zoom: 1; &:before, &:after { display: table; content: ""; } &:after { clear: both; } }
+.clearfix { @include clearfix; }
+
+// converting px to em
+@function em($px, $base: $base-font-size) { @return ($px / $base) * 1em; }
+
+// creates percentage width
+@function fluid($col, $avail: $current-bp) { @return (100% / $avail) * $col }
+
+// creates em width
 // pass false as a second argument to remove the built in gutter (for creating height measurements)
 @function fixed($col, $gutter: true) {
     @if ($gutter) { @return $col * ( em($grid-column + $grid-gutter) ) }
     @else { @return $col * ( em($grid-column + $grid-gutter) ) - em($grid-gutter) }
 }
-@function fluid($col, $avail: $current-bp) { @return (100% / $avail) * $col }
 
-// Javascript hook
+
+// Javascript hook for current breakpoint label
 // =============================================================================
+
 @media (min-width: 0px) {
     body::before { content: "#{nth($breakpoint-list, 1)}"; display: none; }
 }
+
 
 // Breakpoint mixin
 // =============================================================================
@@ -49,7 +62,7 @@ $current-bp: 0; // init breakpoint variable
     		// create min width mq
     		// can we remove duplication of code here?
     		@if ($orientation) {
-        		@media ( min-width: fixed($min) + em($grid-gutter) * ($base-font-size / 16px) ) and ( orientation: $orientation ) {
+        		@media ( min-width: (fixed($min) + em($grid-gutter)) * ($base-font-size / 16px) ) and ( orientation: $orientation ) {
             		@include breakpoint-extras($min, $wrapper, $label, $grid-overlay) { @content };
         		}
     		} @else {

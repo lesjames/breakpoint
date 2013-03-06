@@ -4,7 +4,7 @@
 // =============================================================================
 
 // establish base font size in config so that media queries can be resized if the base context chagnes
-body { font-size: $base-font-size; }
+body { font-size: em($base-font-size, 16px); }
 
 // wrapper defaults to 100% fluid with side gutters
 // when triggering a breakpoint wrapper becomes fixed width and centered
@@ -21,7 +21,6 @@ img { max-width: 100%; }
 
 // Grid container
 // Must only contain `.grid` or `.grid-cell` components as children.
-
 .grid {
     display: block;
     padding: 0;
@@ -37,24 +36,27 @@ img { max-width: 100%; }
     text-rendering: optimizespeed;
 }
 
-.flexbox .grid {
-    display: -webkit-flex;  /* NEW - Chrome */
-    display: flex;
-}
-
-.flexbox .grid__cell {
-    flex: 1;
-}
-
-// opera has issues with image max-width
-.flexbox .grid img :-o-prefocus,
-.flexbox .grid img {
-    width: 100%;
+@if ($flexbox-support) {
+    .flexbox .grid {
+        display: -webkit-flex;
+        display: flex;
+    }
+    
+    .flexbox .grid__cell {
+        -webkit-flex: 1;
+        -ms-flex: 1;
+        flex: 1;
+    }
+    
+    // opera has issues with image max-width
+    .flexbox .grid img :-o-prefocus,
+    .flexbox .grid img {
+        width: 100%;
+    }
 }
 
 // Child `grid` object adjustments
 // Used for more complex fixed-fluid hybrid grids
-
 .grid > .grid {
     overflow: hidden;
     margin-right: 0;
@@ -64,7 +66,6 @@ img { max-width: 100%; }
 
 // Grid units
 // No explicit width by default
-
 .grid__cell {
     width: 100%;
     @include inline-block;
@@ -84,7 +85,6 @@ img { max-width: 100%; }
 // Modifier: horizontally center all grid units
 // Allows for automatic unit centering irrespective of the number of
 // units in the grid.
-
 .grid--center {
     text-align: center;
 }
@@ -92,7 +92,6 @@ img { max-width: 100%; }
 // Modifier: horizontally center one unit
 // Set a specific unit to be horizontally centered. Doesn't affect
 // any other units. Can still contain a child `grid` object.
-
 .grid__cell--center {
     display: block;
     margin: 0 auto;

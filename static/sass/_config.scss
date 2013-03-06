@@ -7,30 +7,43 @@ $normalize-base: true;
 
 // $normalize-links: true;
 // $normalize-typography: true;
-// $normalize-lists: true;
 // $normalize-embedded: true;
 // $normalize-forms: true;
 // $normalize-tables: true;
 
+
 // other resets
 // ==========================================================================
 
+// H5BP default styles
+$opinionated-defaults: true;
+
 // $print-styles: true;
+
 
 // Grid Variables
 // =============================================================================
 
 $grid-column: 60px;
 $grid-gutter: 20px;
-$grid-overlay: false; // generate visual grid overlay
-$ie-support: false; // fallback breakpoint
 $base-font-size: 16px;
-$breakpoint-list: 'small'; // label for your mobile first breakpoint
+
+// generate visual grid overlay on class .grid-overlay
+$grid-overlay: false;
+
+// fallback breakpoint (column count for < IE9)
+$ie-support: false;
+
+// label for your mobile first breakpoint
+$breakpoint-list: 'small'; 
+
+// makes .grid use flexbox (requires Modernizr .flexbox class)
+$flexbox-support: true;
 
 // Path to server's static files directory
 // Do not use a trailing slash
-// ==========================================================================
 $static-path: '/static';
+
 
 // ==========================================================================
 // project specific variables and mixins
