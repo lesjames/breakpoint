@@ -8,7 +8,6 @@
 * Reorganized JS files into src and lib folders
 * Added Codekit configuation file
 * Moved grid overlay to a class [#40](https://github.com/lesjames/Breakpoint/issues/40)
-* added optional flexbox support to grid class (defaults to true in config)
 * Updated to normalize.css v2.1.0
 * Removed cross browser mixins
 * Added H5BP opinionated styles

@@ -29,16 +29,13 @@ $grid-gutter: 20px;
 $base-font-size: 16px;
 
 // generate visual grid overlay on class .grid-overlay
-$grid-overlay: false;
+$grid-overlay: true;
 
 // fallback breakpoint (column count for < IE9)
 $ie-support: false;
 
 // label for your mobile first breakpoint
 $breakpoint-list: 'small'; 
-
-// makes .grid use flexbox (requires Modernizr .flexbox class)
-$flexbox-support: true;
 
 // Path to server's static files directory
 // Do not use a trailing slash

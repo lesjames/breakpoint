@@ -36,23 +36,9 @@ img { max-width: 100%; }
     text-rendering: optimizespeed;
 }
 
-@if ($flexbox-support) {
-    .flexbox .grid {
-        display: -webkit-flex;
-        display: flex;
-    }
-    
-    .flexbox .grid__cell {
-        -webkit-flex: 1;
-        -ms-flex: 1;
-        flex: 1;
-    }
-    
-    // opera has issues with image max-width
-    .flexbox .grid img :-o-prefocus,
-    .flexbox .grid img {
-        width: 100%;
-    }
+.grid :-o-prefocus,
+.grid {
+    word-spacing: -0.43em;
 }
 
 // Child `grid` object adjustments
