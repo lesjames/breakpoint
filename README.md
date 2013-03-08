@@ -34,7 +34,7 @@ The Breakpoint grid starts as a fluid grid for mobile. It gets transformed into 
 fixed width layout at your first breakpoint. When the grid is fixed width, grid column and gutter widths
 become constant and are set by the following variables in the `static/sass/_config.scss` file.
 
-```sass
+```scss
 $grid-column: 60px;
 $grid-gutter: 20px;
 ```
@@ -68,7 +68,7 @@ the number of columns you want on screen as an argument and breakpoint creates t
 to trigger this layout when the screen becomes wide enough. Note that a matching centering `.wrapper` class is
 auto generated for each break point.
 
-```sass
+```scss
 // 8 column breakpoint
 @include breakpoint(8) {
     .main { width: fluid(5); }
@@ -122,7 +122,7 @@ a `<noscript>` fallback.
 
 When you create a breakpoint, pass it a argument called `$label` with a string as the name you want. 
 
-```sass
+```scss
 @include breakpoint(6, $label: 'medium');
 @include breakpoint(9, $label: 'large');
 ```
