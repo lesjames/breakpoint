@@ -1,4 +1,4 @@
-# Breakpoint - 3.0.0
+# Breakpoint - v3.0.0
 
 Breakpoint is a grid system and responsive image solution. It's based on the concept that columns shouldn't
 stretch but get added or taken away as the screen changes size. This concept
@@ -43,15 +43,15 @@ $grid-gutter: 20px;
 
 Breakpoint uses three classes to establish a grid. First `.wrapper` is used as
 a fixed width centering div. `.grid` is the parent container for your cells and is always
-100% fluid in width. `.grid-cell` is the child unit and can be set to either fixed or
+100% fluid in width. `.grid__cell` is the child unit and can be set to either fixed or
 fluid widths. You should avoid applying styles to these classes because it can misalign
 the grid or create unexpected results.
 
 ### Helper Functions
 
-Sizing `.grid-cell` elements in your layout requires a class name to hook on to.
+Sizing `.grid__cell` elements in your layout requires a class name to hook on to.
 There are a couple functions for sizing elements but by default you should use the fluid() 
-function for sizing `.grid-cell` elements.
+function for sizing `.grid__cell` elements.
 
 `fluid($col, [$available-columns])` calculates a percentage based on how many columns you want. Has an optional
 second argument that can override the number of availiable columns when calulating the
@@ -59,7 +59,7 @@ percentage.
 
 `fixed($col, [false])` calculates a fixed width for grid cells. Passing false as a second argument
 calculates a fixed width for items outside of the grid system. It overrides the built in gutter and should
-be applied to elements other than `.grid-cell` units or when calculating measurements like heights. 
+be applied to elements other than `.grid__cell` units or when calculating measurements like heights. 
 
 ### The Breakpoint Mixin
 
