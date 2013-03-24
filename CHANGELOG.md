@@ -1,3 +1,7 @@
+# v3.0.1 - 3/24/2013
+
+* Merged @darrenscerri box sizing test [#45](https://github.com/lesjames/Breakpoint/pull/45)
+
 # v3.0.0 - 3/6/2013
 
 * Merged @skibblenybbles refactor of JS [#29](https://github.com/lesjames/Breakpoint/pull/29)
