@@ -1,4 +1,8 @@
-# Breakpoint - v3.0.0
+# Breakpoint
+
+***
+
+Verson: 3.0.1
 
 Breakpoint is a grid system and responsive image solution. It's based on the concept that columns shouldn't
 stretch but get added or taken away as the screen changes size. This concept
@@ -8,6 +12,8 @@ layout technique is taken from [Griddle](https://github.com/necolas/griddle) by 
 Breakpoint generates media queries at column break points so that your layout always has enough
 room to fit on the screen. Your media queries can be labeled which allows JavaScript to pair them
 with responsive image sources.
+
+***
 
 ## Installation
 
