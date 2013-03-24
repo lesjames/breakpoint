@@ -2,14 +2,16 @@
 
 // Box sizing
 // =============================================================================
+Modernizr.addTest("boxsizing", function() {
+    return Modernizr.testAllProps("boxSizing") && (document.documentMode === undefined || document.documentMode > 7);
+});
 
-if (Modernizr.boxsizing !== null && Modernizr.boxsizing === false) {
+if (!Modernizr.boxsizing) {
 
     $.fn.boxSizeIE7 = function() {
         this.each(function() {
-            var $this = $(this),
-                elem_width = $this.width();
-            $this.width(elem_width - ($this.outerWidth() - elem_width));
+            var $this = $(this);
+            $this.width($this.width()*2 - $this.outerWidth());
         });
     };
 
