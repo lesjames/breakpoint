@@ -106,13 +106,13 @@ $current-bp: 0; // init breakpoint variable
 	}
 
 	// pixel ratio mq
-	@if ($resolution) {    	
+	@if ($resolution) {
     	// warn if invalid value
     	@if ($resolution != 'high' and $resolution != 'low') {
         	@warn "$resolution only supports values of 'high' or 'low'";
     	}
     	@if ($resolution == 'high') {
-            @media (-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi) { @content }	
+            @media (-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi) { @content }
     	}
     	@if ($resolution == 'low') {
         	@media (-webkit-max-device-pixel-ratio: 1.5), (max-resolution: 144dpi) { @content }
@@ -127,21 +127,21 @@ $current-bp: 0; // init breakpoint variable
 // private mixin for generating extras in a min width mq
 @mixin breakpoint-extras($min, $wrapper, $label, $grid-overlay) {
 	@if($grid-overlay) { @include grid-overlay($min); }
-	
+
 	// create hook for js
 	@if($label) {
-	   
+
 	   // label current breakpoint
 	   body::before { content: $label; }
-	
+
 	   // push label to label list names = push(names, myname)
 	   $breakpoint-list: append($breakpoint-list, unquote($label), comma);
-	   
+
     }
 	// proper sizing of wrapper
-    
+
     @if($wrapper) { .wrapper { width: fixed($min) - em($grid-gutter); } }
-	
+
 	@content
 }
 
@@ -151,14 +151,28 @@ $current-bp: 0; // init breakpoint variable
 @mixin grid-overlay($col: false) {
 	.grid-overlay {
 		position: fixed; top: 0; bottom: 0; pointer-events: none; z-index: 10000;
-		@include background(linear-gradient(left, transparent $grid-gutter, transparentize(red, .9) $grid-gutter, transparentize(red, .9) $grid-gutter + $grid-column));
+
+		$overlay-color: transparentize(red, .9);
+        background: -webkit-linear-gradient(left, transparent $grid-gutter, $overlay-color $grid-gutter, $overlay-color $grid-gutter + $grid-column);
+        background: -moz-linear-gradient(left, transparent $grid-gutter, $overlay-color $grid-gutter, $overlay-color $grid-gutter + $grid-column);
+        background: -o-linear-gradient(left, transparent $grid-gutter, $overlay-color $grid-gutter, $overlay-color $grid-gutter + $grid-column);
+        background: linear-gradient(left, transparent $grid-gutter, $overlay-color $grid-gutter, $overlay-color $grid-gutter + $grid-column);
+
 		@if ($col) {
 			left: 50%;
-			width: fixed($col) + em($grid-gutter); margin-left: fixed($col) / -2 - (em($grid-gutter)/2);
-			@include background-size($grid-gutter + $grid-column);
+			width: fixed($col) + em($grid-gutter);
+			margin-left: fixed($col) / -2 - (em($grid-gutter)/2);
+            -webkit-background-size: $grid-gutter + $grid-column;
+            -moz-background-size: $grid-gutter + $grid-column;
+            -o-background-size: $grid-gutter + $grid-column;
+            background-size: $grid-gutter + $grid-column;
 		} @else {
-			left: 0; right: $grid-gutter;
-			@include background-size(25%);
+			left: 0;
+			right: $grid-gutter;
+            -webkit-background-size: 25%;
+            -moz-background-size: 25%;
+            -o-background-size: 25%;
+            background-size: 25%;
 		}
 	}
 }

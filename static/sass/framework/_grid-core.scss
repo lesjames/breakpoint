@@ -54,14 +54,26 @@ img { max-width: 100%; }
 // No explicit width by default
 .grid__cell {
     width: 100%;
-    @include inline-block;
-    @include box-sizing('border-box');
+
+    display: -moz-inline-stack;
+    display: inline-block;
+    *vertical-align: auto;
+    zoom: 1;
+    *display: inline;
+
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+
     margin: 0;
     padding: 0 0.5 * em($grid-gutter);
+
     /* controls vertical positioning of units */
     vertical-align: top;
+
     /* keeps unit content correctly aligned */
     text-align: $grid-direction;
+
     /* reset text defaults */
     letter-spacing: normal;
     word-spacing: normal;

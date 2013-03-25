@@ -157,7 +157,6 @@ textarea {
   bottom: 0;
   pointer-events: none;
   z-index: 10000;
-  background: -webkit-gradient(linear, 0% 50%, 80 50%, color-stop(25%, transparent), color-stop(25%, rgba(255, 0, 0, 0.1)), color-stop(100%, rgba(255, 0, 0, 0.1)));
   background: -webkit-linear-gradient(left, transparent 20px, rgba(255, 0, 0, 0.1) 20px, rgba(255, 0, 0, 0.1) 80px);
   background: -moz-linear-gradient(left, transparent 20px, rgba(255, 0, 0, 0.1) 20px, rgba(255, 0, 0, 0.1) 80px);
   background: -o-linear-gradient(left, transparent 20px, rgba(255, 0, 0, 0.1) 20px, rgba(255, 0, 0, 0.1) 80px);
@@ -214,7 +213,6 @@ img {
   width: 100%;
   display: -moz-inline-stack;
   display: inline-block;
-  vertical-align: middle;
   *vertical-align: auto;
   zoom: 1;
   *display: inline;
