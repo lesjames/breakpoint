@@ -1,3 +1,7 @@
+# v3.1.0
+
+* Removed Compass as dependency [#46](https://github.com/lesjames/Breakpoint/issues/46)
+
 # v3.0.1 - 3/24/2013
 
 * Merged @darrenscerri box sizing test [#45](https://github.com/lesjames/Breakpoint/pull/45)
