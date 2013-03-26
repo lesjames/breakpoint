@@ -51,7 +51,15 @@ Breakpoint uses three classes to establish a grid. First `.wrapper` is used as
 a fixed width centering div. `.grid` is the parent container for your cells and is always
 100% fluid in width. `.grid__cell` is the child unit and can be set to either fixed or
 fluid widths. You should avoid applying styles to these classes because it can misalign
-the grid or create unexpected results.
+the grid or create unexpected results. When creating a named hook for a grid cell it's recommended
+to use the [BEM syntax](http://csswizardry.com/2013/01/mindbemding-getting-your-head-round-bem-syntax/).
+
+```html
+<div class="grid__cell grid__cell--sidebar"></div>
+```
+
+The BEM syntax will help you remember that this is a structure element and that you shouldn't apply
+padding to it.
 
 ### Helper Functions
 
@@ -59,11 +67,13 @@ Sizing `.grid__cell` elements in your layout requires a class name to hook on to
 There are a couple functions for sizing elements but by default you should use the fluid() 
 function for sizing `.grid__cell` elements.
 
-`fluid($col, [$available-columns])` calculates a percentage based on how many columns you want. Has an optional
+**fluid($col, [$available-columns])**  
+Calculates a percentage based on how many columns you want. Has an optional
 second argument that can override the number of availiable columns when calulating the
 percentage.
 
-`fixed($col, [false])` calculates a fixed width for grid cells. Passing false as a second argument
+**fixed($col, [false])**  
+Calculates a fixed width for grid cells. Passing false as a second argument
 calculates a fixed width for items outside of the grid system. It overrides the built in gutter and should
 be applied to elements other than `.grid__cell` units or when calculating measurements like heights. 
 
@@ -77,14 +87,14 @@ auto generated for each break point.
 ```scss
 // 8 column breakpoint
 @include breakpoint(8) {
-    .main { width: fluid(5); }
-	.sidebar { width: fluid(3); }
+    .grid__cell--main { width: fluid(5); }
+    .grid__cell--sidebar { width: fluid(3); }
 }
 
 // 12 column breakpoint
 @include breakpoint(12) {
-	.main { width: fluid(8); }
-	.sidebar { width: fluid(4); }
+    .grid__cell--main { width: fluid(8); }
+    .grid__cell--sidebar { width: fluid(4); }
 }
 ```
 
@@ -93,13 +103,13 @@ The code above generates the following markup (formatted for readability)
 ```css
 @media (min-width: 41.25em) {
     .wrapper { width: 38.75em; margin-left: auto; margin-right: auto; }
-    .main { width: 62.5%; }
-    .sidebar { width: 37.5%; }
+    .grid__cell--main { width: 62.5%; }
+    .grid__cell--sidebar { width: 37.5%; }
 }
 @media (min-width: 61.25em) {
     .wrapper { width: 58.75em; margin-left: auto; margin-right: auto; }
-    .main { width: 66.66667%; }
-    .sidebar { width: 33.33333%; }
+    .grid__cell--main { width: 66.66667%; }
+    .grid__cell--sidebar { width: 33.33333%; }
 }
 ```
 
@@ -140,7 +150,9 @@ fluid layout to 'small'. You can change this to 'mobile' or any name that makes 
 
 Apply the Breakpoint plugin on any image you want to make responsive.
 
-`$('.responsive-image').breakpoint();`
+```javascript
+$('.responsive-image').breakpoint();
+```
 
 There are some options you can pass as an object to the breakpoint plugin.
 
@@ -154,6 +166,9 @@ $('.responsive-image').breakpoint({
         console.log(this, breakpoint, src);
     }
 });
+
+// will log...
+// $(this), 'active-breakpoint', 'image.jpg'
 ```
 
 **delay** - This is the time it takes to reevaluate responsive images when resizing the screen. It
