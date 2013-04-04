@@ -1,5 +1,6 @@
 # v3.1.0
 
+* Using Grunt and NPM, ditched Codekit
 * Removed Compass as dependency [#46](https://github.com/lesjames/Breakpoint/issues/46)
 
 # v3.0.1 - 3/24/2013

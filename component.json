@@ -1,0 +1,6 @@
+{
+    "dependencies": {
+        "jquery": "latest",
+        "modernizr": "latest"
+    }
+}
