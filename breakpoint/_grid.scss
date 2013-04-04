@@ -1,7 +1,4 @@
-/* Grid based on https://github.com/necolas/griddle by Nicolas Gallagher (@necolas) */
-
-// Grid Core
-// =============================================================================
+/*! Grid based on https://github.com/necolas/griddle by Nicolas Gallagher (@necolas) */
 
 // establish base font size in config so that media queries can be resized if the base context chagnes
 body { font-size: em($base-font-size, 16px); }
@@ -54,14 +51,26 @@ img { max-width: 100%; }
 // No explicit width by default
 .grid__cell {
     width: 100%;
-    @include inline-block;
-    @include box-sizing('border-box');
+
+    display: -moz-inline-stack;
+    display: inline-block;
+    *vertical-align: auto;
+    zoom: 1;
+    *display: inline;
+
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+
     margin: 0;
     padding: 0 0.5 * em($grid-gutter);
+
     /* controls vertical positioning of units */
     vertical-align: top;
+
     /* keeps unit content correctly aligned */
     text-align: $grid-direction;
+
     /* reset text defaults */
     letter-spacing: normal;
     word-spacing: normal;
@@ -69,15 +78,11 @@ img { max-width: 100%; }
 }
 
 // Modifier: horizontally center all grid units
-// Allows for automatic unit centering irrespective of the number of
-// units in the grid.
 .grid--center {
     text-align: center;
 }
 
 // Modifier: horizontally center one unit
-// Set a specific unit to be horizontally centered. Doesn't affect
-// any other units. Can still contain a child `grid` object.
 .grid__cell--center {
     display: block;
     margin: 0 auto;

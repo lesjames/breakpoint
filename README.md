@@ -2,7 +2,13 @@
 
 ***
 
-Verson: 3.0.1
+NOTICE
+
+Breakpoint has been split into two projects. This is the core project and contains only the Sass needed for the grid system
+and the jquery plugin for responsive images. The boilerplate framework has been moved to a seperate repo called
+[Breakpoint Scaffold](https://github.com/lesjames/breakpoint-scaffold) and includes this core as a Bower package.
+
+***
 
 Breakpoint is a grid system and responsive image solution. It's based on the concept that columns shouldn't
 stretch but get added or taken away as the screen changes size. This concept
@@ -15,23 +21,22 @@ with responsive image sources.
 
 ***
 
-## Installation
+## Installation and Use
 
-Breakpoint requires a minimum of Sass 3.2 and Compass
+Breakpoint requires Sass 3.2 or later
 
 `$ gem install sass`
 
-`$ gem install compass`
+If you don't use [Breakpoint Scaffold](https://github.com/lesjames/breakpoint-scaffold) you can drop the
+breakpoint folder into your Sass folder and include Breakpoint with an import.
 
-You can then start a new Breakpoint project by cloning the repo
-
-`$ git clone https://github.com/lesjames/Breakpoint.git MYPROJECTNAME`
+`@import 'breakpoint/breakpoint'`
 
 ### Resources
 
-Here is a writeup about [Breakpoint on 24 Ways](http://24ways.org/2012/redesigning-the-media-query/).  
-You can [view a presentation about Breakpoint](http://wordpress.tv/2012/12/18/les-james-responsive-design-with-the-breakpoint-framework/) on wordpress.tv.  
-Here is a [Codepen demo](http://codepen.io/lesjames/pen/ixjsc) that you can play with.  
+Here is a writeup about [Breakpoint on 24 Ways](http://24ways.org/2012/redesigning-the-media-query/).
+You can [view a presentation about Breakpoint](http://wordpress.tv/2012/12/18/les-james-responsive-design-with-the-breakpoint-framework/) on wordpress.tv.
+Here is a [Codepen demo](http://codepen.io/lesjames/pen/ixjsc) that you can play with.
 You can hit up [Les James on Twitter](https://twitter.com/lesjames) with any questions.
 
 ## Grid
@@ -64,7 +69,7 @@ padding to it.
 ### Helper Functions
 
 Sizing `.grid__cell` elements in your layout requires a class name to hook on to.
-There are a couple functions for sizing elements but by default you should use the fluid() 
+There are a couple functions for sizing elements but by default you should use the fluid()
 function for sizing `.grid__cell` elements.
 
 **fluid($col, [$available-columns])**  
@@ -75,7 +80,7 @@ percentage.
 **fixed($col, [false])**  
 Calculates a fixed width for grid cells. Passing false as a second argument
 calculates a fixed width for items outside of the grid system. It overrides the built in gutter and should
-be applied to elements other than `.grid__cell` units or when calculating measurements like heights. 
+be applied to elements other than `.grid__cell` units or when calculating measurements like heights.
 
 ### The Breakpoint Mixin
 
@@ -136,7 +141,7 @@ a `<noscript>` fallback.
 
 ### Sass
 
-When you create a breakpoint, pass it a argument called `$label` with a string as the name you want. 
+When you create a breakpoint, pass it a argument called `$label` with a string as the name you want.
 
 ```scss
 @include breakpoint(6, $label: 'medium');
@@ -176,7 +181,7 @@ defaults to 200 milliseconds.
 
 **prefix** - Breakpoint assumes that the data attribute is simply the label. So if the label is 'small' then
 breakpoint looks for `data-small` on the image tag. If you want to prefix the label with something
-then use this option.  
+then use this option.
 So `prefix : 'foo'` will look for an attribute called `data-foo-small`.
 
 **fallback** - This is a label that you can use for browsers that don't support `getComputedStyle`.
@@ -200,13 +205,10 @@ You just need to create an element in your HTML to see it. `<div class="grid-ove
 
 Breakpoint uses the following frameworks, technologies and inspirations:
 
-[H5BP](http://html5boilerplate.com/), 
-[normalize.css](http://necolas.github.com/normalize.css/), 
-[Griddle](https://github.com/necolas/griddle), 
-[Frameless Grid](http://framelessgrid.com/), 
-[Sass](http://sass-lang.com/), 
-[Compass](http://compass-style.org/), 
+[normalize.css](http://necolas.github.com/normalize.css/),
+[Griddle](https://github.com/necolas/griddle),
+[Frameless Grid](http://framelessgrid.com/),
+[Sass](http://sass-lang.com/),
 [Conditional CSS](http://adactio.com/journal/5429/),
 [DetectMQ.js](https://github.com/viljamis/detectMQ.js),
-[jQuery](http://jquery.com/), 
-[Modernizr](http://modernizr.com/)
+[jQuery](http://jquery.com/)
