@@ -2,12 +2,5 @@
     "name": "breakpoint",
     "version": "4.0.0",
     "author": "Les James",
-    "homepage": "https://github.com/lesjames/breakpoint",
-    "main": [
-        "breakpoint/_breakpoint.scss",
-        "breakpoint/_core.scss",
-        "breakpoint/_grid.scss",
-        "jquery.breakpoint.js"
-    ],
-    "ignore": "**/*.md"
+    "homepage": "https://github.com/lesjames/breakpoint"
 }
