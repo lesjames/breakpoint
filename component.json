@@ -3,7 +3,7 @@
     "version": "4.0.0",
     "author": "Les James",
     "homepage": "https://github.com/lesjames/breakpoint",
-    "ignore": "**/*.md",
+    "ignore": ["**/*.md"],
     "main": [
         "./breakpoint/_breakpoint.scss",
         "./breakpoint/_core.scss",
