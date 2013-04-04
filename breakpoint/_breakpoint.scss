@@ -1,0 +1,19 @@
+// Grid Variables
+// ==========================================================================
+
+$grid-column: 60px !default;
+$grid-gutter: 20px !default;
+$base-font-size: 16px !default;
+$grid-direction: left !default;
+
+// generate visual grid overlay on class .grid-overlay
+$grid-overlay: false !default;
+
+// fallback breakpoint (column count for < IE9)
+$ie-support: false !default;
+
+// label for your mobile first breakpoint
+$breakpoint-list: 'small' !default;
+
+@import 'core';
+@import 'grid'

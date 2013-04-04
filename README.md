@@ -2,7 +2,13 @@
 
 ***
 
-Verson: 3.0.1
+NOTICE
+
+Breakpoint has been split into two projects. This is the core project and contains only the Sass needed for the grid system
+and the jquery plugin for responsive images. The boilerplate framework has been moved to a seperate repo called
+[Breakpoint Scaffold](https://github.com/lesjames/breakpoint-scaffold) and includes this core as a Bower package.
+
+***
 
 Breakpoint is a grid system and responsive image solution. It's based on the concept that columns shouldn't
 stretch but get added or taken away as the screen changes size. This concept
@@ -21,25 +27,10 @@ Breakpoint requires Sass 3.2 or later
 
 `$ gem install sass`
 
-You can then start a new Breakpoint project by cloning the repo
+If you don't use [Breakpoint Scaffold](https://github.com/lesjames/breakpoint-scaffold) you can drop the
+breakpoint folder into your Sass folder and include Breakpoint with an import.
 
-`$ git clone https://github.com/lesjames/Breakpoint.git MYPROJECTNAME`
-
-Breakpoint uses NPM, Bower and Grunt.js to manage CSS and JavaScript. Install Node and NPM. Inside of your project directory set up Node dependencies...
-
-`$ npm install`
-
-Download dependencies via Bower...
-
-`$ grunt install`
-
-During development Grunt can watch your JS and Sass files...
-
-`$ grunt watch`
-
-Ready your project for production (minifies your JS and CSS)...
-
-`$ grunt release`
+`@import 'breakpoint/breakpoint'`
 
 ### Resources
 
@@ -199,13 +190,10 @@ You just need to create an element in your HTML to see it. `<div class="grid-ove
 
 Breakpoint uses the following frameworks, technologies and inspirations:
 
-[H5BP](http://html5boilerplate.com/),
 [normalize.css](http://necolas.github.com/normalize.css/),
 [Griddle](https://github.com/necolas/griddle),
 [Frameless Grid](http://framelessgrid.com/),
 [Sass](http://sass-lang.com/),
-[Compass](http://compass-style.org/),
 [Conditional CSS](http://adactio.com/journal/5429/),
 [DetectMQ.js](https://github.com/viljamis/detectMQ.js),
-[jQuery](http://jquery.com/),
-[Modernizr](http://modernizr.com/)
+[jQuery](http://jquery.com/)
