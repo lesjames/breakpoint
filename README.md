@@ -2,14 +2,6 @@
 
 ***
 
-NOTICE
-
-Breakpoint has been split into two projects. This is the core project and contains only the Sass needed for the grid system
-and the jquery plugin for responsive images. The boilerplate framework has been moved to a seperate repo called
-[Breakpoint Scaffold](https://github.com/lesjames/breakpoint-scaffold) and includes this core as a Bower package.
-
-***
-
 Breakpoint is a grid system and responsive image solution. It's based on the concept that columns shouldn't
 stretch but get added or taken away as the screen changes size. This concept
 was taken from the [Frameless Grid](http://framelessgrid.com/) system developed by Joni Korpi.
@@ -18,6 +10,10 @@ layout technique is taken from [Griddle](https://github.com/necolas/griddle) by 
 Breakpoint generates media queries at column break points so that your layout always has enough
 room to fit on the screen. Your media queries can be labeled which allows JavaScript to pair them
 with responsive image sources.
+
+**Breakpoint has been split into two projects**. This is the core project and contains only the Sass needed for the grid system
+and the jquery plugin for responsive images. The boilerplate framework has been moved to a seperate repo called
+[Breakpoint Scaffold](https://github.com/lesjames/breakpoint-scaffold) and includes this project as a Bower package.
 
 ***
 
@@ -34,10 +30,10 @@ breakpoint folder into your Sass folder and include Breakpoint with an import.
 
 ### Resources
 
-Here is a writeup about [Breakpoint on 24 Ways](http://24ways.org/2012/redesigning-the-media-query/).
-You can [view a presentation about Breakpoint](http://wordpress.tv/2012/12/18/les-james-responsive-design-with-the-breakpoint-framework/) on wordpress.tv.
-Here is a [Codepen demo](http://codepen.io/lesjames/pen/ixjsc) that you can play with.
-You can hit up [Les James on Twitter](https://twitter.com/lesjames) with any questions.
+Here is a writeup about [Breakpoint on 24 Ways](http://24ways.org/2012/redesigning-the-media-query/).  
+You can [view a presentation about Breakpoint](http://wordpress.tv/2012/12/18/les-james-responsive-design-with-the-breakpoint-framework/) on wordpress.tv.  
+Here is a [Codepen demo](http://codepen.io/lesjames/pen/ixjsc) that you can play with.  
+You can hit up [Les James on Twitter](https://twitter.com/lesjames) with any questions.  
 
 ## Grid
 
@@ -205,7 +201,6 @@ You just need to create an element in your HTML to see it. `<div class="grid-ove
 
 Breakpoint uses the following frameworks, technologies and inspirations:
 
-[normalize.css](http://necolas.github.com/normalize.css/),
 [Griddle](https://github.com/necolas/griddle),
 [Frameless Grid](http://framelessgrid.com/),
 [Sass](http://sass-lang.com/),
