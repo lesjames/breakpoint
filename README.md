@@ -15,15 +15,13 @@ with responsive image sources.
 and the jquery plugin for responsive images. The boilerplate framework has been moved to a seperate repo called
 [Breakpoint Scaffold](https://github.com/lesjames/breakpoint-scaffold) and includes this project as a Bower package.
 
-***
-
 ## Installation and Use
 
 Breakpoint requires Sass 3.2 or later
 
-`$ gem install sass`
+`$ sudo gem install sass`
 
-If you don't use [Breakpoint Scaffold](https://github.com/lesjames/breakpoint-scaffold) you can drop the
+If you don't use [Breakpoint Scaffold](https://github.com/lesjames/breakpoint-scaffold), you can drop the
 breakpoint folder into your Sass folder and include Breakpoint with an import.
 
 `@import 'breakpoint/breakpoint'`
