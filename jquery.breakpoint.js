@@ -1,5 +1,7 @@
 (function($, window, document){
 
+    'use strict';
+
     var
         // regex to strip quotes around the breakpoint label
         rxQuotes = /('|"|\s+)/g,
@@ -97,7 +99,12 @@
     $(window).bind('resize.breakpoint', updateBreakpoint);
 
     // define the plugin
-    $.fn.breakpoint = function(options) {
+    $.fn.breakpoint = function(options, callback) {
+
+        if (typeof options === 'function') {
+            callback = options;
+            options = null;
+        }
 
         this.each(function() {
 
@@ -123,7 +130,6 @@
             // configure the options
             options = $.extend({
                 delay : 200,
-                callback: null,
                 prefix: '',
                 fallback: null
             }, options || { });
@@ -184,15 +190,28 @@
                                 return src;
                             }());
 
-                            if (src) {
-                                image.attr('src', src);
+                            // did we call breakpoint on the document
+                            if (image[0] === document && typeof callback === 'function') {
+
+                                callback.call(null, {
+                                    breakpoint: breakpoint,
+                                    labels: labels,
+                                    position: position
+                                });
+
                             } else {
-                                console.warn('Breakpoint could not find a source for: ' + image[0].outerHTML);
+
+                                if (src) {
+                                    image.attr('src', src);
+                                } else {
+                                    console.warn('Breakpoint could not find a source for: ' + image[0].outerHTML);
+                                }
+
+                                if (typeof callback === 'function') {
+                                    callback.call(image, breakpoint, src);
+                                }
                             }
 
-                            if (typeof options.callback === 'function') {
-                                options.callback.call(image, breakpoint, src);
-                            }
                             currentBreakpoint = breakpoint;
                         }
                     };

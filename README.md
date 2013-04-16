@@ -28,10 +28,10 @@ breakpoint folder into your Sass folder and include Breakpoint with an import.
 
 ### Resources
 
-Here is a writeup about [Breakpoint on 24 Ways](http://24ways.org/2012/redesigning-the-media-query/).  
-You can [view a presentation about Breakpoint](http://wordpress.tv/2012/12/18/les-james-responsive-design-with-the-breakpoint-framework/) on wordpress.tv.  
-Here is a [Codepen demo](http://codepen.io/lesjames/pen/ixjsc) that you can play with.  
-You can hit up [Les James on Twitter](https://twitter.com/lesjames) with any questions.  
+* Here is a writeup about [Breakpoint on 24 Ways](http://24ways.org/2012/redesigning-the-media-query/).
+* You can [view a presentation about Breakpoint](http://wordpress.tv/2012/12/18/les-james-responsive-design-with-the-breakpoint-framework/) on wordpress.tv.
+* Here is a [Codepen demo](http://codepen.io/lesjames/pen/ixjsc) that you can play with.
+* You can hit up [Les James on Twitter](https://twitter.com/lesjames) with any questions.
 
 ## Grid
 
@@ -66,12 +66,14 @@ Sizing `.grid__cell` elements in your layout requires a class name to hook on to
 There are a couple functions for sizing elements but by default you should use the fluid()
 function for sizing `.grid__cell` elements.
 
-**fluid($col, [$available-columns])**  
+**fluid($col, [$available-columns])**
+
 Calculates a percentage based on how many columns you want. Has an optional
 second argument that can override the number of availiable columns when calulating the
 percentage.
 
-**fixed($col, [false])**  
+**fixed($col, [false])**
+
 Calculates a fixed width for grid cells. Passing false as a second argument
 calculates a fixed width for items outside of the grid system. It overrides the built in gutter and should
 be applied to elements other than `.grid__cell` units or when calculating measurements like heights.
@@ -153,22 +155,31 @@ Apply the Breakpoint plugin on any image you want to make responsive.
 $('.responsive-image').breakpoint();
 ```
 
-There are some options you can pass as an object to the breakpoint plugin.
-
-**callback** - This is a function that will be called once the source of the image is set. The callback
+You can pass a callback function that will be called once the source of the image is set. The callback
 receives a jQuery object of the image as `this`. The callback gets passed two parameters,
 the current breakpoint label and the source that was applied.
 
 ```javascript
-$('.responsive-image').breakpoint({
-    callback : function (breakpoint, src) {
-        console.log(this, breakpoint, src);
-    }
+$('.responsive-image').breakpoint(function (breakpoint, src) {
+    console.log(this, breakpoint, src);
 });
 
 // will log...
 // $(this), 'active-breakpoint', 'image.jpg'
 ```
+
+Apply breakpoint to the document to get back information about layout
+
+```javascript
+$(document).breakpoint(function (data) {
+    console.log(data)
+});
+
+// will log...
+// { breakpoint: 'active-breakpoint', labels: [array of breakpoint labels], positon: int }
+```
+
+There are some options you can pass as an object to the breakpoint plugin.
 
 **delay** - This is the time it takes to reevaluate responsive images when resizing the screen. It
 defaults to 200 milliseconds.
@@ -179,6 +190,17 @@ then use this option.
 So `prefix : 'foo'` will look for an attribute called `data-foo-small`.
 
 **fallback** - This is a label that you can use for browsers that don't support `getComputedStyle`.
+
+```javascript
+var options = {
+    prefix: 'myprefix',
+    fallback: 'desktop'
+};
+
+$('.responsive-image').breakpoint(options, function () {
+    // callback
+});
+```
 
 ## Other Features
 
@@ -199,9 +221,9 @@ You just need to create an element in your HTML to see it. `<div class="grid-ove
 
 Breakpoint uses the following frameworks, technologies and inspirations:
 
-[Griddle](https://github.com/necolas/griddle),
-[Frameless Grid](http://framelessgrid.com/),
-[Sass](http://sass-lang.com/),
-[Conditional CSS](http://adactio.com/journal/5429/),
-[DetectMQ.js](https://github.com/viljamis/detectMQ.js),
-[jQuery](http://jquery.com/)
+* [Griddle](https://github.com/necolas/griddle)
+* [Frameless Grid](http://framelessgrid.com/)
+* [Sass](http://sass-lang.com/)
+* [Conditional CSS](http://adactio.com/journal/5429/)
+* [DetectMQ.js](https://github.com/viljamis/detectMQ.js)
+* [jQuery](http://jquery.com/)
