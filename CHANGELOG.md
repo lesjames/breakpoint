@@ -1,3 +1,8 @@
+# 4.2.0
+
+* Added AMD support
+* Removed stuff I don't understand
+
 # 4.1.0
 
 * Changed how callbacks are passed

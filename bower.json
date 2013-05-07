@@ -1,14 +1,16 @@
 {
     "name": "breakpoint",
-    "version": "4.1.0",
+    "version": "4.2.0",
     "author": "Les James",
     "homepage": "https://github.com/lesjames/breakpoint",
     "ignore": ["**/*.md"],
-    "main": [
+    "scripts": [
+        "jquery.breakpoint.js"
+    ],
+    "styles": [
         "./breakpoint/_breakpoint.scss",
         "./breakpoint/_core.scss",
-        "./breakpoint/_grid.scss",
-        "jquery.breakpoint.js"
+        "./breakpoint/_grid.scss"
     ],
     "dependencies": {
         "jquery": "latest"
