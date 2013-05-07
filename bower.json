@@ -13,6 +13,6 @@
         "./breakpoint/_grid.scss"
     ],
     "dependencies": {
-        "jquery": "latest"
+        "jquery": ">= 1.9.1"
     }
 }
