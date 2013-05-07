@@ -176,7 +176,7 @@ $(document).breakpoint(function (data) {
 });
 
 // will log...
-// { breakpoint: 'active-breakpoint', labels: [array of breakpoint labels], positon: int }
+// { breakpoint: 'active-breakpoint', list: [array of breakpoint labels], position: int }
 ```
 
 There are some options you can pass as an object to the breakpoint plugin.
