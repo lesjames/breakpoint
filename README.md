@@ -178,15 +178,15 @@ The data object sent back to callbacks contains looks like this...
 ```javascript
 {
     breakpoint: {
-        current: 'the current breakpoint label',
-        all: [array of all breakpoint labels],
+        current: "the current breakpoint label",
+        all: ["array of all breakpoint labels"],
         position: int // the current position in the label array
     },
     images: {
-        all: [all images in set],
-        broken: [images that didn't load],
-        skipped: [images that didn't have a source to set],
-        proper: [images that loaded]
+        all: ["all images in set"],
+        broken: ["images that did not load"],
+        skipped: ["images that did not have a source to set"],
+        proper: ["images that loaded"]
     }
 }
 ```
