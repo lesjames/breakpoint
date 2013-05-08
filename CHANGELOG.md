@@ -1,3 +1,11 @@
+# 4.3.0
+
+* Better fallback support for older browsers
+* Better tolerance for missing sources
+* Now has imagesLoaded built in
+* Now returns a deferred
+* Revised data object passed to callbacks
+
 # 4.2.0
 
 * Added AMD support

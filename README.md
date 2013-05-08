@@ -37,7 +37,7 @@ breakpoint folder into your Sass folder and include Breakpoint with an import.
 
 The Breakpoint grid starts as a fluid grid for mobile. It gets transformed into a
 fixed width layout at your first breakpoint. When the grid is fixed width, grid column and gutter widths
-become constant and are set by the following variables in the `static/sass/_config.scss` file.
+become constant and are set by the following variables.
 
 ```scss
 $grid-column: 60px;
@@ -155,33 +155,53 @@ Apply the Breakpoint plugin on any image you want to make responsive.
 $('.responsive-image').breakpoint();
 ```
 
-You can pass a callback function that will be called once the source of the image is set. The callback
-receives a jQuery object of the image as `this`. The callback gets passed two parameters,
-the current breakpoint label and the source that was applied.
+You can pass a callback function that will be fired once the images in the set are loaded.
 
 ```javascript
-$('.responsive-image').breakpoint(function (breakpoint, src) {
-    console.log(this, breakpoint, src);
+$('.responsive-image').breakpoint(function (data) {
+    console.log(data);
 });
-
-// will log...
-// $(this), 'active-breakpoint', 'image.jpg'
 ```
 
-Apply breakpoint to the document to get back information about layout
+Breakpoint also returns a deferred which can be used for more robust callbacks.
+
+```javascript
+var images = $('.responsive-image').breakpoint();
+
+images.done(function (data) {
+    console.log(data);
+});
+```
+
+The data object sent back to callbacks contains looks like this...
+
+```javascript
+{
+    breakpoint: {
+        current: 'the current breakpoint label',
+        all: [array of all breakpoint labels],
+        position: int // the current position in the label array
+    },
+    images: {
+        all: [all images in set],
+        broken: [images that didn't load],
+        skipped: [images that didn't have a source to set],
+        proper: [images that loaded]
+    }
+}
+```
+
+The callback data object can be obtained without images by applying breakpoint to the document.
 
 ```javascript
 $(document).breakpoint(function (data) {
     console.log(data)
 });
-
-// will log...
-// { breakpoint: 'active-breakpoint', list: [array of breakpoint labels], position: int }
 ```
 
 There are some options you can pass as an object to the breakpoint plugin.
 
-**delay** - This is the time it takes to reevaluate responsive images when resizing the screen. It
+**delay** - This is the time it takes to after resizing the screen to reevaluate if the breakpoint has changed. It
 defaults to 200 milliseconds.
 
 **prefix** - Breakpoint assumes that the data attribute is simply the label. So if the label is 'small' then
@@ -191,10 +211,13 @@ So `prefix : 'foo'` will look for an attribute called `data-foo-small`.
 
 **fallback** - This is a label that you can use for browsers that don't support `getComputedStyle`.
 
+**fallbackSet** - This is a label array of all the breakpoint labels for browsers that don't support `getComputedStyle`.
+
 ```javascript
 var options = {
     prefix: 'myprefix',
-    fallback: 'desktop'
+    fallback: 'desktop',
+    fallbackSet: ['mobile', 'tablet', 'desktop']
 };
 
 $('.responsive-image').breakpoint(options, function () {
@@ -206,7 +229,7 @@ $('.responsive-image').breakpoint(options, function () {
 
 ### IE Support
 
-`$ie-support` sets the number of columns that vintage IE should use as a layout. Since
+`$ie-support` Sass variable sets the number of columns that vintage IE should use as a layout. Since
 breakpoint generates your fixed width structure inside media queries vintage IE won't see
 it and thus serve the mobile first fluid layout. `$ie-support` will make sure that a
 single, fixed width layout gets served to vintage IE without media queries. You need to
@@ -223,6 +246,7 @@ Breakpoint uses the following frameworks, technologies and inspirations:
 
 * [Griddle](https://github.com/necolas/griddle)
 * [Frameless Grid](http://framelessgrid.com/)
+* [imagesLoaded](https://github.com/desandro/imagesloaded)
 * [Sass](http://sass-lang.com/)
 * [Conditional CSS](http://adactio.com/journal/5429/)
 * [DetectMQ.js](https://github.com/viljamis/detectMQ.js)
