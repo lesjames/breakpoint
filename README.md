@@ -37,7 +37,7 @@ breakpoint folder into your Sass folder and include Breakpoint with an import.
 
 The Breakpoint grid starts as a fluid grid for mobile. It gets transformed into a
 fixed width layout at your first breakpoint. When the grid is fixed width, grid column and gutter widths
-become constant and are set by the following variables in the `static/sass/_config.scss` file.
+become constant and are set by the following variables.
 
 ```scss
 $grid-column: 60px;
@@ -165,7 +165,7 @@ $('.responsive-image').breakpoint(function (breakpoint, src) {
 });
 
 // will log...
-// $(this), 'active-breakpoint', 'image.jpg'
+// this, 'active-breakpoint', 'image.jpg'
 ```
 
 Apply breakpoint to the document to get back information about layout
@@ -181,7 +181,7 @@ $(document).breakpoint(function (data) {
 
 There are some options you can pass as an object to the breakpoint plugin.
 
-**delay** - This is the time it takes to reevaluate responsive images when resizing the screen. It
+**delay** - This is the time it takes to after resizing the screen to reevaluate if the breakpoint has changed. It
 defaults to 200 milliseconds.
 
 **prefix** - Breakpoint assumes that the data attribute is simply the label. So if the label is 'small' then
@@ -206,7 +206,7 @@ $('.responsive-image').breakpoint(options, function () {
 
 ### IE Support
 
-`$ie-support` sets the number of columns that vintage IE should use as a layout. Since
+`$ie-support` Sass variable sets the number of columns that vintage IE should use as a layout. Since
 breakpoint generates your fixed width structure inside media queries vintage IE won't see
 it and thus serve the mobile first fluid layout. `$ie-support` will make sure that a
 single, fixed width layout gets served to vintage IE without media queries. You need to
