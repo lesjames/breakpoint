@@ -1,5 +1,5 @@
 /*!
- * jQuery Breakpoint plugin v4.3.0
+ * jQuery Breakpoint plugin v4.3.1
  * http://github.com/lesjames/breakpoint
  *
  * Incorporated large portions of imagesloaded
@@ -175,6 +175,10 @@
             // each call to breakpoint returns a data object for that set of images
             // you get the current breakpoint information and info about the images
             // in the set, if they were loaded, broken or skipped because of no source
+
+            // fallbacks
+            if (!breakpoint) { breakpoint = options.fallback; }
+            if (!labelArr) { labelArr = options.fallbackSet; }
 
             var data = {
                 breakpoint: {
