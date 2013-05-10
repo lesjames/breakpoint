@@ -1,3 +1,7 @@
+# 4.3.1
+
+* Added fallback data to callback when using breakpoint on document
+
 # 4.3.0
 
 * Better fallback support for older browsers
