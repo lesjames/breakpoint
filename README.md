@@ -173,7 +173,7 @@ images.done(function (data) {
 });
 ```
 
-The data object sent back to callbacks contains looks like this...
+The data object sent back to callbacks looks like this...
 
 ```javascript
 {
