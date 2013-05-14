@@ -211,7 +211,10 @@
 
         // if no images or if applied to the document trigger immediately
         if ( !$images.length || $this[0] === document ) {
+
+            // make sure the breakpoint deferred is resolved first
             ready.done(doneLoading);
+
         } else {
 
             // bind the imagesLoaded event to images and then run breakpoint on each on
