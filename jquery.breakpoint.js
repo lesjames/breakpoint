@@ -1,5 +1,5 @@
 /*!
- * jQuery Breakpoint plugin v4.3.1
+ * jQuery Breakpoint plugin v4.3.2
  * http://github.com/lesjames/breakpoint
  *
  * Incorporated large portions of imagesloaded

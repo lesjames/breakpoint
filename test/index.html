@@ -9,33 +9,25 @@
     <meta name="viewport" content="width=device-width">
 
     <link rel="stylesheet" href="/style.css">
-    <link rel="stylesheet" href="/components/qunit/qunit.css">
     <script src="/components/jquery/jquery.js"></script>
     <script src="/components/qunit/qunit.js"></script>
     <script src="/jquery.breakpoint.js"></script>
 
-
 </head>
 <body>
 
+    <img class="test-1" data-small="/img/small.png">
 
-    <img data-small="small.jpg" data-medium="medium.jpg">
-    <div id="qunit"></div>
+    <img class="test-2" data-small="/img/small.png">
 
-    <script>
+    <img class="test-3">
 
-        test('Small image by default', function() {
+    <img class="test-4" data-small="/img/404.png">
 
-            expect(1);
+    <img class="test-5" data-small="/img/small.png">
+    <img class="test-5" data-small="/img/404.png">
 
-            var $img = $('img');
-            $img.breakpoint();
-
-            equal( $img.attr('src'), 'small.jpg', 'defaults to small image' );
-
-        });
-
-    </script>
+    <script src="/tests.js"></script>
 
 </body>
 </html>

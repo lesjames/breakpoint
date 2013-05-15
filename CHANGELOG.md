@@ -1,3 +1,7 @@
+# 4.3.2
+
+* Added some basic tests for responsive images
+
 # 4.3.1
 
 * Added fallback data to callback when using breakpoint on document

@@ -65,7 +65,8 @@ module.exports = function (grunt) {
               options: {
                 urls: [
                   'http://localhost:8000/index.html'
-                ]              }
+                ]
+              }
             }
         }
     });
