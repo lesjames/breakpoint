@@ -1,6 +1,4 @@
-# Breakpoint
-
-***
+# Breakpoint [![Build Status](https://travis-ci.org/lesjames/breakpoint.png?branch=master)](https://travis-ci.org/lesjames/breakpoint)
 
 Breakpoint is a grid system and responsive image solution. It's based on the concept that columns shouldn't
 stretch but get added or taken away as the screen changes size. This concept
