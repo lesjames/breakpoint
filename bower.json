@@ -3,7 +3,7 @@
     "version": "4.3.2",
     "author": "Les James",
     "homepage": "https://github.com/lesjames/breakpoint",
-    "ignore": ["**/*.md", "./test/**/*", "Gruntfile.js", "package.json"],
+    "ignore": ["**/*.md", "./test/", "Gruntfile.js", "package.json"],
     "main": [
         "jquery.breakpoint.js",
         "./breakpoint/_breakpoint.scss",
