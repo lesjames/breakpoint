@@ -5,24 +5,30 @@ stretch but get added or taken away as the screen changes size. This concept
 was taken from the [Frameless Grid](http://framelessgrid.com/) system developed by Joni Korpi.
 The Breakpoint grid is also floatless by using inline-block cells and border box sizing. This
 layout technique is taken from [Griddle](https://github.com/necolas/griddle) by Nicolas Gallagher.
-Breakpoint generates media queries at column break points so that your layout always has enough
-room to fit on the screen. Your media queries can be labeled which allows JavaScript to pair them
-with responsive image sources.
+Breakpoint generates media queries at column break points that you determine.
+You can label your media queries too which allows JavaScript to pair them with responsive image sources.
 
-**Breakpoint has been split into two projects**. This is the core project and contains only the Sass needed for the grid system
-and the jquery plugin for responsive images. The boilerplate framework has been moved to a seperate repo called
-[Breakpoint Scaffold](https://github.com/lesjames/breakpoint-scaffold) and includes this project as a Bower package.
-
-## Installation and Use
+## Installation
 
 Breakpoint requires Sass 3.2 or later
 
 `$ sudo gem install sass`
 
-If you don't use [Breakpoint Scaffold](https://github.com/lesjames/breakpoint-scaffold), you can drop the
-breakpoint folder into your Sass folder and include Breakpoint with an import.
+### Bower
 
-`@import 'breakpoint/breakpoint'`
+The quickest way to install Breakpoint is with with [Bower](http://bower.io/).
+
+`bower install breakpoint`
+
+Then in your style.scss import Breakpoint from your Bower components directory. The following assumes
+the bower component folder is the same level as your Sass folder.
+
+`@import '../components/breakpoint/breakpoint/breakpoint'`
+
+### Yeoman
+
+For a full, opinionated project setup that includes a build system using [Grunt](http://gruntjs.com/) and [RequireJS](http://requirejs.org/),
+you can [install Breakpoint with Yeoman](https://github.com/lesjames/generator-breakpoint).
 
 ### Resources
 

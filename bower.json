@@ -1,9 +1,15 @@
 {
     "name": "breakpoint",
     "version": "4.3.2",
+    "description": "Breakpoint is a column based media query generator and responsive image framework.",
     "author": "Les James",
     "homepage": "https://github.com/lesjames/breakpoint",
-    "ignore": ["**/*.md", "./test/", "Gruntfile.js", "package.json"],
+    "ignore": [
+        "**/*.md",
+        "test",
+        "Gruntfile.js",
+        "package.json"
+    ],
     "main": [
         "jquery.breakpoint.js",
         "./breakpoint/_breakpoint.scss",
@@ -11,7 +17,7 @@
         "./breakpoint/_grid.scss"
     ],
     "dependencies": {
-        "jquery": ">= 1.9.1"
+        "jquery": ">= 1.7"
     },
     "devDependencies": {
         "qunit": "1.11.0"
