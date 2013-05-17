@@ -14,7 +14,7 @@ Breakpoint requires Sass 3.2 or later
 
 `$ sudo gem install sass`
 
-### Bower
+#### Bower
 
 The quickest way to install Breakpoint is with with [Bower](http://bower.io/).
 
@@ -25,12 +25,12 @@ the bower component folder is the same level as your Sass folder.
 
 `@import '../components/breakpoint/breakpoint/breakpoint'`
 
-### Yeoman
+#### Yeoman
 
 For a full, opinionated project setup that includes a build system using [Grunt](http://gruntjs.com/) and [RequireJS](http://requirejs.org/),
 you can [install Breakpoint with Yeoman](https://github.com/lesjames/generator-breakpoint).
 
-### Resources
+#### Resources
 
 * Here is a writeup about [Breakpoint on 24 Ways](http://24ways.org/2012/redesigning-the-media-query/).
 * You can [view a presentation about Breakpoint](http://wordpress.tv/2012/12/18/les-james-responsive-design-with-the-breakpoint-framework/) on wordpress.tv.
