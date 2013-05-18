@@ -16,7 +16,7 @@ Breakpoint requires Sass 3.2 or later
 
 #### Bower
 
-The quickest way to install Breakpoint is with with [Bower](http://bower.io/).
+The quickest way to install Breakpoint is with [Bower](http://bower.io/).
 
 `bower install breakpoint`
 
