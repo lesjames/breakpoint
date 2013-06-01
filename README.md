@@ -10,9 +10,12 @@ You can label your media queries too which allows JavaScript to pair them with r
 
 ## Installation
 
-Breakpoint requires Sass 3.2 or later
+The Breakpoint grid requires Sass 3.2 or later
 
 `$ sudo gem install sass`
+
+If you want to use Breakpoint for responsive images you need jQuery. While not a requirement, you can get
+enhanced deferreds/callbacks when working with responsive images by installing [imagesLoaded](https://github.com/desandro/imagesloaded).
 
 #### Bower
 
@@ -25,9 +28,12 @@ the bower component folder is the same level as your Sass folder.
 
 `@import '../components/breakpoint/breakpoint/breakpoint'`
 
+The jQuery plugin for Breakpoint is AMD compatable and should be loaded with a tool like [RequireJS](http://requirejs.org/). If you don't
+use AMD then make sure jQuery and imagesLoaded are loaded before the Breakpoint plugin.
+
 #### Yeoman
 
-For a full, opinionated project setup that includes a build system using [Grunt](http://gruntjs.com/) and [RequireJS](http://requirejs.org/),
+For a full, opinionated project setup that includes a build system using [Grunt](http://gruntjs.com/) and AMD loading with [RequireJS](http://requirejs.org/),
 you can [install Breakpoint with Yeoman](https://github.com/lesjames/generator-breakpoint).
 
 #### Resources
@@ -132,11 +138,13 @@ matches that name to a matching data attribute on the image tag.
 ### HTML
 
 Store source paths in data attributes on an image tag. Make sure you provide
-a `<noscript>` fallback.
+a `<noscript>` fallback. It's also recommended that you use a data uri as a placeholder src
+like `src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs%3D"` so that the image tag
+remains valid.
 
 ```html
-<img class="responsive-image" data-small="/static/img/small.gif" data-large="/static/img/large.gif" />
-<noscript><img src="/static/img/small.gif" /></noscript>
+<img class="responsive-image" data-small="/static/img/small.gif" data-large="/static/img/large.gif" src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs%3D" alt="My responsive image">
+<noscript><img src="/static/img/small.gif" alt="My responsive image fallback"></noscript>
 ```
 
 ### Sass
@@ -148,8 +156,8 @@ When you create a breakpoint, pass it a argument called `$label` with a string a
 @include breakpoint(9, $label: 'large');
 ```
 
-There is a config variable called `$breakpoint-list` and it defaults the name of the smallest,
-fluid layout to 'small'. You can change this to 'mobile' or any name that makes sense to you.
+The default layout label is 'small' and is generated for you. If you don't like the default name you can change it
+with a Sass variable called `$breakpoint-list`.
 
 ### jQuery
 
@@ -159,11 +167,11 @@ Apply the Breakpoint plugin on any image you want to make responsive.
 $('.responsive-image').breakpoint();
 ```
 
-You can pass a callback function that will be fired once the images in the set are loaded.
+A Callback can be added which returns object detailing information about the current layout.
 
 ```javascript
-$('.responsive-image').breakpoint(function (data) {
-    console.log(data);
+$('.responsive-image').breakpoint(function (breakpoint) {
+    console.log(breakpoint);
 });
 ```
 
@@ -172,50 +180,43 @@ Breakpoint also returns a deferred which can be used for more robust callbacks.
 ```javascript
 var images = $('.responsive-image').breakpoint();
 
-images.done(function (data) {
-    console.log(data);
+images.done(function (breakpoint) {
+    console.log(breakpoint);
 });
 ```
 
-The data object sent back to callbacks looks like this...
+#### Breakpoint Object
+
+The breakpoint object sent back to a callback or deferred contains the current responsive layout information.
+
+**breakpoint.current** [string] - the current breakpoint label
+
+**breakpoint.all** [array] - list of all breakpoint labels in your project
+
+**breakpoint.position** [int] - the current breakpoint's position in the breakpoint labels array
+
+The breakpoint object can be obtained without images by applying breakpoint to the document.
 
 ```javascript
-{
-    breakpoint: {
-        current: "the current breakpoint label",
-        all: ["array of all breakpoint labels"],
-        position: int // the current position in the label array
-    },
-    images: {
-        all: ["all images in set"],
-        broken: ["images that did not load"],
-        skipped: ["images that did not have a source to set"],
-        proper: ["images that loaded"]
-    }
-}
-```
-
-The callback data object can be obtained without images by applying breakpoint to the document.
-
-```javascript
-$(document).breakpoint(function (data) {
-    console.log(data)
+$(document).breakpoint(function (breakpoint) {
+    console.log(breakpoint)
 });
 ```
+
+#### Options
 
 There are some options you can pass as an object to the breakpoint plugin.
 
-**delay** - This is the time it takes to after resizing the screen to reevaluate if the breakpoint has changed. It
+**delay** [int] - This is the time it takes to after resizing the screen to reevaluate if the breakpoint has changed. It
 defaults to 200 milliseconds.
 
-**prefix** - Breakpoint assumes that the data attribute is simply the label. So if the label is 'small' then
+**prefix** [string] - Breakpoint assumes that the data attribute is simply the label. So if the label is 'small' then
 breakpoint looks for `data-small` on the image tag. If you want to prefix the label with something
-then use this option.
-So `prefix : 'foo'` will look for an attribute called `data-foo-small`.
+then use this option. So `prefix : 'foo'` will look for an attribute called `data-foo-small`.
 
-**fallback** - This is a label that you can use for browsers that don't support `getComputedStyle`.
+**fallback** [string] - This is a label that you can use for browsers that don't support `getComputedStyle`.
 
-**fallbackSet** - This is a label array of all the breakpoint labels for browsers that don't support `getComputedStyle`.
+**fallbackSet** [array] - This is a label array of all the breakpoint labels for browsers that don't support `getComputedStyle`.
 
 ```javascript
 var options = {
@@ -228,6 +229,15 @@ $('.responsive-image').breakpoint(options, function () {
     // callback
 });
 ```
+
+#### imagesLoaded
+
+Breakpoint works with [imagesLoaded](https://github.com/desandro/imagesloaded) to fire callbacks/deferreds once
+images set with Breakpoint are loaded. Just make sure imagesLoaded and it's dependencies are loaded on your
+page. If using AMD provide a path to them in your AMD loader so that Breakpoint can pick them up as dependencies.
+
+Breakpoint returns the imagesLoaded instance in callbacks/deferreds as the second argument after the Breakpoint object.
+See the [imagesLoaded](https://github.com/desandro/imagesloaded) documentation for working with the instance.
 
 ## Other Features
 
@@ -248,10 +258,10 @@ You just need to create an element in your HTML to see it. `<div class="grid-ove
 
 Breakpoint uses the following frameworks, technologies and inspirations:
 
-* [Griddle](https://github.com/necolas/griddle)
-* [Frameless Grid](http://framelessgrid.com/)
-* [imagesLoaded](https://github.com/desandro/imagesloaded)
-* [Sass](http://sass-lang.com/)
-* [Conditional CSS](http://adactio.com/journal/5429/)
-* [DetectMQ.js](https://github.com/viljamis/detectMQ.js)
-* [jQuery](http://jquery.com/)
+[Griddle](https://github.com/necolas/griddle),
+[Frameless Grid](http://framelessgrid.com/),
+[Sass](http://sass-lang.com/),
+[Conditional CSS](http://adactio.com/journal/5429/),
+[imagesLoaded](https://github.com/desandro/imagesloaded),
+[DetectMQ.js](https://github.com/viljamis/detectMQ.js),
+[jQuery](http://jquery.com/)
