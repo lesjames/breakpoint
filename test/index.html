@@ -1,0 +1,43 @@
+<!doctype html>
+<html>
+<head>
+
+    <meta charset="utf-8">
+
+    <title>Breakpoint Test Page</title>
+
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/components/qunit/qunit.css" />
+
+    <script src="/components/jquery/jquery.js"></script>
+    <script src="/components/qunit/qunit.js"></script>
+
+    <script src="/components/eventEmitter/EventEmitter.js"></script>
+    <script src="/components/eventie/eventie.js"></script>
+    <script src="/components/imagesloaded/imagesloaded.js"></script>
+    <script src="/js/vendor/jquery.breakpoint.js"></script>
+
+</head>
+<body>
+
+    <div id="qunit" style="margin: 4em 4em 10em"></div>
+
+    <img class="sources" data-small="/img/small.png" data-medium="/img/medium.png" data-large="/img/large.png" src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs%3D">
+    <img class="sources" data-small="/img/small.png" data-large="/img/large.png" src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs%3D">
+    <img class="sources" data-large="/img/large.png" src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs%3D">
+    <img class="sources" data-small="/img/small.png" src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs%3D">
+    <img class="sources" src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs%3D">
+
+    <img class="resolved" data-small="http://i.imgur.com/xrQHn.jpg" src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs%3D">
+    <img class="fail" data-small="404.png" src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs%3D">
+    <img class="always" data-small="404.png" src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs%3D">
+    <img class="progress" data-small="http://i.imgur.com/b3fBJ.jpg" src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs%3D">
+    <img class="progress" data-small="http://i.imgur.com/xmSh2.jpg" src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs%3D">
+    <img class="progress" data-small="http://i.imgur.com/iIpJm.jpg" src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs%3D">
+    <img class="progress" data-small="http://i.imgur.com/cvZZl10.gif" src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs%3D">
+
+    <script src="/js/breakpoints.js"></script>
+    <script src="/js/deferreds.js"></script>
+
+</body>
+</html>

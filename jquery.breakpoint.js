@@ -1,7 +1,32 @@
-(function($, window, document){
+/*!
+ * jQuery Breakpoint plugin v4.4.0
+ * http://github.com/lesjames/breakpoint
+ *
+ * MIT License
+ */
+
+(function (factory) {
+    if (typeof define === 'function' && define.amd) {
+
+        // AMD. Register as an anonymous module.
+        define(['jquery', 'imagesloaded'], factory);
+
+    } else {
+
+        // in case imagesLoaded wasn't included
+        var imagesLoaded = window.imagesLoaded || null;
+
+        // Browser globals
+        factory(jQuery, imagesLoaded);
+
+    }
+}(function ($, imagesLoaded) {
+
+    // init vars
+    // ==========================================================================
 
     var
-        // regex to strip quotes around the breakpoint label
+        serial = 0,
         rxQuotes = /('|"|\s+)/g,
 
         // defer setting any images until the breakpoint label
@@ -9,145 +34,198 @@
         breakpointReady = $.Deferred(),
         ready = breakpointReady.promise(),
 
-        // the current serial number
-        serial = 0,
-
-        // the current breakpoint label
-        breakpoint = null,
-
-        // get breakpoint label list
-        labels = (function () {
-            var labels = window.getComputedStyle && window.getComputedStyle(document.body, '::after');
-            if (labels) {
-                labels = labels.content || null;
-                if (typeof labels === 'string' || labels instanceof String) {
-                    labels = labels.replace(rxQuotes, '');
-                    // convert label list into an array
-                    labels = labels.split(',');
-                }
-            }
-            return labels;
-        }()),
-
-        // searches label array for current breakpoint and returns position
-        searchLabels = function (stringArray, breakpoint) {
-            for (var j=0; j<stringArray.length; j++) {
-                if (stringArray[j].match(breakpoint)) { return j; }
-            }
-            return -1;
-        },
-
-        // a utility for converting arguments to an Array
-        rest = function(args, nth) {
-            var values = [],
-                length = args.length,
-                i = nth || 0;
-            for ( ; i < length; i++) {
-                values.push(args[i]);
-            }
-            return values;
-        },
-
-        // a utility for currying function arguments
-        partial = function(fn) {
-            return (function(fn, args) {
-                return function() {
-                    return fn.apply(null, args.concat(rest(arguments)));
-                };
-            })(fn, rest(arguments, 1));
-        },
-
-        // generate the next serial number
-        nextSerial = function() {
-            serial += 1;
-            return serial;
-        },
-
-        // update the current breakpoint label and dispatch
-        // the breakpoint event if it has changed
-        updateBreakpoint = function() {
-
-            var currentBreakpoint = breakpoint,
-                style = window.getComputedStyle && window.getComputedStyle(document.body, '::before');
-
-            if (style) {
-                breakpoint = style.content || null;
-                if (typeof breakpoint === 'string' || breakpoint instanceof String) {
-                    breakpoint = breakpoint.replace(rxQuotes, '');
-                }
-            }
-
-            // fulfill the promise or dispatch an event?
-            if (breakpointReady !== null) {
-
-                breakpointReady.resolve();
-                breakpointReady = null;
-
-            } else if (breakpoint !== currentBreakpoint) {
-
-                $('body').trigger($.Event('breakpoint', { breakpoint: breakpoint }));
-
-            }
+        // the current breakpoint and array
+        breakpoint = {
+            current: null,
+            all: null,
+            position: null
         };
+
+
+    // breakpoint functions
+    // ==========================================================================
+
+    // increment the serial number
+    function nextSerial() {
+        serial += 1;
+        return serial;
+    }
+
+    // finds the source of an image
+    function setSource($image, prefix, breakpoint) {
+
+        // find source by first trying the current breakpoint
+        var src = $image.attr('data-' + prefix + breakpoint.current),
+            i = breakpoint.position - 1;
+
+        // if no match is found walk backwards through the
+        // labels array until a matching data attr is found
+        if (src === undefined) {
+            for (i; i >= 0; i = i - 1) {
+                src = $image.attr('data-' + prefix + breakpoint.all[i]);
+                if (src !== undefined) {
+                    break;
+                }
+            }
+        }
+
+        return src;
+    }
+
+    // grabs the breakpoint labels from the body's css generated content
+    // triggers the event or promise to set the image's source
+    function updateBreakpoint() {
+
+        var currentBreakpoint = breakpoint.current,
+            style = window.getComputedStyle && window.getComputedStyle(document.body, '::before'),
+            labels = window.getComputedStyle && window.getComputedStyle(document.body, '::after');
+
+        // modern browser can read the label
+        if (style && style.content) {
+
+            breakpoint.current = style.content;
+            breakpoint.all = labels.content;
+
+            // remove quotes
+            if (typeof breakpoint.current === 'string' || breakpoint.current instanceof String) {
+                breakpoint.current = breakpoint.current.replace(rxQuotes, '');
+            }
+            if (typeof breakpoint.all === 'string' || breakpoint.all instanceof String) {
+                breakpoint.all = breakpoint.all.replace(rxQuotes, '');
+            }
+
+            // convert label list into an array
+            breakpoint.all = breakpoint.all.split(',');
+
+            // find positon of current breakpoint in list of all breakpoints
+            breakpoint.position = $.inArray(breakpoint.current, breakpoint.all);
+
+        }
+
+        if (breakpointReady !== null) {
+
+            // we have a label so make it safe to set the src of an image
+            breakpointReady.resolve();
+            breakpointReady = null;
+
+        } else if (breakpoint !== currentBreakpoint) {
+
+            // trigger breakpoint event if the breakpoint has changed
+            $(document).trigger($.Event('breakpoint', { breakpoint: breakpoint }));
+
+        }
+
+    }
+
+    // callback and deferred execution
+    function loadingComplete(proper, deferred, callback) {
+
+        if (proper && imagesLoaded) {
+
+            var load = imagesLoaded(proper);
+
+            load.on('done', function ( instance ) {
+                deferred.resolve( breakpoint, instance );
+                if ( $.isFunction( callback ) ) {
+                    callback.call( null, breakpoint, instance );
+                }
+            });
+
+            load.on('fail', function ( instance ) {
+                deferred.reject( breakpoint, instance );
+            });
+
+            load.on('progress', function( instance, image ) {
+                deferred.notify( breakpoint, instance, image );
+            });
+
+        } else {
+
+            // no images here or imagesLoaded isn't loaded,
+            // just send back the breakpoint info
+            deferred.resolve( breakpoint );
+            if ( $.isFunction( callback ) ) {
+                callback.call( null, breakpoint );
+            }
+
+        }
+
+    }
+
+
+    // bindings to update breakpoint
+    // ==========================================================================
 
     // update the breakpoint on load
     $(document).ready(updateBreakpoint);
 
     // update the breakpoint on window resize
-    $(window).bind('resize.breakpoint', updateBreakpoint);
+    $(window).on('resize.breakpoint', updateBreakpoint);
+
 
     // define the plugin
-    $.fn.breakpoint = function(options) {
+    // ==========================================================================
 
-        this.each(function() {
+    $.fn.breakpoint = function (options, callback) {
 
-            var image = $(this),
-                serial = image.data('breakpoint-serial');
+        var setLength = this.length,
+            processed = 0,
+            proper = [],
+            deferred = $.Deferred();
 
-            // has this not yet been registered?
-            if (!serial) {
-                serial = nextSerial();
-                image.data('breakpoint-serial', serial);
+        // if callback passed as only argument
+        if ( $.isFunction( options ) ) {
+            callback = options;
+            options = null;
+        }
 
-                // be a good memory citizen
-                $(document).bind('unload.breakpoint.serial' + serial, partial(function(image, serial) {
+        // configure the options
+        options = $.extend({
+            delay : 200,
+            prefix: '',
+            fallback: null,
+            fallbackSet: null
+        }, options || { });
 
-                    // unbind our closures so garbage collection can happen
-                    image.unbind('breakpoint.serial' + serial);
-                    $(this).unbind('unload.breakpoint.serial' + serial);
-                    image = null;
+        // if applied to the document trigger callbacks
+        if ( this[0] === document || !setLength ) {
 
-                }, image, serial));
-            }
+            // make sure the breakpoint deferred is resolved first
+            ready.done(function () {
+                loadingComplete(null, deferred, callback);
+            });
 
-            // configure the options
-            options = $.extend({
-                delay : 200,
-                callback: null,
-                prefix: '',
-                fallback: null
-            }, options || { });
+        } else {
 
-            // remove any previous handler
-            $('body').unbind('breakpoint.serial' + serial);
+            // loop though each image in set
+            this.each(function() {
 
-            // create the new handler
-            $('body').bind('breakpoint.serial' + serial, (function(image, options) {
+                var $image = $(this),
+                    serial = $image.data('breakpoint-serial');
 
-                var
-                    // have we set the src at least once?
-                    once = false,
+                // has this not yet been registered?
+                if (!serial) {
+                    serial = nextSerial();
+                    $image.data('breakpoint-serial', serial);
+                }
 
-                    // track our delay timeout
-                    timeout = null,
+                // remove any previous handler
+                $(document).off('breakpoint.serial' + serial);
 
-                    // track our current breakpoint setting
-                    currentBreakpoint = null,
+                // create new handler
+                $(document).on('breakpoint.serial' + serial, (function($image, options) {
 
-                    // set the image's src
-                    set = function(breakpoint) {
+                    var
+                        // have we set the src at least once?
+                        once = false,
 
-                        var src, position;
+                        // track our delay timeout
+                        timeout = null;
+
+                    function set(breakpoint) {
+
+                        // init image source
+                        var src = null;
 
                         // now we've processed this image at least once
                         once = true;
@@ -155,78 +233,68 @@
                         // logically, any timeout must be finished
                         timeout = null;
 
-                        // resolve the breakpoint
-                        breakpoint = breakpoint || options.fallback;
+                        // check for breakpoint fallback
+                        breakpoint.current = breakpoint.current || options.fallback;
 
-                        // update?
-                        if (breakpoint !== currentBreakpoint) {
+                        // if label array is null then pull it from fallbackSet option
+                        if (!breakpoint.all) {
+                            breakpoint.all = options.fallbackSet;
+                            breakpoint.position = breakpoint.all.length;
+                        }
 
-                            // breakpoint position in the array of known breakpoints
-                            position = (labels) ? searchLabels(labels, breakpoint) : null;
+                        src = setSource($image, options.prefix, breakpoint);
 
-                            src = (function () {
+                        if (src) {
 
-                                // find source by first trying the current breakpoint
-                                var src = image.attr('data-' + options.prefix + breakpoint),
-                                    i = position - 1;
+                            // if we have a source set it
+                            $image.attr('src', src);
+                            proper.push($image[0]);
 
-                                // if no match is found walk backwards through the
-                                // labels array until a matching data attr is found
-                                if (src === undefined) {
-                                    for (i; i >= 0; i = i - 1) {
-                                        src = image.attr('data-' + options.prefix + labels[i]);
-                                        if (src !== undefined) {
-                                            break;
-                                        }
-                                    }
-                                }
+                        }
 
-                                return src;
-                            }());
+                        // count processed images
+                        processed = processed + 1;
 
-                            if (src) {
-                                image.attr('src', src);
-                            } else {
-                                console.warn('Breakpoint could not find a source for: ' + image[0].outerHTML);
-                            }
+                        // if the whole set is processed, load the images
+                        if (processed === setLength) {
+                            loadingComplete(proper, deferred, callback);
+                        }
 
-                            if (typeof options.callback === 'function') {
-                                options.callback.call(image, breakpoint, src);
-                            }
-                            currentBreakpoint = breakpoint;
+                    }
+
+                    // set the image once with the current breakpoint
+                    // when the breakpoint is resolved
+                    ready.done(function() {
+                        set(breakpoint);
+                    });
+
+                    // return the event handler
+                    return function(evt) {
+
+                        // cancel any existing timeout
+                        if (timeout !== null) {
+                            clearTimeout(timeout);
+                            timeout = null;
+                        }
+
+                        // run immediately or wait for resize delay?
+                        if (!once || options.delay <= 0) {
+                            set(evt.breakpoint);
+                        } else {
+                            timeout = setTimeout(function () {
+                                set(evt.breakpoint);
+                            }, options.delay);
                         }
                     };
 
-                // set the image once with the current breakpoint
-                ready.done(function() {
-                    set(breakpoint);
-                });
+                })($image, options));
 
-                // return the event handler
-                return function(evt) {
+            });
 
-                    // cancel any existing timeout
-                    if (timeout !== null) {
-                        clearTimeout(timeout);
-                        timeout = null;
-                    }
+        }
 
-                    // run immediately or time out?
-                    if (!once || options.delay <= 0) {
-                        set(evt.breakpoint);
-                    } else {
-                        timeout = setTimeout(partial(set, evt.breakpoint), options.delay);
-                    }
-                };
-
-            })(image, options));
-        });
-
-        // now that we have some images, update the breakpoint
-        // to give them a chance to set their images
-        updateBreakpoint();
-
-        return this;
+        // return promise
+        return deferred.promise( this );
     };
 
-})(jQuery, window, document);
+}));

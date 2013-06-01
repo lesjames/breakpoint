@@ -147,29 +147,72 @@ Apply the Breakpoint plugin on any image you want to make responsive.
 
 `$('.responsive-image').breakpoint();`
 
-There are some options you can pass as an object to the breakpoint plugin.
-
-**callback** - This is a function that will be called once the source of the image is set. The callback
-receives a jQuery object of the image as `this`. The callback gets passed two parameters,
-the current breakpoint label and the source that was applied.
-
 ```javascript
-$('.responsive-image').breakpoint({
-    callback : function (breakpoint, src) {
-        console.log(this, breakpoint, src);
-    }
+$('.responsive-image').breakpoint(function (breakpoint) {
+    console.log(breakpoint);
 });
 ```
 
-**delay** - This is the time it takes to reevaluate responsive images when resizing the screen. It
+Breakpoint also returns a deferred which can be used for more robust callbacks.
+
+```javascript
+var images = $('.responsive-image').breakpoint();
+
+images.done(function (breakpoint) {
+    console.log(breakpoint);
+});
+```
+
+#### Breakpoint Object
+
+The breakpoint object sent back to a callback or deferred contains the current responsive layout information.
+
+**breakpoint.current** [string] - the current breakpoint label
+
+**breakpoint.all** [array] - list of all breakpoint labels in your project
+
+**breakpoint.position** [int] - the current breakpoint's position in the breakpoint labels array
+
+The breakpoint object can be obtained without images by applying breakpoint to the document.
+
+```javascript
+$(document).breakpoint(function (breakpoint) {
+    console.log(breakpoint)
+});
+```
+
+#### Options
+
+There are some options you can pass as an object to the breakpoint plugin.
+
+**delay** [int] - This is the time it takes to after resizing the screen to reevaluate if the breakpoint has changed. It
 defaults to 200 milliseconds.
 
-**prefix** - Breakpoint assumes that the data attribute is simply the label. So if the label is 'small' then
+**prefix** [string] - Breakpoint assumes that the data attribute is simply the label. So if the label is 'small' then
 breakpoint looks for `data-small` on the image tag. If you want to prefix the label with something
-then use this option.
-So `prefix : 'foo'` will look for an attribute called `data-foo-small`.
+then use this option. So `prefix : 'foo'` will look for an attribute called `data-foo-small`.
 
-**fallback** - This is a label that you can use for browsers that don't support `getComputedStyle`.
+**fallback** [string] - This is a label that you can use for browsers that don't support `getComputedStyle`.
+
+**fallbackSet** [array] - This is a label array of all the breakpoint labels for browsers that don't support `getComputedStyle`.
+
+```javascript
+var options = {
+    prefix: 'myprefix',
+    fallback: 'desktop',
+    fallbackSet: ['mobile', 'tablet', 'desktop']
+};
+
+$('.responsive-image').breakpoint(options, function () {
+    // callback
+});
+```
+
+#### imagesLoaded
+
+Breakpoint works with [imagesLoaded](https://github.com/desandro/imagesloaded) to fire callbacks/deferreds once
+images set with Breakpoint are loaded. Just make sure imagesLoaded and it's dependencies are loaded on your
+page or provide a path to them in your AMD loader.
 
 ## Other Features
 
