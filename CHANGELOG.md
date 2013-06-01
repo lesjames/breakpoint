@@ -1,3 +1,8 @@
+# 4.4.0
+
+* Made imagesloaded a seperate dependency
+* Changed the return values that get sent back to callbacks/deferreds
+
 # 4.3.2
 
 * Added some basic tests for responsive images

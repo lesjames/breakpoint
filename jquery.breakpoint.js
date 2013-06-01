@@ -1,22 +1,26 @@
 /*!
- * jQuery Breakpoint plugin v4.3.2
+ * jQuery Breakpoint plugin v4.4.0
  * http://github.com/lesjames/breakpoint
- *
- * Incorporated large portions of imagesloaded
- * http://github.com/desandro/imagesloaded
  *
  * MIT License
  */
 
 (function (factory) {
     if (typeof define === 'function' && define.amd) {
+
         // AMD. Register as an anonymous module.
-        define(['jquery'], factory);
+        define(['jquery', 'imagesloaded'], factory);
+
     } else {
+
+        // in case imagesLoaded wasn't included
+        var imagesLoaded = window.imagesLoaded || null;
+
         // Browser globals
-        factory(jQuery);
+        factory(jQuery, imagesLoaded);
+
     }
-}(function ($) {
+}(function ($, imagesLoaded) {
 
     // init vars
     // ==========================================================================
@@ -31,9 +35,11 @@
         ready = breakpointReady.promise(),
 
         // the current breakpoint and array
-        breakpoint = null,
-        labelArr = null,
-        position = null;
+        breakpoint = {
+            current: null,
+            all: null,
+            position: null
+        };
 
 
     // breakpoint functions
@@ -45,33 +51,54 @@
         return serial;
     }
 
+    // finds the source of an image
+    function setSource($image, prefix, breakpoint) {
+
+        // find source by first trying the current breakpoint
+        var src = $image.attr('data-' + prefix + breakpoint.current),
+            i = breakpoint.position - 1;
+
+        // if no match is found walk backwards through the
+        // labels array until a matching data attr is found
+        if (src === undefined) {
+            for (i; i >= 0; i = i - 1) {
+                src = $image.attr('data-' + prefix + breakpoint.all[i]);
+                if (src !== undefined) {
+                    break;
+                }
+            }
+        }
+
+        return src;
+    }
+
     // grabs the breakpoint labels from the body's css generated content
     // triggers the event or promise to set the image's source
     function updateBreakpoint() {
 
-        var currentBreakpoint = breakpoint,
+        var currentBreakpoint = breakpoint.current,
             style = window.getComputedStyle && window.getComputedStyle(document.body, '::before'),
             labels = window.getComputedStyle && window.getComputedStyle(document.body, '::after');
 
         // modern browser can read the label
         if (style && style.content) {
 
-            breakpoint = style.content;
-            labels = labels.content;
+            breakpoint.current = style.content;
+            breakpoint.all = labels.content;
 
             // remove quotes
-            if (typeof breakpoint === 'string' || breakpoint instanceof String) {
-                breakpoint = breakpoint.replace(rxQuotes, '');
+            if (typeof breakpoint.current === 'string' || breakpoint.current instanceof String) {
+                breakpoint.current = breakpoint.current.replace(rxQuotes, '');
             }
-            if (typeof labels === 'string' || labels instanceof String) {
-                labels = labels.replace(rxQuotes, '');
+            if (typeof breakpoint.all === 'string' || breakpoint.all instanceof String) {
+                breakpoint.all = breakpoint.all.replace(rxQuotes, '');
             }
 
             // convert label list into an array
-            labelArr = labels.split(',');
+            breakpoint.all = breakpoint.all.split(',');
 
             // find positon of current breakpoint in list of all breakpoints
-            position = $.inArray(breakpoint, labelArr);
+            breakpoint.position = $.inArray(breakpoint.current, breakpoint.all);
 
         }
 
@@ -85,6 +112,41 @@
 
             // trigger breakpoint event if the breakpoint has changed
             $(document).trigger($.Event('breakpoint', { breakpoint: breakpoint }));
+
+        }
+
+    }
+
+    // callback and deferred execution
+    function loadingComplete(proper, deferred, callback) {
+
+        if (proper && imagesLoaded) {
+
+            var load = imagesLoaded(proper);
+
+            load.on('done', function ( instance ) {
+                deferred.resolve( breakpoint, instance );
+                if ( $.isFunction( callback ) ) {
+                    callback.call( null, breakpoint, instance );
+                }
+            });
+
+            load.on('fail', function ( instance ) {
+                deferred.reject( breakpoint, instance );
+            });
+
+            load.on('progress', function( instance, image ) {
+                deferred.notify( breakpoint, instance, image );
+            });
+
+        } else {
+
+            // no images here or imagesLoaded isn't loaded,
+            // just send back the breakpoint info
+            deferred.resolve( breakpoint );
+            if ( $.isFunction( callback ) ) {
+                callback.call( null, breakpoint );
+            }
 
         }
 
@@ -106,13 +168,10 @@
 
     $.fn.breakpoint = function (options, callback) {
 
-        var $this = this,
-            deferred = $.Deferred(),
-            $images = $this.find('img').add( $this.filter('img') ),
-            loaded = [],
+        var setLength = this.length,
+            processed = 0,
             proper = [],
-            broken = [],
-            skipped = [];
+            deferred = $.Deferred();
 
         // if callback passed as only argument
         if ( $.isFunction( options ) ) {
@@ -128,97 +187,18 @@
             fallbackSet: null
         }, options || { });
 
-
-        // imagesloaded functions
-        // ==========================================================================
-
-        // when the image load event fires pass along the image and if there was an error
-        function imgLoadedHandler( event ) {
-            imgLoaded( event.target, event.type === 'error' );
-        }
-
-        function imgLoaded( img, isBroken, skip ) {
-
-            // don't proceed if image is already loaded
-            if ( $.inArray( img, loaded ) !== -1 ) {
-                return;
-            }
-
-            // store element in loaded images array
-            loaded.push( img );
-
-            // keep track of broken and properly loaded images
-            if ( isBroken ) {
-                broken.push( img );
-            } else if ( skip ) {
-                skipped.push( img );
-            } else {
-                proper.push( img );
-            }
-
-            // cache image and its state for future calls
-            $.data( img, 'imagesLoaded', { isBroken: isBroken, src: img.src } );
-
-            // trigger deferred progress method
-            deferred.notify( img, isBroken, loaded.length, $images.length );
-
-            // call doneLoading and clean listeners if all images are loaded
-            if ( $images.length === loaded.length ) {
-                setTimeout( doneLoading );
-                $images.unbind( '.imagesLoaded', imgLoadedHandler );
-            }
-
-        }
-
-        function doneLoading() {
-
-            // each call to breakpoint returns a data object for that set of images
-            // you get the current breakpoint information and info about the images
-            // in the set, if they were loaded, broken or skipped because of no source
-
-            // fallbacks
-            if (!breakpoint) { breakpoint = options.fallback; }
-            if (!labelArr) { labelArr = options.fallbackSet; }
-
-            var data = {
-                breakpoint: {
-                    current: breakpoint,
-                    all: labelArr,
-                    position: position
-                },
-                images: {
-                    all: loaded,
-                    broken: broken,
-                    skipped: skipped,
-                    proper: proper
-                }
-            };
-
-            if ( broken.length ) {
-                deferred.reject( data );
-            } else {
-                deferred.resolve( data );
-            }
-
-            if ( $.isFunction( callback ) ) {
-                callback.call($this, data);
-            }
-        }
-
-
-        // images loaded event
-        // ==========================================================================
-
-        // if no images or if applied to the document trigger immediately
-        if ( !$images.length || $this[0] === document ) {
+        // if applied to the document trigger callbacks
+        if ( this[0] === document || !setLength ) {
 
             // make sure the breakpoint deferred is resolved first
-            ready.done(doneLoading);
+            ready.done(function () {
+                loadingComplete(null, deferred, callback);
+            });
 
         } else {
 
-            // bind the imagesLoaded event to images and then run breakpoint on each on
-            $images.on( 'load.imagesLoaded error.imagesLoaded', imgLoadedHandler ).each(function () {
+            // loop though each image in set
+            this.each(function() {
 
                 var $image = $(this),
                     serial = $image.data('breakpoint-serial');
@@ -254,50 +234,36 @@
                         timeout = null;
 
                         // check for breakpoint fallback
-                        breakpoint = breakpoint || options.fallback;
+                        breakpoint.current = breakpoint.current || options.fallback;
 
                         // if label array is null then pull it from fallbackSet option
-                        if (!labelArr) {
-                            labelArr = options.fallbackSet;
-                            position = labelArr.length;
+                        if (!breakpoint.all) {
+                            breakpoint.all = options.fallbackSet;
+                            breakpoint.position = breakpoint.all.length;
                         }
 
-                        src = (function () {
-
-                            // find source by first trying the current breakpoint
-                            var src = $image.attr('data-' + options.prefix + breakpoint),
-                                i = position - 1;
-
-                            // if no match is found walk backwards through the
-                            // labels array until a matching data attr is found
-                            if (src === undefined) {
-                                for (i; i >= 0; i = i - 1) {
-                                    src = $image.attr('data-' + options.prefix + labelArr[i]);
-                                    if (src !== undefined) {
-                                        break;
-                                    }
-                                }
-                            }
-
-                            return src;
-                        }());
+                        src = setSource($image, options.prefix, breakpoint);
 
                         if (src) {
 
                             // if we have a source set it
                             $image.attr('src', src);
+                            proper.push($image[0]);
 
-                        } else {
+                        }
 
-                            // if no source is found we need to skip this
-                            // image and not reject the deferred
-                            imgLoaded($image[0], false, true);
+                        // count processed images
+                        processed = processed + 1;
 
+                        // if the whole set is processed, load the images
+                        if (processed === setLength) {
+                            loadingComplete(proper, deferred, callback);
                         }
 
                     }
 
                     // set the image once with the current breakpoint
+                    // when the breakpoint is resolved
                     ready.done(function() {
                         set(breakpoint);
                     });
@@ -328,7 +294,7 @@
         }
 
         // return promise
-        return deferred.promise( $this );
+        return deferred.promise( this );
     };
 
 }));

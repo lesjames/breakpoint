@@ -40,6 +40,7 @@ module.exports = function (grunt) {
                 browser: true,
                 globals: {
                     define: true,
+                    imagesLoaded: true
                 }
             },
             files: {
@@ -54,19 +55,36 @@ module.exports = function (grunt) {
                     style: 'expanded'
                 },
                 src: ['./test/sass/style.scss'],
-                dest: './test/style.css'
+                dest: './test/css/style.css'
             }
         },
         uglify: {
-            './test/jquery.breakpoint.js': './jquery.breakpoint.js'
+            './test/js/vendor/jquery.breakpoint.js': './jquery.breakpoint.js'
         },
         qunit: {
-            all: {
-              options: {
-                urls: [
-                  'http://localhost:8000/index.html'
-                ]
-              }
+            options: {
+                urls: [ 'http://localhost:8000/index.html' ]
+            },
+            small: {
+                options: {
+                    page : {
+                        viewportSize : { width: 300, height: 400 }
+                    }
+                }
+            },
+            medium: {
+                options: {
+                    page : {
+                        viewportSize : { width: 700, height: 400 }
+                    }
+                }
+            },
+            large: {
+                options: {
+                    page : {
+                        viewportSize : { width: 1000, height: 400 }
+                    }
+                }
             }
         }
     });
@@ -77,6 +95,8 @@ module.exports = function (grunt) {
         'uglify',
         'sass:test',
         'connect',
-        'qunit'
+        'qunit:small',
+        'qunit:medium',
+        'qunit:large'
     ]);
 };
