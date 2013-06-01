@@ -10,9 +10,12 @@ You can label your media queries too which allows JavaScript to pair them with r
 
 ## Installation
 
-Breakpoint requires Sass 3.2 or later
+The Breakpoint grid requires Sass 3.2 or later
 
 `$ sudo gem install sass`
+
+If you want to use Breakpoint for responsive images you need jQuery. While not a requirement, you can get
+enhanced deferreds/callbacks when working with responsive images by installing [imagesLoaded](https://github.com/desandro/imagesloaded).
 
 #### Bower
 
@@ -25,9 +28,12 @@ the bower component folder is the same level as your Sass folder.
 
 `@import '../components/breakpoint/breakpoint/breakpoint'`
 
+The jQuery plugin for Breakpoint is AMD compatable and should be loaded with a tool like [RequireJS](http://requirejs.org/). If you don't
+use AMD then make sure jQuery and imagesLoaded are loaded before the Breakpoint plugin.
+
 #### Yeoman
 
-For a full, opinionated project setup that includes a build system using [Grunt](http://gruntjs.com/) and [RequireJS](http://requirejs.org/),
+For a full, opinionated project setup that includes a build system using [Grunt](http://gruntjs.com/) and AMD loading with [RequireJS](http://requirejs.org/),
 you can [install Breakpoint with Yeoman](https://github.com/lesjames/generator-breakpoint).
 
 #### Resources
@@ -132,11 +138,13 @@ matches that name to a matching data attribute on the image tag.
 ### HTML
 
 Store source paths in data attributes on an image tag. Make sure you provide
-a `<noscript>` fallback.
+a `<noscript>` fallback. It's also recommended that you use a data uri as a placeholder src
+like `src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs%3D"` so that the image tag
+remains valid.
 
 ```html
-<img class="responsive-image" data-small="/static/img/small.gif" data-large="/static/img/large.gif" />
-<noscript><img src="/static/img/small.gif" /></noscript>
+<img class="responsive-image" data-small="/static/img/small.gif" data-large="/static/img/large.gif" src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs%3D" alt="My responsive image">
+<noscript><img src="/static/img/small.gif" alt="My responsive image fallback"></noscript>
 ```
 
 ### Sass
@@ -148,8 +156,8 @@ When you create a breakpoint, pass it a argument called `$label` with a string a
 @include breakpoint(9, $label: 'large');
 ```
 
-There is a config variable called `$breakpoint-list` and it defaults the name of the smallest,
-fluid layout to 'small'. You can change this to 'mobile' or any name that makes sense to you.
+The default layout label is 'small' and is generated for you. If you don't like the default name you can change it
+with a Sass variable called `$breakpoint-list`.
 
 ### jQuery
 
@@ -158,6 +166,8 @@ Apply the Breakpoint plugin on any image you want to make responsive.
 ```javascript
 $('.responsive-image').breakpoint();
 ```
+
+A Callback can be added which returns object detailing information about the current layout.
 
 ```javascript
 $('.responsive-image').breakpoint(function (breakpoint) {
@@ -224,21 +234,10 @@ $('.responsive-image').breakpoint(options, function () {
 
 Breakpoint works with [imagesLoaded](https://github.com/desandro/imagesloaded) to fire callbacks/deferreds once
 images set with Breakpoint are loaded. Just make sure imagesLoaded and it's dependencies are loaded on your
-page or provide a path to them in your AMD loader.
+page. If using AMD provide a path to them in your AMD loader so that Breakpoint can pick them up as dependencies.
 
-**fallbackSet** - This is a label array of all the breakpoint labels for browsers that don't support `getComputedStyle`.
-
-```javascript
-var options = {
-    prefix: 'myprefix',
-    fallback: 'desktop',
-    fallbackSet: ['mobile', 'tablet', 'desktop']
-};
-
-$('.responsive-image').breakpoint(options, function () {
-    // callback
-});
-```
+Breakpoint returns the imagesLoaded instance in callbacks/deferreds as the second argument after the Breakpoint object.
+See the [imagesLoaded](https://github.com/desandro/imagesloaded) documentation for working with the instance.
 
 ## Other Features
 
@@ -259,10 +258,10 @@ You just need to create an element in your HTML to see it. `<div class="grid-ove
 
 Breakpoint uses the following frameworks, technologies and inspirations:
 
-[normalize.css](http://necolas.github.com/normalize.css/),
 [Griddle](https://github.com/necolas/griddle),
 [Frameless Grid](http://framelessgrid.com/),
 [Sass](http://sass-lang.com/),
 [Conditional CSS](http://adactio.com/journal/5429/),
+[imagesLoaded](https://github.com/desandro/imagesloaded),
 [DetectMQ.js](https://github.com/viljamis/detectMQ.js),
 [jQuery](http://jquery.com/)
