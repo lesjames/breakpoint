@@ -95,3 +95,26 @@ test('Breakpoint Callback', 3, function() {
     });
 
 });
+
+// read the correct breakpoint info
+test('Read Breakpoint', 1, function () {
+
+    var test = $.fn.breakpoint({ debug: true });
+
+    var breakpoint = test.updateBreakpoint();
+
+    deepEqual( breakpoint.current, test5, 'current label' );
+
+});
+
+// remove quotes function
+test('Remove Quotes', 4, function () {
+
+    var test = $.fn.breakpoint({ debug: true });
+
+    deepEqual( test.removeQuotes('yep'), 'yep');
+    deepEqual( test.removeQuotes("yep"), 'yep');
+    deepEqual( test.removeQuotes("'yep'"), 'yep');
+    deepEqual( test.removeQuotes('"yep"'), 'yep');
+
+});

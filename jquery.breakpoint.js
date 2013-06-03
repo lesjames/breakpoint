@@ -25,9 +25,7 @@
     // init vars
     // ==========================================================================
 
-    var
-        serial = 0,
-        rxQuotes = /('|"|\s+)/g,
+    var serial = 0,
 
         // defer setting any images until the breakpoint label
         // has been calculated the first time
@@ -72,27 +70,30 @@
         return src;
     }
 
+    // some browsers add quotes to the value from css generated content
+    function removeQuotes(string) {
+        var rxQuotes = /('|"|\s+)/g;
+        if (typeof string === 'string' || string instanceof String) {
+            string = string.replace(rxQuotes, '');
+        }
+        return string;
+    }
+
     // grabs the breakpoint labels from the body's css generated content
     // triggers the event or promise to set the image's source
     function updateBreakpoint() {
 
-        var currentBreakpoint = breakpoint.current,
+        var oldBreakpoint = breakpoint.current,
+
+            // grab values from css generated content
             style = window.getComputedStyle && window.getComputedStyle(document.body, '::before'),
             labels = window.getComputedStyle && window.getComputedStyle(document.body, '::after');
 
         // modern browser can read the label
         if (style && style.content) {
 
-            breakpoint.current = style.content;
-            breakpoint.all = labels.content;
-
-            // remove quotes
-            if (typeof breakpoint.current === 'string' || breakpoint.current instanceof String) {
-                breakpoint.current = breakpoint.current.replace(rxQuotes, '');
-            }
-            if (typeof breakpoint.all === 'string' || breakpoint.all instanceof String) {
-                breakpoint.all = breakpoint.all.replace(rxQuotes, '');
-            }
+            breakpoint.current = removeQuotes(style.content);
+            breakpoint.all = removeQuotes(labels.content);
 
             // convert label list into an array
             breakpoint.all = breakpoint.all.split(',');
@@ -108,12 +109,14 @@
             breakpointReady.resolve();
             breakpointReady = null;
 
-        } else if (breakpoint !== currentBreakpoint) {
+        } else if (breakpoint.current !== oldBreakpoint) {
 
             // trigger breakpoint event if the breakpoint has changed
             $(document).trigger($.Event('breakpoint', { breakpoint: breakpoint }));
 
         }
+
+        return breakpoint;
 
     }
 
@@ -176,7 +179,7 @@
         // if callback passed as only argument
         if ( $.isFunction( options ) ) {
             callback = options;
-            options = null;
+            options = {};
         }
 
         // configure the options
@@ -184,8 +187,17 @@
             delay : 200,
             prefix: '',
             fallback: null,
-            fallbackSet: null
-        }, options || { });
+            fallbackSet: null,
+            debug: false
+        }, options || {});
+
+        // for testing
+        if (options.debug) {
+            return {
+                updateBreakpoint: updateBreakpoint,
+                removeQuotes: removeQuotes
+            };
+        }
 
         // if applied to the document trigger callbacks
         if ( this[0] === document || !setLength ) {
@@ -293,8 +305,8 @@
 
         }
 
-        // return promise
         return deferred.promise( this );
+
     };
 
 }));
