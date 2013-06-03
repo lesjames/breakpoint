@@ -40,7 +40,8 @@ module.exports = function (grunt) {
                 browser: true,
                 globals: {
                     define: true,
-                    imagesLoaded: true
+                    imagesLoaded: true,
+                    EventEmitter: true
                 }
             },
             files: {
