@@ -59,29 +59,41 @@ module.exports = function (grunt) {
                 dest: './test/css/style.css'
             }
         },
-        uglify: {
-            './test/js/vendor/jquery.breakpoint.js': './jquery.breakpoint.js'
+        copy: {
+            main: {
+                files: [
+                    { src: ['jquery.breakpoint.js'], dest: 'test/js/vendor/jquery.breakpoint.js' }
+                ]
+            }
         },
         qunit: {
-            options: {
-                urls: [ 'http://localhost:8000/index.html' ]
-            },
-            small: {
+            functions: {
                 options: {
+                    urls: [ 'http://localhost:8000/functions.html' ],
                     page : {
                         viewportSize : { width: 300, height: 400 }
                     }
                 }
             },
-            medium: {
+            resizeSmall: {
                 options: {
+                    urls: [ 'http://localhost:8000/resize.html' ],
+                    page : {
+                        viewportSize : { width: 300, height: 400 }
+                    }
+                }
+            },
+            resizeMedium: {
+                options: {
+                    urls: [ 'http://localhost:8000/resize.html' ],
                     page : {
                         viewportSize : { width: 700, height: 400 }
                     }
                 }
             },
-            large: {
+            resizeLarge: {
                 options: {
+                    urls: [ 'http://localhost:8000/resize.html' ],
                     page : {
                         viewportSize : { width: 1000, height: 400 }
                     }
@@ -93,11 +105,9 @@ module.exports = function (grunt) {
     // for dev we need to lint js and compile sass
     grunt.registerTask('default', [
         'jshint',
-        'uglify',
+        'copy',
         'sass:test',
         'connect',
-        'qunit:small',
-        'qunit:medium',
-        'qunit:large'
+        'qunit'
     ]);
 };

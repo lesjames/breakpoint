@@ -1,3 +1,10 @@
+# 4.5.0
+
+* Rewrite for more testable code
+* EventEmitter is now a required dependency
+* Removed delay option
+* Can be applied without a selector with `$.fn.breakpoint();`
+
 # 4.4.0
 
 * Made imagesloaded a seperate dependency

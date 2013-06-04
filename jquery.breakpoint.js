@@ -1,5 +1,5 @@
 /*!
- * jQuery Breakpoint plugin v4.4.0
+ * jQuery Breakpoint plugin v4.5.0
  * http://github.com/lesjames/breakpoint
  *
  * MIT License
@@ -14,11 +14,8 @@
 
     } else {
 
-        // in case dependencies aren't included
-        var imagesLoaded = window.imagesLoaded || null;
-
         // Browser globals
-        factory(jQuery, imagesLoaded, window.EventEmitter);
+        factory(window.jQuery, window.imagesLoaded, window.EventEmitter);
 
     }
 
@@ -36,9 +33,8 @@
         return string;
     }
 
-    // grabs the breakpoint labels from the body's css generated content
-    // triggers the event or promise to set the image's source
-    function updateBreakpoint() {
+    // get the breakpoint labels from the body's css generated content
+    function getBreakpoint() {
 
         var breakpoint = {},
 
@@ -64,10 +60,10 @@
 
     }
 
-    // finds the source of an image
+    // finds the source of an image by matching breakpoint label to image data attr
     function findSource($image, set) {
 
-        // find source by first trying the current breakpoint
+        // try the current breakpoint first
         var src = $image.attr('data-' + set.options.prefix + set.breakpoint.current),
             i = set.breakpoint.position - 1;
 
@@ -102,9 +98,9 @@
     // callback and deferred execution
     function breakpointComplete(set) {
 
-        if (imagesLoaded && set.selection.length > 0) {
+        if (imagesLoaded && set.images.length > 0) {
 
-            var load = imagesLoaded(set.selection);
+            var load = imagesLoaded(set.images);
 
             load.on('done', function ( instance ) {
                 set.dfd.resolve( set.breakpoint, instance );
@@ -122,6 +118,7 @@
             });
 
         } else {
+
             // no images here or imagesLoaded isn't loaded,
             // just send back the breakpoint info
             set.dfd.resolve( set.breakpoint );
@@ -134,43 +131,90 @@
     }
 
 
-    // Set of Breakpoint images
+    // Breakpoint Constructor
     // ==========================================================================
 
-    function BreakpointSet( selection ) {
-        this.selection = selection;
+    function BreakpointImages( images ) {
+
+        // keep a reference to this
+        var _this = this;
+
+        // store the selected images
+        this.images = images;
+
+        // create callback and deferred
+        this.callback = null;
+        this.dfd = $.Deferred();
+
+        // breakpoint default options
+        this.options = {
+            prefix: '',
+            fallback: null,
+            fallbackSet: null,
+            debug: false
+        };
+
+        // check to see if the breakpoint has changed
+        this.checkBreakpoint = function () {
+
+            // grab the latest breakpoint so we can see it if updated
+            var latestBreakpoint = getBreakpoint();
+
+            // if the breakpoint is set and it matches the previous value bail out
+            if (_this.breakpoint && _this.breakpoint.current === latestBreakpoint.current) {
+                return;
+            }
+
+            // breakpoint is new so save it
+            _this.breakpoint = latestBreakpoint;
+            _this.processImages();
+        };
+
+        // process the images with the current breakpoint
+        this.processImages = function () {
+
+            if (_this.images.length > 0) {
+                _this.images.each(function () {
+                    setSource( $(this), _this );
+                });
+            }
+            breakpointComplete(_this);
+        };
+
+        // init event listener
+        this.on('breakpoint.init', function () {
+
+            _this.checkBreakpoint();
+
+            // return true removes this listener
+            return true;
+
+        });
+
+        // window resize listener
+        this.on('breakpoint.update', _this.checkBreakpoint);
+
+        // for removing the resize listener
+        this.removeEvent = function () {
+            _this.off('breakpoint.update', _this.checkBreakpoint);
+        };
+
     }
 
-    BreakpointSet.prototype = new EventEmitter();
+    // add event methods
+    BreakpointImages.prototype = new EventEmitter();
 
-    BreakpointSet.prototype.options = {
-        delay : 200,
-        prefix: '',
-        fallback: null,
-        fallbackSet: null,
-        debug: false
-    };
-
-    BreakpointSet.prototype.callback = null;
-
-    BreakpointSet.prototype.processImages = function () {
-
-        var set = this;
-
-        if (set.selection.length > 0) {
-            set.selection.each(function () {
-                setSource( $(this), set );
-            });
-        }
-
-        breakpointComplete(set);
-
-    };
 
     // define the plugin
     // ==========================================================================
 
     $.fn.breakpoint = function (options, callback) {
+
+        // reduce selection to only images
+        var $images = this.find('img').add( this.filter('img') );
+
+        // create an instance and pass it selected images
+        var breakpointImages = new BreakpointImages( $images );
 
         // if callback passed as only argument
         if ( $.isFunction( options ) ) {
@@ -178,24 +222,46 @@
             options = {};
         }
 
-        var breakpointSet = new BreakpointSet( this );
-        breakpointSet.dfd = $.Deferred();
-        breakpointSet.options = $.extend({}, breakpointSet.options, options);
-        breakpointSet.callback = callback;
-        breakpointSet.breakpoint = updateBreakpoint();
+        // store options and callback on instance
+        breakpointImages.options = $.extend({}, breakpointImages.options, options);
+        breakpointImages.callback = callback;
 
-        breakpointSet.processImages();
 
-        if (breakpointSet.options.debug) {
+        // event bindings
+        // ==========================================================================
+
+        // get things started
+        $(document).ready(function () {
+            breakpointImages.trigger('breakpoint.init');
+        });
+
+        // reevaluate breakpoint when window resizes
+        $(window).on('resize.breakpoint', function () {
+            breakpointImages.trigger('breakpoint.update');
+        });
+
+        // remove listeners on unload
+        $(window).on('unload.breakpoint', function () {
+            $(window).off('.breakpoint');
+            breakpointImages.removeEvent();
+        });
+
+        if (breakpointImages.options.debug) {
+
+            // if debug return functions for testing
             return {
-                breakpointSet: breakpointSet,
+                breakpointImages: breakpointImages,
                 removeQuotes: removeQuotes,
-                updateBreakpoint: updateBreakpoint,
+                getBreakpoint: getBreakpoint,
                 findSource: findSource,
                 setSource: setSource
             };
+
         } else {
-            return breakpointSet.dfd.promise();
+
+            // return the deferred and attach it to the instance
+            return breakpointImages.dfd.promise( breakpointImages );
+
         }
 
     };
