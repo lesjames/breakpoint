@@ -34,16 +34,16 @@
     }
 
     // get the breakpoint labels from the body's css generated content
-    function getBreakpoint() {
+    function getBreakpoint(options) {
 
-        var breakpoint = {},
-
-            // grab values from css generated content
-            style = window.getComputedStyle && window.getComputedStyle(document.body, '::before'),
-            labels = window.getComputedStyle && window.getComputedStyle(document.body, '::after');
+        var breakpoint = {};
 
         // modern browser can read the label
-        if (style && style.content) {
+        if (window.getComputedStyle && window.getComputedStyle(document.body, '::before')) {
+
+            // grab values from css generated content
+            var style = window.getComputedStyle(document.body, '::before'),
+                labels = window.getComputedStyle(document.body, '::after');
 
             breakpoint.current = removeQuotes(style.content);
             breakpoint.all = removeQuotes(labels.content);
@@ -53,6 +53,13 @@
 
             // find positon of current breakpoint in list of all breakpoints
             breakpoint.position = $.inArray(breakpoint.current, breakpoint.all);
+
+        } else {
+
+            // for browsers that don't support css generated content
+            breakpoint.current = options.fallback;
+            breakpoint.all = options.fallbackSet;
+            breakpoint.position = options.fallbackSet.length;
 
         }
 
@@ -83,12 +90,10 @@
 
     function setSource($image, set) {
 
-        var hasSource = false,
-            src = findSource($image, set);
+        var src = findSource($image, set);
 
         if (src) {
             $image.attr('src', src);
-            hasSource = true;
         }
 
         return $image;
@@ -98,7 +103,8 @@
     // callback and deferred execution
     function breakpointComplete(set) {
 
-        if (imagesLoaded && set.images.length > 0) {
+        // this requires imagesLoaded and that requires querySelector
+        if (imagesLoaded && document.querySelectorAll && set.images.length > 0) {
 
             var load = imagesLoaded(set.images);
 
@@ -158,7 +164,7 @@
         this.checkBreakpoint = function () {
 
             // grab the latest breakpoint so we can see it if updated
-            var latestBreakpoint = getBreakpoint();
+            var latestBreakpoint = getBreakpoint(_this.options);
 
             // if the breakpoint is set and it matches the previous value bail out
             if (_this.breakpoint && _this.breakpoint.current === latestBreakpoint.current) {
