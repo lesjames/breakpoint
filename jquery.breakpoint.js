@@ -1,5 +1,5 @@
 /*!
- * jQuery Breakpoint plugin v4.5.0
+ * jQuery Breakpoint plugin v4.5.1
  * http://github.com/lesjames/breakpoint
  *
  * MIT License
@@ -93,7 +93,13 @@
         var src = findSource($image, set);
 
         if (src) {
+
+            // remove previous source before setting
+            // imagesLoaded in FF was using the previous image's
+            // naturalHeight for a false positive load event
+            $image.removeAttr('src');
             $image.attr('src', src);
+
         }
 
         return $image;
