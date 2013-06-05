@@ -43,7 +43,17 @@
 
             // grab json from css generated content
             style = window.getComputedStyle(document.body, '::before');
-            breakpoint = JSON.parse( removeQuotes(style.content) );
+            style = style.content;
+
+            // webkit
+            if (style.charAt(0) === '\'') {
+                breakpoint = $.parseJSON( removeQuotes(style) );
+            }
+
+            // firefox
+            if (style.charAt(0) === '"') {
+                breakpoint = $.parseJSON( $.parseJSON(style) );
+            }
 
         } else {
 
