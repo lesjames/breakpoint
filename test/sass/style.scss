@@ -8,6 +8,3 @@
 
 // sturcture loaded last for proper media query cascading
 @import 'structure';
-
-// create breakpoint label list
-body::after { content: "#{$breakpoint-list}"; display: none; }

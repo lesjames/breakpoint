@@ -7,8 +7,8 @@ test('Remove Quotes', 4, function () {
 
     var test = $.fn.breakpoint({ debug: true });
 
-    deepEqual( test.removeQuotes('ye"p'), 'yep' );
-    deepEqual( test.removeQuotes("ye'p"), 'yep' );
+    deepEqual( test.removeQuotes('yep'), 'yep' );
+    deepEqual( test.removeQuotes("yep"), 'yep' );
     deepEqual( test.removeQuotes("'yep'"), 'yep' );
     deepEqual( test.removeQuotes('"yep"'), 'yep' );
 
@@ -79,7 +79,7 @@ test('Breakpoint Object on Instance', 3, function () {
     var test = $.fn.breakpoint();
 
     deepEqual( test.breakpoint.current, 'small' );
-    deepEqual( test.breakpoint.all, ['small', 'medium', 'large'] );
+    deepEqual( test.breakpoint.all, ['small'] );
     deepEqual( test.breakpoint.position, 0 );
 
 });
@@ -100,7 +100,7 @@ asyncTest('Breakpoint Always Deferred', 4, function () {
     test.always(function (breakpoint) {
         QUnit.start();
         deepEqual( breakpoint.current, 'small' );
-        deepEqual( breakpoint.all, ['small', 'medium', 'large'] );
+        deepEqual( breakpoint.all, ['small'] );
         deepEqual( breakpoint.position, 0 );
     });
 
@@ -141,7 +141,7 @@ asyncTest('Breakpoint Done Deferred', 6, function () {
         QUnit.start();
         deepEqual( test.state(), 'resolved' );
         deepEqual( breakpoint.current, 'small' );
-        deepEqual( breakpoint.all, ['small', 'medium', 'large'] );
+        deepEqual( breakpoint.all, ['small'] );
         deepEqual( breakpoint.position, 0 );
 
         // imagesLoaded instance
@@ -171,7 +171,7 @@ asyncTest('Breakpoint Fail Deferred', 6, function () {
         QUnit.start();
         deepEqual( test.state(), 'rejected' );
         deepEqual( breakpoint.current, 'small' );
-        deepEqual( breakpoint.all, ['small', 'medium', 'large'] );
+        deepEqual( breakpoint.all, ['small'] );
         deepEqual( breakpoint.position, 0 );
 
         // imagesLoaded instance
@@ -233,7 +233,7 @@ asyncTest('Breakpoint Callback w/o Images', 3, function () {
     $.fn.breakpoint(function (breakpoint) {
         QUnit.start();
         deepEqual( breakpoint.current, 'small' );
-        deepEqual( breakpoint.all, ['small', 'medium', 'large'] );
+        deepEqual( breakpoint.all, ['small'] );
         deepEqual( breakpoint.position, 0 );
     });
 
@@ -255,7 +255,7 @@ asyncTest('Breakpoint Callback w/o Images', 4, function () {
 
         QUnit.start();
         deepEqual( breakpoint.current, 'small' );
-        deepEqual( breakpoint.all, ['small', 'medium', 'large'] );
+        deepEqual( breakpoint.all, ['small'] );
         deepEqual( breakpoint.position, 0 );
 
         // imagesLoaded instance

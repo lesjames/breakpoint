@@ -1,8 +1,8 @@
 // Vars and Functions
 // =============================================================================
 
-$breakpoint-list: unquote($breakpoint-list);
 $current-bp: 0; // init breakpoint variable
+$counter: 0;
 
 // converting px to em
 @function em($px, $base: $base-font-size) { @return ($px / $base) * 1em; }
@@ -22,8 +22,10 @@ $current-bp: 0; // init breakpoint variable
 // =============================================================================
 
 @media (min-width: 0px) {
-    body::before { content: "#{nth($breakpoint-list, 1)}"; display: none; }
+    $first-breakpoint: quote(unquote($first-breakpoint));
+    body::before { content: '{ "current" : "#{$first-breakpoint}", "all" : ["#{$first-breakpoint}"], "position" : #{$counter} }'; display: none; }
 }
+@if ($ie-support) { .lt-ie9 head { font-family: '{ "current" : "#{$first-breakpoint}", "all" : ["#{$first-breakpoint}"], "position" : #{$counter} }'; } }
 
 
 // Breakpoint mixin
@@ -39,6 +41,17 @@ $current-bp: 0; // init breakpoint variable
         @warn "If you pass zero as a minimum you need to specify a max column value.";
     }
 
+
+    // create MQ labels
+    @if($label) {
+
+        $label: quote(unquote($label));
+        $counter: $counter + 1;
+        // push label to label list names = push(names, myname)
+        $first-breakpoint: append($first-breakpoint, $label, comma);
+
+    }
+
     // set current breakpoint for fluid function
     $current-bp: $min;
 
@@ -49,17 +62,30 @@ $current-bp: 0; // init breakpoint variable
             // can we remove duplication of code here?
             @if ($orientation) {
                 @media ( min-width: (fixed($min) + em($grid-gutter)) * ($base-font-size / 16px) ) and ( orientation: $orientation ) {
-                    @include breakpoint-extras($min, $wrapper, $label, $grid-overlay) { @content };
+
+                    // label current breakpoint
+                    @if($label) { body::before { content: '{ "current" : "#{$label}", "all" : [#{$first-breakpoint}], "position" : #{$counter} }'; } }
+
+                    @include breakpoint-extras($min, $wrapper, $grid-overlay) { @content };
                 }
             } @else {
                 @media ( min-width: (fixed($min) + em($grid-gutter)) * ($base-font-size / 16px) ) {
-                    @include breakpoint-extras($min, $wrapper, $label, $grid-overlay) { @content };
+
+                    // label current breakpoint
+                    @if($label) { body::before { content: '{ "current" : "#{$label}", "all" : [#{$first-breakpoint}], "position" : #{$counter} }'; } }
+
+                    @include breakpoint-extras($min, $wrapper, $grid-overlay) { @content };
                 }
             }
             // ie fallback
             @if ($ie-support and $min <= $ie-support and $orientation == false) {
                 .lt-ie9 {
-                    @include breakpoint-extras($min, $wrapper, $label: false, $grid-overlay: false) { @content };
+                    @include breakpoint-extras($min, $wrapper, $grid-overlay: false) { @content };
+
+                    // label current breakpoint
+                    @if($label) { & head { font-family: '{ "current" : "#{$label}", "all" : [#{$first-breakpoint}], "position" : #{$counter} }; }'; } }
+
+
                 }
             }
         }
@@ -111,21 +137,11 @@ $current-bp: 0; // init breakpoint variable
 }
 
 // private mixin for generating extras in a min width mq
-@mixin breakpoint-extras($min, $wrapper, $label, $grid-overlay) {
+@mixin breakpoint-extras($min, $wrapper, $grid-overlay) {
+
     @if($grid-overlay) { @include grid-overlay($min); }
 
-    // create hook for js
-    @if($label) {
-
-       // label current breakpoint
-       body::before { content: $label; }
-
-       // push label to label list names = push(names, myname)
-       $breakpoint-list: append($breakpoint-list, unquote($label), comma);
-
-    }
     // proper sizing of wrapper
-
     @if($wrapper) { .wrapper { width: fixed($min) - em($grid-gutter); } }
 
     @content

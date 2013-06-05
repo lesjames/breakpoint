@@ -1,5 +1,5 @@
 /*!
- * jQuery Breakpoint plugin v4.5.1
+ * jQuery Breakpoint plugin v4.6.0
  * http://github.com/lesjames/breakpoint
  *
  * MIT License
@@ -26,40 +26,50 @@
 
     // some browsers add quotes to the value from css generated content
     function removeQuotes(string) {
-        var rxQuotes = /('|"|\s+)/g;
         if (typeof string === 'string' || string instanceof String) {
-            string = string.replace(rxQuotes, '');
+            string = string.replace(/^['"]+|['"]$/g, '');
         }
         return string;
     }
 
     // get the breakpoint labels from the body's css generated content
-    function getBreakpoint(options) {
+    function getBreakpoint() {
 
-        var breakpoint = {};
+        var breakpoint = {},
+            style = null;
 
         // modern browser can read the label
         if (window.getComputedStyle && window.getComputedStyle(document.body, '::before')) {
 
-            // grab values from css generated content
-            var style = window.getComputedStyle(document.body, '::before'),
-                labels = window.getComputedStyle(document.body, '::after');
-
-            breakpoint.current = removeQuotes(style.content);
-            breakpoint.all = removeQuotes(labels.content);
-
-            // convert label list into an array
-            breakpoint.all = breakpoint.all.split(',');
-
-            // find positon of current breakpoint in list of all breakpoints
-            breakpoint.position = $.inArray(breakpoint.current, breakpoint.all);
+            // grab json from css generated content
+            style = window.getComputedStyle(document.body, '::before');
+            breakpoint = JSON.parse( removeQuotes(style.content) );
 
         } else {
 
-            // for browsers that don't support css generated content
-            breakpoint.current = options.fallback;
-            breakpoint.all = options.fallbackSet;
-            breakpoint.position = options.fallbackSet.length;
+            // older browsers need help
+            window.getComputedStyle = function(el) {
+                this.el = el;
+                this.getPropertyValue = function(prop) {
+                    var re = /(\-([a-z]){1})/g;
+                    if (re.test(prop)) {
+                        prop = prop.replace(re, function () {
+                            return arguments[2].toUpperCase();
+                        });
+                    }
+                    return el.currentStyle[prop] ? el.currentStyle[prop] : null;
+                };
+                return this;
+            };
+
+            // grab value from head font-family
+            style = window.getComputedStyle(document.getElementsByTagName('head')[0], '');
+            style = removeQuotes(style.getPropertyValue('font-family'));
+
+            // IE8 has artifacts on end of string
+            style = style.replace(/;\s?}$/, '');
+
+            breakpoint = JSON.parse(style);
 
         }
 
@@ -170,7 +180,7 @@
         this.checkBreakpoint = function () {
 
             // grab the latest breakpoint so we can see it if updated
-            var latestBreakpoint = getBreakpoint(_this.options);
+            var latestBreakpoint = getBreakpoint();
 
             // if the breakpoint is set and it matches the previous value bail out
             if (_this.breakpoint && _this.breakpoint.current === latestBreakpoint.current) {
