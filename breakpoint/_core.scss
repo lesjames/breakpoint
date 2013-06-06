@@ -1,31 +1,15 @@
-// Vars and Functions
-// =============================================================================
-
-$current-bp: 0; // init breakpoint variable
+$current-bp: 0;
 $counter: 0;
+$ie-support: 12;
 
-// converting px to em
-@function em($px, $base: $base-font-size) { @return ($px / $base) * 1em; }
-
-// creates percentage width
-@function fluid($col, $avail: $current-bp) { @return (100% / $avail) * $col }
-
-// creates em width
-// pass false as a second argument to remove the built in gutter (for creating height measurements)
-@function fixed($col, $gutter: true) {
-    @if ($gutter) { @return $col * ( em($grid-column + $grid-gutter) ) }
-    @else { @return $col * ( em($grid-column + $grid-gutter) ) - em($grid-gutter) }
-}
-
+// push small breakpoint label into list
+$first-breakpoint: append($first-breakpoint, ());
 
 // Javascript hook for current breakpoint label
-// =============================================================================
-
-@media (min-width: 0px) {
-    $first-breakpoint: quote(unquote($first-breakpoint));
-    body::before { content: '{ "current" : "#{$first-breakpoint}", "all" : ["#{$first-breakpoint}"], "position" : #{$counter} }'; display: none; }
+@media (min-width: 0) {
+    body::before { content: breakpoint-list(nth($first-breakpoint, 1), $first-breakpoint, $counter); display: none; }
 }
-@if ($ie-support) { .lt-ie9 head { font-family: '{ "current" : "#{$first-breakpoint}", "all" : ["#{$first-breakpoint}"], "position" : #{$counter} }'; } }
+@if ($ie-support) { .lt-ie9 head { font-family: breakpoint-list(nth($first-breakpoint, 1), $first-breakpoint, $counter); } }
 
 
 // Breakpoint mixin
@@ -41,12 +25,14 @@ $counter: 0;
         @warn "If you pass zero as a minimum you need to specify a max column value.";
     }
 
-
     // create MQ labels
-    @if($label) {
+    @if ($label) {
 
+        // normalize quotes
         $label: quote(unquote($label));
+
         $counter: $counter + 1;
+
         // push label to label list names = push(names, myname)
         $first-breakpoint: append($first-breakpoint, $label, comma);
 
@@ -62,17 +48,13 @@ $counter: 0;
             // can we remove duplication of code here?
             @if ($orientation) {
                 @media ( min-width: (fixed($min) + em($grid-gutter)) * ($base-font-size / 16px) ) and ( orientation: $orientation ) {
-
-                    // label current breakpoint
-                    @if($label) { body::before { content: '{ "current" : "#{$label}", "all" : [#{$first-breakpoint}], "position" : #{$counter} }'; } }
-
                     @include breakpoint-extras($min, $wrapper, $grid-overlay) { @content };
                 }
             } @else {
                 @media ( min-width: (fixed($min) + em($grid-gutter)) * ($base-font-size / 16px) ) {
 
                     // label current breakpoint
-                    @if($label) { body::before { content: '{ "current" : "#{$label}", "all" : [#{$first-breakpoint}], "position" : #{$counter} }'; } }
+                    @if($label) { body::before { content: breakpoint-list($label, $first-breakpoint, $counter); } }
 
                     @include breakpoint-extras($min, $wrapper, $grid-overlay) { @content };
                 }
@@ -83,7 +65,7 @@ $counter: 0;
                     @include breakpoint-extras($min, $wrapper, $grid-overlay: false) { @content };
 
                     // label current breakpoint
-                    @if($label) { & head { font-family: '{ "current" : "#{$label}", "all" : [#{$first-breakpoint}], "position" : #{$counter} }; }'; } }
+                    @if($label) { & head { font-family: breakpoint-list($label, $first-breakpoint, $counter); } }
 
 
                 }
@@ -145,6 +127,7 @@ $counter: 0;
     @if($wrapper) { .wrapper { width: fixed($min) - em($grid-gutter); } }
 
     @content
+
 }
 
 // Grid overlay

@@ -2,15 +2,16 @@
     module( 'Utility Function Testing' );
 // ==========================================================================
 
-// remove quotes function
+// browsers return css passed json in crazy ways, normalize it...
 test('Remove Quotes', 4, function () {
 
     var test = $.fn.breakpoint({ debug: true });
+    var result = JSON.stringify({"current":"small","all":["small","medium","large"],"position":0});
 
-    deepEqual( test.removeQuotes('yep'), 'yep' );
-    deepEqual( test.removeQuotes("yep"), 'yep' );
-    deepEqual( test.removeQuotes("'yep'"), 'yep' );
-    deepEqual( test.removeQuotes('"yep"'), 'yep' );
+    deepEqual( test.removeQuotes( '{"current":"small","all":["small","medium","large"],"position":0}' ), result );
+    deepEqual( test.removeQuotes( "{\"current\":\"small\",\"all\":[\"small\",\"medium\",\"large\"],\"position\":0}" ), result );
+    deepEqual( test.removeQuotes( "{\"current\" : \"small\", \"all\" : [\"small\",\"medium\",\"large\"], \"position\" : 0 }" ), result );
+    deepEqual( test.removeQuotes( "{\"current\" : \"small\", \"all\" : [\"small\",\"medium\",\"large\"], \"position\" : 0 } ; }" ), result );
 
 });
 

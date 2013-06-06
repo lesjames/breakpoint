@@ -24,10 +24,10 @@
     // breakpoint functions
     // ==========================================================================
 
-    // some browsers add quotes to the value from css generated content
+    // some craxy regex to deal with how browsers pass the JSON through CSS
     function removeQuotes(string) {
         if (typeof string === 'string' || string instanceof String) {
-            string = string.replace(/^['"]+|['"]$/g, '');
+            string = string.replace(/^['"]+|\s+|\\|(;\s?})+|['"]$/g, '');
         }
         return string;
     }
@@ -35,8 +35,7 @@
     // get the breakpoint labels from the body's css generated content
     function getBreakpoint() {
 
-        var breakpoint = {},
-            style = null;
+        var style = null;
 
         // modern browser can read the label
         if (window.getComputedStyle && window.getComputedStyle(document.body, '::before')) {
@@ -45,19 +44,9 @@
             style = window.getComputedStyle(document.body, '::before');
             style = style.content;
 
-            // webkit
-            if (style.charAt(0) === '\'') {
-                breakpoint = $.parseJSON( removeQuotes(style) );
-            }
-
-            // firefox
-            if (style.charAt(0) === '"') {
-                breakpoint = $.parseJSON( $.parseJSON(style) );
-            }
-
         } else {
 
-            // older browsers need help
+            // older browsers need some help
             window.getComputedStyle = function(el) {
                 this.el = el;
                 this.getPropertyValue = function(prop) {
@@ -72,18 +61,14 @@
                 return this;
             };
 
-            // grab value from head font-family
+            // fallback label is added as a font-family to the head, thanks Jeremy Keith
             style = window.getComputedStyle(document.getElementsByTagName('head')[0], '');
             style = removeQuotes(style.getPropertyValue('font-family'));
 
-            // IE8 has artifacts on end of string
-            style = style.replace(/;\s?}$/, '');
-
-            breakpoint = JSON.parse(style);
-
         }
 
-        return breakpoint;
+        // parse that sucka and return it
+        return JSON.parse(removeQuotes(style));
 
     }
 
@@ -109,21 +94,14 @@
     }
 
     function setSource($image, set) {
-
         var src = findSource($image, set);
-
         if (src) {
-
-            // remove previous source before setting
-            // imagesLoaded in FF was using the previous image's
-            // naturalHeight for a false positive load event
-            $image.removeAttr('src');
+            // cached images don't fire load sometimes, so we reset src
+            $image.attr('src', 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==');
             $image.attr('src', src);
 
         }
-
         return $image;
-
     }
 
     // callback and deferred execution
@@ -181,8 +159,6 @@
         // breakpoint default options
         this.options = {
             prefix: '',
-            fallback: null,
-            fallbackSet: null,
             debug: false
         };
 

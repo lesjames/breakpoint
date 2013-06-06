@@ -15,5 +15,6 @@ $ie-support: false !default;
 // label for your mobile first breakpoint
 $first-breakpoint: "small" !default;
 
+@import 'utils';
 @import 'core';
 @import 'grid';
