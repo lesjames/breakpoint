@@ -13,7 +13,8 @@ $grid-overlay: false !default;
 $ie-support: false !default;
 
 // label for your mobile first breakpoint
-$breakpoint-list: 'small' !default;
+$first-breakpoint: "small" !default;
 
+@import 'utils';
 @import 'core';
 @import 'grid';

@@ -1,3 +1,8 @@
+# 4.6.0
+
+* Fix for IE image loading
+* Removed need to set fallback labels in Javascript. Yay!!
+
 # 4.5.0
 
 * Rewrite for more testable code
