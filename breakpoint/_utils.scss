@@ -1,0 +1,17 @@
+// converting px to em
+@function em($px, $base: $base-font-size) { @return ($px / $base) * 1em; }
+
+// creates percentage width
+@function fluid($col, $avail: $current-bp) { @return (100% / $avail) * $col }
+
+// creates em width
+// pass false as a second argument to remove the built in gutter (for creating height measurements)
+@function fixed($col, $gutter: true) {
+    @if ($gutter) { @return $col * ( em($grid-column + $grid-gutter) ) }
+    @else { @return $col * ( em($grid-column + $grid-gutter) ) - em($grid-gutter) }
+}
+
+// create json formatted string of breakpoint info
+@function breakpoint-list($label, $first-breakpoint, $counter) {
+    @return '{ "current" : "#{$label}", "all" : [#{$first-breakpoint}], "position" : #{$counter} }';
+}
