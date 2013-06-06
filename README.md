@@ -47,7 +47,7 @@ $grid-gutter: 20px;
 Breakpoint uses three classes to establish a grid. First `.wrapper` is used as a fixed width centering div. `.grid` is the parent container for your cells and is always 100% fluid in width. `.grid__cell` is the child unit and can be set to either fixed or fluid widths. You should avoid applying styles to these classes because it can misalign the grid or create unexpected results. When creating a named hook for a grid cell it's recommended to use the [BEM syntax](http://csswizardry.com/2013/01/mindbemding-getting-your-head-round-bem-syntax/).
 
 ```html
-<div class"grid">
+<div class="grid">
     <div class="grid__cell grid__cell--content"></div>
     <div class="grid__cell grid__cell--sidebar"></div>
 </div>
