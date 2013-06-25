@@ -29,10 +29,10 @@ For a full, opinionated project setup that includes a build system using [Grunt]
 #### Resources
 
 * Here is a writeup about [Breakpoint on 24 Ways](http://24ways.org/2012/redesigning-the-media-query/).
+* A post on [CSS Tricks](http://css-tricks.com/making-sass-talk-to-javascript-with-json/) on how Breakpoint loads responsive images.
 * You can [view a presentation about Breakpoint](http://wordpress.tv/2012/12/18/les-james-responsive-design-with-the-breakpoint-framework/) on wordpress.tv.
 * Here is a [Codepen demo](http://codepen.io/lesjames/pen/ixjsc) that you can play with.
 * You can hit up [Les James on Twitter](https://twitter.com/lesjames) with any questions.
-* A post on [CSS Tricks](http://css-tricks.com/making-sass-talk-to-javascript-with-json/) on how Breakpoint loads responsive images.
 
 ## Grid
 
