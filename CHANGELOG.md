@@ -1,3 +1,7 @@
+# 4.6.1
+
+Removed accidental hard coded IE column count
+
 # 4.6.0
 
 * Fix for IE image loading
