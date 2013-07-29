@@ -1,5 +1,5 @@
 /*!
- * jQuery Breakpoint plugin v4.6.0
+ * jQuery Breakpoint plugin v4.6.2
  * http://github.com/lesjames/breakpoint
  *
  * MIT License
@@ -10,7 +10,7 @@
     if (typeof define === 'function' && define.amd) {
 
         // AMD. Register as an anonymous module.
-        define(['jquery', 'imagesloaded', 'eventEmitter'], factory);
+        define(['jquery', 'imagesloaded', 'eventEmitter/EventEmitter'], factory);
 
     } else {
 
