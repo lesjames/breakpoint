@@ -1,6 +1,10 @@
+# 4.6.2
+
+* Changed eventemitter AMD name to keep pace with imagesloaded
+
 # 4.6.1
 
-Removed accidental hard coded IE column count
+* Removed accidental hard coded IE column count
 
 # 4.6.0
 
