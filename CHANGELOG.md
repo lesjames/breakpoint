@@ -1,3 +1,7 @@
+# 4.6.3
+
+* Fixed broken qunit testing
+
 # 4.6.2
 
 * Changed eventemitter AMD name to keep pace with imagesloaded
