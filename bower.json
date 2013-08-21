@@ -1,6 +1,6 @@
 {
     "name": "breakpoint",
-    "version": "4.6.2",
+    "version": "4.6.3",
     "description": "Breakpoint is a column based media query generator and responsive image framework.",
     "author": "Les James",
     "homepage": "https://github.com/lesjames/breakpoint",
@@ -22,6 +22,6 @@
         "eventEmitter": "~4.2.1"
     },
     "devDependencies": {
-        "qunit": "1.11.0"
+        "qunit": "1.12.0"
     }
 }
