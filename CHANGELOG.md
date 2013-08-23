@@ -1,3 +1,8 @@
+# 4.6.4
+
+* IE8 fix
+* Setting breakpoint on document no longer finds children images
+
 # 4.6.3
 
 * Fixed broken qunit testing

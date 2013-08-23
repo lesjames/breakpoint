@@ -1,5 +1,5 @@
 /*!
- * jQuery Breakpoint plugin v4.6.2
+ * jQuery Breakpoint plugin v4.6.4
  * http://github.com/lesjames/breakpoint
  *
  * MIT License
@@ -47,7 +47,7 @@
         } else {
 
             // older browsers need some help
-            window.getComputedStyle = function(el) {
+            var getComputedFallback = function(el) {
                 this.el = el;
                 this.getPropertyValue = function(prop) {
                     var re = /(\-([a-z]){1})/g;
@@ -62,8 +62,8 @@
             };
 
             // fallback label is added as a font-family to the head, thanks Jeremy Keith
-            style = window.getComputedStyle(document.getElementsByTagName('head')[0], '');
-            style = removeQuotes(style.getPropertyValue('font-family'));
+            style = getComputedFallback(document.getElementsByTagName('head')[0]);
+            style = style.getPropertyValue('font-family');
 
         }
 
@@ -218,8 +218,12 @@
 
     $.fn.breakpoint = function (options, callback) {
 
-        // reduce selection to only images
-        var $images = this.find('img').add( this.filter('img') );
+        var $images = [];
+
+        if (this[0] !== document) {
+            // reduce selection to only images
+            $images = this.find('img').add( this.filter('img') );
+        }
 
         // create an instance and pass it selected images
         var breakpointImages = new BreakpointImages( $images );
