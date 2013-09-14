@@ -1,4 +1,4 @@
-# Breakpoint [![Build Status](https://travis-ci.org/lesjames/breakpoint.png?branch=master)](https://travis-ci.org/lesjames/breakpoint)
+# Breakpoint
 
 Breakpoint is a grid system and responsive image solution. It's based on the concept that columns shouldn't stretch but get added or taken away as the screen changes size. This concept was taken from the [Frameless Grid](http://framelessgrid.com/) system developed by Joni Korpi. The Breakpoint grid is also floatless by using inline-block cells and border box sizing. This layout technique is taken from [Griddle](https://github.com/necolas/griddle) by Nicolas Gallagher. Breakpoint generates media queries at column break points that you determine. You can also label your media queries which allows JavaScript to pair them with responsive image sources.
 
