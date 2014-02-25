@@ -6,7 +6,7 @@ $first-breakpoint: append($first-breakpoint, ());
 
 // Javascript hook for current breakpoint label
 @media (min-width: 0) {
-    body::before { content: breakpoint-list(nth($first-breakpoint, 1), $first-breakpoint, $counter); display: none; }
+    body::before { content: breakpoint-list(nth($first-breakpoint, 1), $first-breakpoint, $counter); height: 0; display:block; overflow:hidden;  }
 }
 @if ($ie-support) { .lt-ie9 head { font-family: breakpoint-list(nth($first-breakpoint, 1), $first-breakpoint, $counter); } }
 
