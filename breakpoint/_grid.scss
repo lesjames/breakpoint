@@ -17,7 +17,7 @@ img { max-width: 100%; }
 .no-js .responsive-image { display: none; }
 
 // Grid container
-// Must only contain `.grid` or `.grid-cell` components as children.
+// Must only contain `.grid` or `.grid__cell` components as children.
 .grid {
     display: block;
     padding: 0;
@@ -27,7 +27,7 @@ img { max-width: 100%; }
     // Remove inter-unit whitespace for all non-monospace font-families
     // If you're using a monospace base font, you will need to set the `grid`
     // font-family to `sans-serif` and then redeclare the monospace font on
-    // the `grid-cell` objects.
+    // the `grid__cell` objects.
     letter-spacing: -0.31em;
     // Protect against WebKit bug with optimizelegibility
     text-rendering: optimizespeed;
