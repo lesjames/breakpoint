@@ -30,7 +30,7 @@ $first-breakpoint: append($first-breakpoint, ());
         // normalize quotes
         $label: quote(unquote($label));
 
-        $counter: $counter + 1;
+        $counter: $counter + 1 !global;
 
         // push label to label list names = push(names, myname)
         $first-breakpoint: append($first-breakpoint, $label, comma);
@@ -38,7 +38,7 @@ $first-breakpoint: append($first-breakpoint, ());
     }
 
     // set current breakpoint for fluid function
-    $current-bp: $min;
+    $current-bp: $min !global;
 
     // min width mq
     @if ($min and $max == false) {
